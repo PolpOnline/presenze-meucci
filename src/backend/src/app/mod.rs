@@ -8,7 +8,6 @@ use std::str::FromStr;
 use axum::{middleware, routing::get};
 use axum_login::AuthManagerLayerBuilder;
 use http::StatusCode;
-use log::info;
 use sqlx::PgPool;
 use tokio::signal;
 use tower::ServiceBuilder;
@@ -19,6 +18,7 @@ use tower_http::{
 };
 use tower_sessions::{Expiry, SessionManagerLayer, cookie::Key};
 use tower_sessions_redis_store::RedisStore;
+use tracing::info;
 use utoipa::OpenApi;
 use utoipa_axum::router::OpenApiRouter;
 use utoipa_scalar::{Scalar, Servable};
