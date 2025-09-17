@@ -1,2 +1,0 @@
-idfoglio	idsettimana	nomesettimana
-F0000	W0000	A

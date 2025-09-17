@@ -1,1 +1,0 @@
-idsostituzione	idsessione	durata	data	idsostituto	idtitolare	email	inviata	idsettimana	idgiorno	idora	idfoglio	idmateria	idsede	idmodulo	note

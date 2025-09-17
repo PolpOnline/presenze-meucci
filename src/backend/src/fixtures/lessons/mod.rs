@@ -24,14 +24,14 @@ use tracing::info;
     derive(Serialize, Debug)
 )]
 struct RawLesson {
-    duration: Option<String>,
-    subject: Option<String>,
-    site: Option<String>,
-    module: Option<String>,
+    _duration: Option<String>,
+    _subject: Option<String>,
+    _site: Option<String>,
+    _module: Option<String>,
     teacher: Option<Vec<String>>,
-    group: Option<Vec<String>>,
+    _group: Option<Vec<String>>,
     room: Option<Vec<String>>,
-    week: Option<String>,
+    _week: Option<String>,
     day: Option<Day>,
     time: Option<String>,
 }
@@ -53,7 +53,7 @@ struct LessonsRoot {
     lessons: Vec<RawLesson>,
 }
 
-const PATH: &str = "./src/fixtures/lessons/orario/Orario Provvisorio 5 ore  v5.xml";
+const PATH: &str = "./src/fixtures/lessons/orario/Orario Provvisorio 5 ore v5.xml";
 
 pub async fn seed(_db: &PgPool, _write: bool) -> color_eyre::Result<()> {
     info!("Seeding the lessons table...");

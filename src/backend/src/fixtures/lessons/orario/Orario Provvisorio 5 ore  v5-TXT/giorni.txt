@@ -1,6 +1,0 @@
-idfoglio	idgiorno	nomegiorno
-F0000	0	LUN
-F0000	1	MAR
-F0000	2	MER
-F0000	3	GIO
-F0000	4	VEN
