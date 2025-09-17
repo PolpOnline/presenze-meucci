@@ -1,6 +1,4 @@
-use std::path::Path;
-
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use sqlx::PgPool;
 use tracing::info;
 
@@ -17,9 +15,15 @@ use tracing::info;
 //   <DAY>LUN</DAY>
 //   <TIME>8:00</TIME>
 // </LESSON>
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Deserialize, restructed::Models)]
 #[serde(rename_all = "UPPERCASE")]
-struct Lesson {
+#[view(
+    Lesson,
+    fields(teacher, day, time),
+    attributes_with = "deriveless",
+    derive(Serialize, Debug)
+)]
+struct RawLesson {
     duration: Option<String>,
     subject: Option<String>,
     site: Option<String>,
@@ -28,14 +32,25 @@ struct Lesson {
     group: Option<Vec<String>>,
     room: Option<Vec<String>>,
     week: Option<String>,
-    day: Option<String>,
+    day: Option<Day>,
     time: Option<String>,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(rename_all = "UPPERCASE")]
+enum Day {
+    Lun,
+    Mar,
+    Mer,
+    Gio,
+    Ven,
+    Sab,
 }
 
 #[derive(Debug, Deserialize)]
 struct LessonsRoot {
     #[serde(rename = "LESSON")]
-    lessons: Vec<Lesson>,
+    lessons: Vec<RawLesson>,
 }
 
 const PATH: &str = "./src/fixtures/lessons/orario/Orario Provvisorio 5 ore  v5.xml";
@@ -44,9 +59,33 @@ pub async fn seed(_db: &PgPool, _write: bool) -> color_eyre::Result<()> {
     info!("Seeding the lessons table...");
 
     let file_content = tokio::fs::read_to_string(PATH).await?;
-    let lessons_root: LessonsRoot = quick_xml::de::from_str(&file_content)?;
+    let raw_lessons: Vec<RawLesson> =
+        quick_xml::de::from_str::<LessonsRoot>(&file_content)?.lessons;
 
-    println!("{:?}", lessons_root.lessons);
+    // Filter for lessons that have any room that starts with DISPOSIZIONE#
+    let lessons: Vec<Lesson> = raw_lessons
+        .into_iter()
+        .filter(|lesson| {
+            if let Some(rooms) = &lesson.room {
+                rooms.iter().any(|room| room.starts_with("DISPOSIZIONE#"))
+            } else {
+                false
+            }
+        })
+        .map(|lesson| lesson.into())
+        .collect();
+
+    // assert that every lesson has exactly one teacher
+    for lesson in &lessons {
+        assert_eq!(
+            lesson.teacher.as_ref().map_or(0, |v| v.len()),
+            1,
+            "Lesson doesn't have exactly one teacher: {:?}",
+            lesson
+        );
+    }
+
+    println!("{}", sonic_rs::to_string_pretty(&lessons)?);
 
     Ok(())
 }

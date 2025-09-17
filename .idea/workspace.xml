@@ -11,20 +11,11 @@
     </cargoProject>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="613d2823-08be-46d5-b3fa-2b152461ec60" name="Changes" comment="Add gitignore">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/backend/src/app/cli/mod.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/backend/src/fixtures/lessons/mod.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/backend/src/web/endpoints/protected/ok.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3afef54b-d82b-47b4-a52d-bb8113bd157e.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3afef54b-d82b-47b4-a52d-bb8113bd157e.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3afef54b-d82b-47b4-a52d-bb8113bd157e/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3afef54b-d82b-47b4-a52d-bb8113bd157e/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
+    <list default="true" id="613d2823-08be-46d5-b3fa-2b152461ec60" name="Changes" comment="Fix some running issues + add xml lesson parsing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backend/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/backend/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/Cargo.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/backend/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backend/src/app/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/src/app/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backend/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backend/src/web/endpoints/protected/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/src/web/endpoints/protected/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/src/fixtures/lessons/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/src/fixtures/lessons/mod.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +151,7 @@
       <updated>1708012348385</updated>
       <workItem from="1708012349530" duration="115000" />
       <workItem from="1758037971683" duration="9634000" />
-      <workItem from="1758140231397" duration="2945000" />
+      <workItem from="1758140231397" duration="4696000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -194,7 +185,23 @@
       <option name="project" value="LOCAL" />
       <updated>1758140447494</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fix some running issues">
+      <option name="closed" value="true" />
+      <created>1758143282928</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1758143282928</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Fix some running issues + add xml lesson parsing">
+      <option name="closed" value="true" />
+      <created>1758143294454</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1758143294454</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,7 +226,9 @@
     </ignored-roots>
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Add gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add gitignore" />
+    <MESSAGE value="Fix some running issues" />
+    <MESSAGE value="Fix some running issues + add xml lesson parsing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix some running issues + add xml lesson parsing" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
