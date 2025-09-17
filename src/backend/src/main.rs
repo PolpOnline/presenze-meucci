@@ -16,6 +16,7 @@ async fn main() -> Result<()> {
     color_eyre::install()?;
 
     tracing_subscriber::registry()
+        .with(tracing_subscriber::fmt::layer())
         .with(EnvFilter::new(std::env::var("RUST_LOG").unwrap_or_else(
             |_| {
                 "axum_login=info,tower_sessions=info,sqlx=warn,tower_http=debug,\

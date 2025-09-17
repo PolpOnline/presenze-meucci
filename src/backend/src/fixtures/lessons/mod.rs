@@ -1,5 +1,8 @@
+use ahash::HashSet;
+use chrono::NaiveTime;
 use serde::{Deserialize, Serialize};
-use sqlx::PgPool;
+use sqlx::{PgPool, Postgres, QueryBuilder};
+use strum::Display;
 use tracing::info;
 
 /// A lesson in the schedule.
@@ -33,10 +36,11 @@ struct RawLesson {
     room: Option<Vec<String>>,
     _week: Option<String>,
     day: Option<Day>,
-    time: Option<String>,
+    time: Option<NaiveTime>,
 }
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize, Display, sqlx::Type)]
+#[sqlx(type_name = "day")]
 #[serde(rename_all = "UPPERCASE")]
 enum Day {
     Lun,
@@ -55,7 +59,7 @@ struct LessonsRoot {
 
 const PATH: &str = "./src/fixtures/lessons/orario/Orario Provvisorio 5 ore v5.xml";
 
-pub async fn seed(_db: &PgPool, _write: bool) -> color_eyre::Result<()> {
+pub async fn seed(db: &PgPool, write: bool) -> color_eyre::Result<()> {
     info!("Seeding the lessons table...");
 
     let file_content = tokio::fs::read_to_string(PATH).await?;
@@ -85,7 +89,54 @@ pub async fn seed(_db: &PgPool, _write: bool) -> color_eyre::Result<()> {
         );
     }
 
-    println!("{}", sonic_rs::to_string_pretty(&lessons)?);
+    let unique_teachers: Vec<&String> = lessons
+        .iter()
+        .filter_map(|lesson| lesson.teacher.as_ref().and_then(|t| t.first()))
+        .collect::<HashSet<_>>()
+        .into_iter()
+        .collect();
+
+    let mut txn = db.begin().await?;
+
+    let mut query_builder: QueryBuilder<Postgres> = QueryBuilder::new(
+        r#"
+        INSERT INTO "teacher" (full_name)
+        "#,
+    );
+
+    query_builder.push_values(unique_teachers, |mut b, teacher| {
+        b.push_bind(teacher);
+    });
+
+    query_builder.build().execute(&mut *txn).await?;
+
+    for lesson in &lessons {
+        let day = lesson.day.as_ref().unwrap();
+        let teacher = lesson.teacher.as_ref().and_then(|t| t.first()).unwrap();
+
+        sqlx::query!(
+            r#"
+            INSERT INTO "availability" (day, time, teacher_id)
+            SELECT $1, $2, id FROM teacher WHERE full_name = $3
+            "#,
+            day as &Day,
+            lesson.time,
+            teacher
+        )
+        .execute(&mut *txn)
+        .await?;
+    }
+
+    if write {
+        txn.commit().await?;
+    } else {
+        txn.rollback().await?;
+    }
+
+    info!(
+        "Availability and teacher tables seeded ({})",
+        if write { "Committed" } else { "Rolled Back" }
+    );
 
     Ok(())
 }
