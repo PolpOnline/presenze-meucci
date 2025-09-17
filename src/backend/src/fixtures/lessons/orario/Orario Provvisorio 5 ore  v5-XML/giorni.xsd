@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2000/10/XMLSchema" xmlns:od="urn:schemas-microsoft-com:officedata">
+<xsd:element name="dataroot">
+<xsd:complexType>
+<xsd:choice maxOccurs="unbounded">
+<xsd:element ref="giorni"/>
+</xsd:choice>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="giorni">
+<xsd:annotation>
+<xsd:appinfo>
+<od:index index-name="PrimaryKey" index-key="idfoglio idgiorno" primary="yes" unique="yes" clustered="no"/>
+<od:index index-name="idfoglio" index-key="idfoglio" primary="no" unique="no" clustered="no"/>
+<od:index index-name="idgiorno" index-key="idgiorno" primary="no" unique="no" clustered="no"/>
+</xsd:appinfo>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="idfoglio" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="idgiorno" minOccurs="0" od:jetType="longinteger" od:sqlSType="int">
+<xsd:simpleType>
+<xsd:restriction base="xsd:integer"/>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="nomegiorno" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>

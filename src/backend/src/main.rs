@@ -1,4 +1,5 @@
 mod app;
+mod fixtures;
 mod middleware;
 mod users;
 mod web;
@@ -32,8 +33,22 @@ async fn main() -> Result<()> {
 
     let app = App::new().await?;
 
-    // Later we might want to add CLI commands here, e.g. for seeding the database.
-    app.serve().await?;
+    #[cfg(debug_assertions)]
+    {
+        use app::cli::{Args, Command};
+        use clap::Parser;
 
-    Ok(())
+        let args = Args::parse();
+
+        match args.command {
+            None => app.serve().await,
+            Some(Command::SeedLessons(args)) => fixtures::lessons::seed(&app.db, args.write).await,
+        }
+    }
+
+    // Run the app in production without the CLI
+    #[cfg(not(debug_assertions))]
+    {
+        app.serve().await
+    }
 }

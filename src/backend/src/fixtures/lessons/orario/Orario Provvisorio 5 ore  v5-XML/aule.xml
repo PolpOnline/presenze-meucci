@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="aule.xsd">
+<aule>
+<idaula>A0000</idaula>
+<nomeaula>00-1E</nomeaula>
+<nomebreveaula>00-1E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0001</idaula>
+<nomeaula>00_Considlio di classe</nomeaula>
+<nomebreveaula>00_Considlio di classe</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0002</idaula>
+<nomeaula>01-1E</nomeaula>
+<nomebreveaula>01-1E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0003</idaula>
+<nomeaula>01-1M</nomeaula>
+<nomebreveaula>01-1M</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0004</idaula>
+<nomeaula>01-PM</nomeaula>
+<nomebreveaula>01-PM</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0005</idaula>
+<nomeaula>01-TC</nomeaula>
+<nomebreveaula>01-TC</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0006</idaula>
+<nomeaula>02-1E</nomeaula>
+<nomebreveaula>02-1E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0007</idaula>
+<nomeaula>02-1M</nomeaula>
+<nomebreveaula>02-1M</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0008</idaula>
+<nomeaula>02-2E</nomeaula>
+<nomebreveaula>02-2E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0009</idaula>
+<nomeaula>02-PM</nomeaula>
+<nomebreveaula>02-PM</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0010</idaula>
+<nomeaula>02A-TC</nomeaula>
+<nomebreveaula>02A-TC</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0011</idaula>
+<nomeaula>03-2E</nomeaula>
+<nomebreveaula>03-2E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0012</idaula>
+<nomeaula>03-PM</nomeaula>
+<nomebreveaula>03-PM</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0013</idaula>
+<nomeaula>04-1E</nomeaula>
+<nomebreveaula>04-1E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0014</idaula>
+<nomeaula>04-1M</nomeaula>
+<nomebreveaula>04-1M</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0015</idaula>
+<nomeaula>04-2E</nomeaula>
+<nomebreveaula>04-2E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0016</idaula>
+<nomeaula>04-PM</nomeaula>
+<nomebreveaula>04-PM</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0017</idaula>
+<nomeaula>04B-TC</nomeaula>
+<nomebreveaula>04B-TC</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0018</idaula>
+<nomeaula>05-1M</nomeaula>
+<nomebreveaula>05-1M</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0019</idaula>
+<nomeaula>05-PM</nomeaula>
+<nomebreveaula>05-PM</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0020</idaula>
+<nomeaula>05-TC</nomeaula>
+<nomebreveaula>05-TC</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0021</idaula>
+<nomeaula>06-1E</nomeaula>
+<nomebreveaula>06-1E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0022</idaula>
+<nomeaula>06-1M</nomeaula>
+<nomebreveaula>06-1M</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0023</idaula>
+<nomeaula>06-2E</nomeaula>
+<nomebreveaula>06-2E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0024</idaula>
+<nomeaula>06-TE</nomeaula>
+<nomebreveaula>06-TE</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0025</idaula>
+<nomeaula>07-1E</nomeaula>
+<nomebreveaula>07-1E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0026</idaula>
+<nomeaula>07-TC</nomeaula>
+<nomebreveaula>07-TC</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0027</idaula>
+<nomeaula>07-TW</nomeaula>
+<nomebreveaula>07-TW</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0028</idaula>
+<nomeaula>08-1E</nomeaula>
+<nomebreveaula>08-1E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0029</idaula>
+<nomeaula>08-1M</nomeaula>
+<nomebreveaula>08-1M</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0030</idaula>
+<nomeaula>08-2E</nomeaula>
+<nomebreveaula>08-2E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0031</idaula>
+<nomeaula>08-2W</nomeaula>
+<nomebreveaula>08-2W</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0032</idaula>
+<nomeaula>08-TE</nomeaula>
+<nomebreveaula>08-TE</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0033</idaula>
+<nomeaula>09-1E</nomeaula>
+<nomebreveaula>09-1E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0034</idaula>
+<nomeaula>09-1M</nomeaula>
+<nomebreveaula>09-1M</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0035</idaula>
+<nomeaula>09-2E</nomeaula>
+<nomebreveaula>09-2E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0036</idaula>
+<nomeaula>09-TC</nomeaula>
+<nomebreveaula>09-TC</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0037</idaula>
+<nomeaula>09-TW</nomeaula>
+<nomebreveaula>09-TW</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0038</idaula>
+<nomeaula>10-1E</nomeaula>
+<nomebreveaula>10-1E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0039</idaula>
+<nomeaula>10-1M</nomeaula>
+<nomebreveaula>10-1M</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0040</idaula>
+<nomeaula>10-2E</nomeaula>
+<nomebreveaula>10-2E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0041</idaula>
+<nomeaula>10-2W</nomeaula>
+<nomebreveaula>10-2W</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0042</idaula>
+<nomeaula>11-1E</nomeaula>
+<nomebreveaula>11-1E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0043</idaula>
+<nomeaula>11-2E</nomeaula>
+<nomebreveaula>11-2E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0044</idaula>
+<nomeaula>11-TC</nomeaula>
+<nomebreveaula>11-TC</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0045</idaula>
+<nomeaula>12-1E</nomeaula>
+<nomebreveaula>12-1E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0046</idaula>
+<nomeaula>12-2E</nomeaula>
+<nomebreveaula>12-2E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0047</idaula>
+<nomeaula>12-2W</nomeaula>
+<nomebreveaula>12-2W</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0048</idaula>
+<nomeaula>12-TW</nomeaula>
+<nomebreveaula>12-TW</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0049</idaula>
+<nomeaula>13-1E</nomeaula>
+<nomebreveaula>13-1E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0050</idaula>
+<nomeaula>13-1W</nomeaula>
+<nomebreveaula>13-1W</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0051</idaula>
+<nomeaula>13-2E</nomeaula>
+<nomebreveaula>13-2E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0052</idaula>
+<nomeaula>13-TC</nomeaula>
+<nomebreveaula>13-TC</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0053</idaula>
+<nomeaula>14-2E</nomeaula>
+<nomebreveaula>14-2E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0054</idaula>
+<nomeaula>14-2W</nomeaula>
+<nomebreveaula>14-2W</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0055</idaula>
+<nomeaula>14-TW</nomeaula>
+<nomebreveaula>14-TW</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0056</idaula>
+<nomeaula>15-2E</nomeaula>
+<nomebreveaula>15-2E</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0057</idaula>
+<nomeaula>16-SE</nomeaula>
+<nomebreveaula>16-SE</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0058</idaula>
+<nomeaula>16-TW</nomeaula>
+<nomebreveaula>16-TW</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0059</idaula>
+<nomeaula>18-TW</nomeaula>
+<nomebreveaula>18-TW</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0060</idaula>
+<nomeaula>A.R.C.</nomeaula>
+<nomebreveaula>A.R.C.</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0061</idaula>
+<nomeaula>ADEL 13-TE</nomeaula>
+<nomebreveaula>ADEL 13-TE</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0062</idaula>
+<nomeaula>ADIS 07-1M</nomeaula>
+<nomebreveaula>ADIS 07-1M</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0063</idaula>
+<nomeaula>AULA 2.0  04A-TC</nomeaula>
+<nomebreveaula>AULA 2.0  04A-TC</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0064</idaula>
+<nomeaula>AULA SCRUTINI</nomeaula>
+<nomebreveaula>AULA SCRUTINI</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0065</idaula>
+<nomeaula>DISPOSIZIONE</nomeaula>
+<nomebreveaula>DISPOSIZIONE</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0066</idaula>
+<nomeaula>LAB FISICA 08-SE</nomeaula>
+<nomebreveaula>LAB FISICA 08-SE</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0067</idaula>
+<nomeaula>LAB SCIENZE 19-TE</nomeaula>
+<nomebreveaula>LAB SCIENZE 19-TE</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0068</idaula>
+<nomeaula>LAC 06-TC</nomeaula>
+<nomebreveaula>LAC 06-TC</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0069</idaula>
+<nomeaula>LACA  14-1W</nomeaula>
+<nomebreveaula>LACA  14-1W</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0070</idaula>
+<nomeaula>LAI 1 - MODIGLIANI 01-2W</nomeaula>
+<nomebreveaula>LAI 1 - MODIGLIANI 01-2W</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0071</idaula>
+<nomeaula>LAI 2 09-SE</nomeaula>
+<nomebreveaula>LAI 2 09-SE</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0072</idaula>
+<nomeaula>LAI 3 05-2W</nomeaula>
+<nomebreveaula>LAI 3 05-2W</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0073</idaula>
+<nomeaula>LAM 15-TM</nomeaula>
+<nomebreveaula>LAM 15-TM</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0074</idaula>
+<nomeaula>LAME 04-TE</nomeaula>
+<nomebreveaula>LAME 04-TE</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0075</idaula>
+<nomeaula>LAMU 1_02B -TC</nomeaula>
+<nomebreveaula>LAMU 1_02B -TC</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0076</idaula>
+<nomeaula>LAMU 2_03-TC</nomeaula>
+<nomebreveaula>LAMU 2_03-TC</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0077</idaula>
+<nomeaula>LAP 10-SE</nomeaula>
+<nomebreveaula>LAP 10-SE</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0078</idaula>
+<nomeaula>LAS 07-2W</nomeaula>
+<nomebreveaula>LAS 07-2W</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0079</idaula>
+<nomeaula>LASM 11-TM</nomeaula>
+<nomebreveaula>LASM 11-TM</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0080</idaula>
+<nomeaula>LAT 23-TM</nomeaula>
+<nomebreveaula>LAT 23-TM</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0081</idaula>
+<nomeaula>LATI 05-TW</nomeaula>
+<nomebreveaula>LATI 05-TW</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0082</idaula>
+<nomeaula>LEG 02-TE</nomeaula>
+<nomebreveaula>LEG 02-TE</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0083</idaula>
+<nomeaula>LEIS 11-SE</nomeaula>
+<nomebreveaula>LEIS 11-SE</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0084</idaula>
+<nomeaula>LOGISTICA 12-TE</nomeaula>
+<nomebreveaula>LOGISTICA 12-TE</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0085</idaula>
+<nomeaula>OMU 18-TM</nomeaula>
+<nomebreveaula>OMU 18-TM</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0086</idaula>
+<nomeaula>ON LINE</nomeaula>
+<nomebreveaula>ON LINE</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0087</idaula>
+<nomeaula>PAL</nomeaula>
+<nomebreveaula>PAL</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0088</idaula>
+<nomeaula>SERVIZIO</nomeaula>
+<nomebreveaula>SERVIZIO</nomebreveaula>
+</aule>
+<aule>
+<idaula>A0089</idaula>
+<nomeaula>Studio Assistito</nomeaula>
+<nomebreveaula>Studio Assistito</nomebreveaula>
+</aule>
+</dataroot>

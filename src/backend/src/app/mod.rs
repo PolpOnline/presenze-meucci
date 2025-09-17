@@ -1,3 +1,4 @@
+pub(crate) mod cli;
 pub mod db;
 pub mod openapi;
 mod redis;

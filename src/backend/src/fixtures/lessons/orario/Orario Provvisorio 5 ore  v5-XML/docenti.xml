@@ -1,0 +1,801 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="docenti.xsd">
+<docenti>
+<iddocente>P0000</iddocente>
+<nomedocente>A012</nomedocente>
+<nomebrevedocente>SODI NICCOLO'</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0001</iddocente>
+<nomedocente>A012_ECC</nomedocente>
+<nomebrevedocente>Nuovo docente (1)</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0002</iddocente>
+<nomedocente>A033</nomedocente>
+<nomebrevedocente>Nuovo docente (1)</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0003</iddocente>
+<nomedocente>A040_supp</nomedocente>
+<nomebrevedocente>A040_supp</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0004</iddocente>
+<nomedocente>A041_2</nomedocente>
+<nomebrevedocente>Nuovo docente (1)</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0005</iddocente>
+<nomedocente>A041_ECC</nomedocente>
+<nomebrevedocente>Nuovo docente (1)</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0006</iddocente>
+<nomedocente>A042_ECC</nomedocente>
+<nomebrevedocente>Nuovo docente (1)</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0007</iddocente>
+<nomedocente>ACCORDINO FRANCESCO</nomedocente>
+<nomebrevedocente>ACCORDINO FRANCESCO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0008</iddocente>
+<nomedocente>AGRELLO GIUSEPPINA</nomedocente>
+<nomebrevedocente>AGRELLO GIUSEPPINA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0009</iddocente>
+<nomedocente>ALBANESI ANTONELLA</nomedocente>
+<nomebrevedocente>ALBANESI ANTONELLA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0010</iddocente>
+<nomedocente>ANEDDA VALERIA</nomedocente>
+<nomebrevedocente>ANEDDA VALERIA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0011</iddocente>
+<nomedocente>ANTONELLI ANDREA</nomedocente>
+<nomebrevedocente>Nuovo docente (1)</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0012</iddocente>
+<nomedocente>B016-COE</nomedocente>
+<nomebrevedocente>B016-COE</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0013</iddocente>
+<nomedocente>B017_ECC</nomedocente>
+<nomebrevedocente>Nuovo docente (1)</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0014</iddocente>
+<nomedocente>B09_ECC</nomedocente>
+<nomebrevedocente>Nuovo docente (1)</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0015</iddocente>
+<nomedocente>BAGNOLI FRANCESCA</nomedocente>
+<nomebrevedocente>BAGNOLI FRANCESCA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0016</iddocente>
+<nomedocente>BALDI MARIA CRISTINA</nomedocente>
+<nomebrevedocente>BALDI MARIA CRISTINA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0017</iddocente>
+<nomedocente>BARTOLI ANTONELLA</nomedocente>
+<nomebrevedocente>A034</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0018</iddocente>
+<nomedocente>BENVENUTI CLAUDIO</nomedocente>
+<nomebrevedocente>BENVENUTI CLAUDIO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0019</iddocente>
+<nomedocente>BERTOLI FRANCESCO</nomedocente>
+<nomebrevedocente>BERTOLI FRANCESCO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0020</iddocente>
+<nomedocente>BINI MICHELA</nomedocente>
+<nomebrevedocente>BINI MICHELA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0021</iddocente>
+<nomedocente>BOCCINI VALENTINA</nomedocente>
+<nomebrevedocente>BOCCINI VALENTINA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0022</iddocente>
+<nomedocente>BONDI FRANCESCO</nomedocente>
+<nomebrevedocente>BONDI</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0023</iddocente>
+<nomedocente>BONFIGLIOLI ROBERTO</nomedocente>
+<nomebrevedocente>BONFIGLIOLI ROBERTO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0024</iddocente>
+<nomedocente>BORTOLINI GIANCARLO</nomedocente>
+<nomebrevedocente>BORTOLINI GIANCARLO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0025</iddocente>
+<nomedocente>BROGI BARBARA</nomedocente>
+<nomebrevedocente>BROGI BARBARA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0026</iddocente>
+<nomedocente>BRUNI ELISABETTA</nomedocente>
+<nomebrevedocente>BRUNI ELISABETTA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0027</iddocente>
+<nomedocente>BRUNI VALENTINO</nomedocente>
+<nomebrevedocente>BRUNI VALENTINO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0028</iddocente>
+<nomedocente>CANNAVO' PATRIZIA</nomedocente>
+<nomebrevedocente>CANNAVO' PATRIZIA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0029</iddocente>
+<nomedocente>CAPARROTTA STEFANIA</nomedocente>
+<nomebrevedocente>CAPARROTTA STEFANIA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0030</iddocente>
+<nomedocente>CAPEZIO FRANCESCO</nomedocente>
+<nomebrevedocente>CAPEZIO FRANCESCO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0031</iddocente>
+<nomedocente>CAPPELLETTI LEONARDO</nomedocente>
+<nomebrevedocente>CAPPELLETTI LEONARDO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0032</iddocente>
+<nomedocente>CARBONE CHRISTIAN</nomedocente>
+<nomebrevedocente>Nuovo docente (1)</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0033</iddocente>
+<nomedocente>CAUTIERO SALVATORE</nomedocente>
+<nomebrevedocente>CAUTIERO SALVATORE</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0034</iddocente>
+<nomedocente>CENCETTI ALICE</nomedocente>
+<nomebrevedocente>CENCETTI ALICE</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0035</iddocente>
+<nomedocente>CIANDELLA ALESSANDRO</nomedocente>
+<nomebrevedocente>CIANDELLA ALESSANDRO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0036</iddocente>
+<nomedocente>CIARAMELLA SIMONA</nomedocente>
+<nomebrevedocente>CIARAMELLA SIMONA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0037</iddocente>
+<nomedocente>COE_FERRARIS_EMPOLI</nomedocente>
+<nomebrevedocente>Nuovo docente (1)</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0038</iddocente>
+<nomedocente>CONTICELLI SIMONA</nomedocente>
+<nomebrevedocente>CONTICELLI SIMONA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0039</iddocente>
+<nomedocente>CORRADO FEDERICO</nomedocente>
+<nomebrevedocente>CORRADO FEDERICO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0040</iddocente>
+<nomedocente>CORSARO GIUSEPPE</nomedocente>
+<nomebrevedocente>CORSARO GIUSEPPE</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0041</iddocente>
+<nomedocente>COSTANZO ILARIA</nomedocente>
+<nomebrevedocente>COSTANZO ILARIA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0042</iddocente>
+<nomedocente>CURRO' ROSALBA</nomedocente>
+<nomebrevedocente>CURRO' ROSALBA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0043</iddocente>
+<nomedocente>DALLAI NADA</nomedocente>
+<nomebrevedocente>DALLAI NADA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0044</iddocente>
+<nomedocente>DE LUCA GIUSTINA</nomedocente>
+<nomebrevedocente>DE LUCA GIUSTINA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0045</iddocente>
+<nomedocente>DE MARIA - COE GALILEI</nomedocente>
+<nomebrevedocente>COE GALILEI - ing</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0046</iddocente>
+<nomedocente>DI FRUSCIA SABINA</nomedocente>
+<nomebrevedocente>DI FRUSCIA SABINA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0047</iddocente>
+<nomedocente>DIMITRI ENRICO</nomedocente>
+<nomebrevedocente>DIMITRI ENRICO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0048</iddocente>
+<nomedocente>ESPOSTO VALERIA</nomedocente>
+<nomebrevedocente>ESPOSTO VALERIA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0049</iddocente>
+<nomedocente>FABBRI RAFFAELLA</nomedocente>
+<nomebrevedocente>FABBRI RAFFAELLA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0050</iddocente>
+<nomedocente>FAGGIONI MARIA GABRIELLA</nomedocente>
+<nomebrevedocente>FAGGIONI MARIA GABRIELLA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0051</iddocente>
+<nomedocente>FALCO ROBERTO</nomedocente>
+<nomebrevedocente>Nuovo docente (1)</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0052</iddocente>
+<nomedocente>FATUCCHI IVAN</nomedocente>
+<nomebrevedocente>FATUCCHI IVAN</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0053</iddocente>
+<nomedocente>FEDELE DELIA</nomedocente>
+<nomebrevedocente>FEDELE DELIA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0054</iddocente>
+<nomedocente>FERRI FABIO</nomedocente>
+<nomebrevedocente>FERRI FABIO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0055</iddocente>
+<nomedocente>FORTUNA ALESSANDRO</nomedocente>
+<nomebrevedocente>FORTUNA ALESSANDRO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0056</iddocente>
+<nomedocente>FOSSATI ALESSIO</nomedocente>
+<nomebrevedocente>FOSSATI ALESSIO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0057</iddocente>
+<nomedocente>FRANCESCHINI GIANFRANCO</nomedocente>
+<nomebrevedocente>FRANCESCHINI GIANFRANCO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0058</iddocente>
+<nomedocente>FRANCHI MICHELI CLAUDIA</nomedocente>
+<nomebrevedocente>FRANCHI MICHELI CLAUDIA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0059</iddocente>
+<nomedocente>GASPERINI LORETTA</nomedocente>
+<nomebrevedocente>GASPERINI LORETTA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0060</iddocente>
+<nomedocente>GATTUSO ELVIS</nomedocente>
+<nomebrevedocente>GATTUSO ELVIS</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0061</iddocente>
+<nomedocente>GHELLI CATERINA</nomedocente>
+<nomebrevedocente>GHELLI CATERINA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0062</iddocente>
+<nomedocente>GIANNINI GIANLUCA</nomedocente>
+<nomebrevedocente>GIANNINI GIANLUCA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0063</iddocente>
+<nomedocente>GIANNINO' PAOLO</nomedocente>
+<nomebrevedocente>GIANNINO' PAOLO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0064</iddocente>
+<nomedocente>GORI YOHAN</nomedocente>
+<nomebrevedocente>Nuovo docente (1)</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0065</iddocente>
+<nomedocente>GRACEFFA IACOPO</nomedocente>
+<nomebrevedocente>GRACEFFA IACOPO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0066</iddocente>
+<nomedocente>GUARDUCCI LUCA</nomedocente>
+<nomebrevedocente>GUARDUCCI LUCA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0067</iddocente>
+<nomedocente>IAIUNESE FABIO</nomedocente>
+<nomebrevedocente>Nuovo docente (1)</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0068</iddocente>
+<nomedocente>INGENITO ERIKA</nomedocente>
+<nomebrevedocente>INGENITO ERIKA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0069</iddocente>
+<nomedocente>LA BADESSA ALESSANDRO</nomedocente>
+<nomebrevedocente>LA BADESSA ALESSANDRO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0070</iddocente>
+<nomedocente>LEBBORONI MARCO</nomedocente>
+<nomebrevedocente>LEBBORONI MARCO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0071</iddocente>
+<nomedocente>LENTINO ROSI</nomedocente>
+<nomebrevedocente>LENTINO ROSI</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0072</iddocente>
+<nomedocente>LERARIO FRANCESCA</nomedocente>
+<nomebrevedocente>LERARIO FRANCESCA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0073</iddocente>
+<nomedocente>LEVI MASSIMILIANO</nomedocente>
+<nomebrevedocente>LEVI MASSIMILIANO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0074</iddocente>
+<nomedocente>LOPARDO GINO</nomedocente>
+<nomebrevedocente>LOPARDO GINO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0075</iddocente>
+<nomedocente>LUCCHESI GIULIA</nomedocente>
+<nomebrevedocente>LUCCHESI GIULIA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0076</iddocente>
+<nomedocente>LUCCHESI MARCO</nomedocente>
+<nomebrevedocente>LUCCHESI MARCO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0077</iddocente>
+<nomedocente>MACINATI MONICA</nomedocente>
+<nomebrevedocente>MACINATI MONICA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0078</iddocente>
+<nomedocente>MANTIGNANI ANDREA</nomedocente>
+<nomebrevedocente>MANTIGNANI ANDREA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0079</iddocente>
+<nomedocente>MARCONI MIRIAM</nomedocente>
+<nomebrevedocente>MARCONI</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0080</iddocente>
+<nomedocente>MARI ROSA</nomedocente>
+<nomebrevedocente>MARI ROSA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0081</iddocente>
+<nomedocente>MARSALA ANTONIETTA</nomedocente>
+<nomebrevedocente>MARSALA ANTONIETTA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0082</iddocente>
+<nomedocente>MASCIONI FOSCO</nomedocente>
+<nomebrevedocente>MASCIONI FOSCO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0083</iddocente>
+<nomedocente>MASI LUCIA</nomedocente>
+<nomebrevedocente>MASI LUCIA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0084</iddocente>
+<nomedocente>MASSARI RICCARDO</nomedocente>
+<nomebrevedocente>MASSARI RICCARDO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0085</iddocente>
+<nomedocente>MASTROLEMBO ALBERTO</nomedocente>
+<nomebrevedocente>MASTROLEMBO ALBERTO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0086</iddocente>
+<nomedocente>MATTEOLI SARA</nomedocente>
+<nomebrevedocente>MATTEOLI SARA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0087</iddocente>
+<nomedocente>MAZZEO IVANA</nomedocente>
+<nomebrevedocente>MAZZEO IVANA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0088</iddocente>
+<nomedocente>MECATTI FEDERICO</nomedocente>
+<nomebrevedocente>Nuovo docente (1)</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0089</iddocente>
+<nomedocente>MULINACCI ANNA PAOLA</nomedocente>
+<nomebrevedocente>MULINACCI ANNA PAOLA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0090</iddocente>
+<nomedocente>NESTI CRISTIANO</nomedocente>
+<nomebrevedocente>NESTI CRISTIANO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0091</iddocente>
+<nomedocente>NOCENTINI MATASSINI DANIELE</nomedocente>
+<nomebrevedocente>NOCENTINI MATASSINI DANIELE</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0092</iddocente>
+<nomedocente>NUCIARI CLAUDIO</nomedocente>
+<nomebrevedocente>NUCIARI CLAUDIO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0093</iddocente>
+<nomedocente>OMINELLI MARIA ILARIA</nomedocente>
+<nomebrevedocente>OMINELLI MARIA ILARIA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0094</iddocente>
+<nomedocente>PAGNINI ROSSANA</nomedocente>
+<nomebrevedocente>PAGNINI ROSSANA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0095</iddocente>
+<nomedocente>PANI STEFAN0</nomedocente>
+<nomebrevedocente>PANI STEFAN0</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0096</iddocente>
+<nomedocente>PASTORE ILEANA</nomedocente>
+<nomebrevedocente>PASTORE ILEANA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0097</iddocente>
+<nomedocente>PERRONE CONCETTA</nomedocente>
+<nomebrevedocente>PERRONE CONCETTA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0098</iddocente>
+<nomedocente>PERROTTA GIOVANNA</nomedocente>
+<nomebrevedocente>PERROTTA GIOVANNA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0099</iddocente>
+<nomedocente>PICCOLO ANTONIO</nomedocente>
+<nomebrevedocente>PICCOLO ANTONIO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0100</iddocente>
+<nomedocente>PICCOLO GIANLUCA</nomedocente>
+<nomebrevedocente>PICCOLO GIANLUCA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0101</iddocente>
+<nomedocente>POMICINO FRANCESCO</nomedocente>
+<nomebrevedocente>POMICINO FRANCESCO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0102</iddocente>
+<nomedocente>POSARELLI CLAUDIA</nomedocente>
+<nomebrevedocente>POSARELLI CLAUDIA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0103</iddocente>
+<nomedocente>PRATESI ISABELLA</nomedocente>
+<nomebrevedocente>PRATESI ISABELLA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0104</iddocente>
+<nomedocente>PRATESI RICCARDO</nomedocente>
+<nomebrevedocente>PRATESI RICCARDO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0105</iddocente>
+<nomedocente>REBESCHINI IRENE NATALIA</nomedocente>
+<nomebrevedocente>REBESCHINI IRENE NATALIA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0106</iddocente>
+<nomedocente>RICCI SIMONE</nomedocente>
+<nomebrevedocente>RICCI SIMONE</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0107</iddocente>
+<nomedocente>RIZZIO MARIA</nomedocente>
+<nomebrevedocente>RIZZIO MARIA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0108</iddocente>
+<nomedocente>ROSSI VERONICA</nomedocente>
+<nomebrevedocente>ROSSI VERONICA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0109</iddocente>
+<nomedocente>RUBINO ANNALISA</nomedocente>
+<nomebrevedocente>Nuovo docente (1)</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0110</iddocente>
+<nomedocente>SALTARELLO NICODEMO</nomedocente>
+<nomebrevedocente>SALTARELLO NICODEMO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0111</iddocente>
+<nomedocente>SALVADORI ALESSANDRA</nomedocente>
+<nomebrevedocente>SALVADORI ALESSANDRA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0112</iddocente>
+<nomedocente>SALVETTI LAPO</nomedocente>
+<nomebrevedocente>SALVETTI LAPO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0113</iddocente>
+<nomedocente>SALVIULO LUIGI</nomedocente>
+<nomebrevedocente>SALVIULO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0114</iddocente>
+<nomedocente>SANTINI MARCO</nomedocente>
+<nomebrevedocente>SANTINI MARCO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0115</iddocente>
+<nomedocente>SCIALPI MARIO</nomedocente>
+<nomebrevedocente>SCIALPI MARIO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0116</iddocente>
+<nomedocente>SENATORE GIUSEPPE</nomedocente>
+<nomebrevedocente>SENATORE GIUSEPPE</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0117</iddocente>
+<nomedocente>SIGNORINO SAVERIO EROS</nomedocente>
+<nomebrevedocente>A048</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0118</iddocente>
+<nomedocente>SIINO ALESSANDRO</nomedocente>
+<nomebrevedocente>SIINO ALESSANDRO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0119</iddocente>
+<nomedocente>SILVESTRO GIUSEPPINA</nomedocente>
+<nomebrevedocente>SILVESTRO GIUSEPPINA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0120</iddocente>
+<nomedocente>SPILLANTINI MARIA FIORA</nomedocente>
+<nomebrevedocente>SPILLANTINI MARIA FIORA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0121</iddocente>
+<nomedocente>STRAFACI MARCO</nomedocente>
+<nomebrevedocente>STRAFACI MARCO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0122</iddocente>
+<nomedocente>TANZINI FRANCESCA</nomedocente>
+<nomebrevedocente>TANZINI FRANCESCA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0123</iddocente>
+<nomedocente>TORRE NOVELLA</nomedocente>
+<nomebrevedocente>TORRE NOVELLA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0124</iddocente>
+<nomedocente>TRANCHINA TERESA</nomedocente>
+<nomebrevedocente>Nuovo docente (1)</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0125</iddocente>
+<nomedocente>TROIANO CATERINA</nomedocente>
+<nomebrevedocente>TROIANO CATERINA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0126</iddocente>
+<nomedocente>VACIRCA MATTEO</nomedocente>
+<nomebrevedocente>VACIRCA MATTEO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0127</iddocente>
+<nomedocente>VADALA' PAOLA</nomedocente>
+<nomebrevedocente>VADALA' PAOLA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0128</iddocente>
+<nomedocente>VAIOLI LETIZIA</nomedocente>
+<nomebrevedocente>VAIOLI LETIZIA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0129</iddocente>
+<nomedocente>VALENTE ANTONIO</nomedocente>
+<nomebrevedocente>VALENTE ANTONIO</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0130</iddocente>
+<nomedocente>VECCI ANNALISA</nomedocente>
+<nomebrevedocente>VECCI ANNALISA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0131</iddocente>
+<nomedocente>VITALI MARIA FRANCESCA</nomedocente>
+<nomebrevedocente>VITALI MARIA FRANCESCA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+<docenti>
+<iddocente>P0132</iddocente>
+<nomedocente>ZONNO GABRIELLA</nomedocente>
+<nomebrevedocente>ZONNO GABRIELLA</nomebrevedocente>
+<emaildocente>(null)</emaildocente>
+</docenti>
+</dataroot>

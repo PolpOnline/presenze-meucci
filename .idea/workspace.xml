@@ -11,7 +11,21 @@
     </cargoProject>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="613d2823-08be-46d5-b3fa-2b152461ec60" name="Changes" comment="Initial commit" />
+    <list default="true" id="613d2823-08be-46d5-b3fa-2b152461ec60" name="Changes" comment="Add gitignore">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/backend/src/app/cli/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/backend/src/fixtures/lessons/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/backend/src/web/endpoints/protected/ok.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3afef54b-d82b-47b4-a52d-bb8113bd157e.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3afef54b-d82b-47b4-a52d-bb8113bd157e.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3afef54b-d82b-47b4-a52d-bb8113bd157e/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3afef54b-d82b-47b4-a52d-bb8113bd157e/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/src/app/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/src/app/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/src/web/endpoints/protected/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/src/web/endpoints/protected/mod.rs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,17 +48,29 @@
     <option name="myRunOnSave" value="true" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/src" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;PolpOnline&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/PolpOnline/presenze-meucci.git&quot;,
+    &quot;accountId&quot;: &quot;c172a685-cb79-460e-a7c1-9b0d2b91e20c&quot;
+  }
+}</component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="yY4KiIeU" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="32muG4MofcATS7Lrn3nt5DC35Zf" />
   <component name="ProjectViewState">
     <option name="abbreviatePackageNames" value="true" />
@@ -61,6 +87,8 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "app.teamhub.selectedTeam": "https://github.com/PolpOnline/presenze-meucci",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/tommy/Documents/Git_projects/presenze-meucci/src/backend",
@@ -93,11 +121,11 @@
       <recent name="$PROJECT_DIR$/src/backend" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/backend/src/fixtures/lessons" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/backend/src/web" />
       <recent name="$PROJECT_DIR$/src/backend" />
       <recent name="$PROJECT_DIR$/src/backend/src/app" />
-      <recent name="$PROJECT_DIR$/src/frontend/src/lib/components" />
     </key>
   </component>
   <component name="RustProjectSettings">
@@ -131,7 +159,8 @@
       <option name="presentableId" value="Default" />
       <updated>1708012348385</updated>
       <workItem from="1708012349530" duration="115000" />
-      <workItem from="1758037971683" duration="8289000" />
+      <workItem from="1758037971683" duration="9634000" />
+      <workItem from="1758140231397" duration="2945000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -149,7 +178,23 @@
       <option name="project" value="LOCAL" />
       <updated>1758046231305</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1758046403368</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1758046403368</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Add gitignore">
+      <option name="closed" value="true" />
+      <created>1758140447494</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1758140447494</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,7 +218,8 @@
       <path value="$PROJECT_DIR$/src" />
     </ignored-roots>
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="Add gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add gitignore" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,0 +1,4 @@
+idsede	nomesede	nomebrevesede
+S0000	Meccanica	Meccanica
+S0001	Prefabbricato	Prefabbricato
+S0002	Sede	Sede

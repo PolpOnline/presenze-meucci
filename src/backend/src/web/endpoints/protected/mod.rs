@@ -1,5 +1,7 @@
-use utoipa_axum::router::OpenApiRouter;
+mod ok;
+
+use utoipa_axum::{router::OpenApiRouter, routes};
 
 pub fn router() -> OpenApiRouter {
-    OpenApiRouter::new()
+    OpenApiRouter::new().routes(routes!(ok::ok))
 }
