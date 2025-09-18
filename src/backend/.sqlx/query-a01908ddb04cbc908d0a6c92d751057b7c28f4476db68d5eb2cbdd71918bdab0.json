@@ -1,0 +1,42 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            INSERT INTO \"availability\" (day, time, availability_type, teacher_id)\n            SELECT $1, $2, $3, id FROM teacher WHERE full_name = $4\n            ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        {
+          "Custom": {
+            "name": "day",
+            "kind": {
+              "Enum": [
+                "Lun",
+                "Mar",
+                "Mer",
+                "Gio",
+                "Ven",
+                "Sab",
+                "Dom"
+              ]
+            }
+          }
+        },
+        "Time",
+        {
+          "Custom": {
+            "name": "availability_type",
+            "kind": {
+              "Enum": [
+                "Availability",
+                "RecoveryHours"
+              ]
+            }
+          }
+        },
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "a01908ddb04cbc908d0a6c92d751057b7c28f4476db68d5eb2cbdd71918bdab0"
+}

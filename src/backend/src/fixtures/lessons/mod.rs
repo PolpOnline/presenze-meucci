@@ -1,5 +1,6 @@
 use ahash::HashSet;
 use chrono::NaiveTime;
+use color_eyre::{Report, Result};
 use serde::{Deserialize, Serialize};
 use sqlx::{PgPool, Postgres, QueryBuilder};
 use strum::Display;
@@ -18,17 +19,11 @@ use tracing::info;
 //   <DAY>LUN</DAY>
 //   <TIME>8:00</TIME>
 // </LESSON>
-#[derive(Debug, Deserialize, restructed::Models)]
+#[derive(Debug, Deserialize)]
 #[serde(rename_all = "UPPERCASE")]
-#[view(
-    Lesson,
-    fields(teacher, day, time),
-    attributes_with = "deriveless",
-    derive(Serialize, Debug)
-)]
 struct RawLesson {
     _duration: Option<String>,
-    _subject: Option<String>,
+    subject: Option<String>,
     _site: Option<String>,
     _module: Option<String>,
     teacher: Option<Vec<String>>,
@@ -37,6 +32,45 @@ struct RawLesson {
     _week: Option<String>,
     day: Option<Day>,
     time: Option<NaiveTime>,
+}
+
+#[derive(Debug, Serialize)]
+struct Lesson {
+    teacher: Option<Vec<String>>,
+    day: Option<Day>,
+    time: Option<NaiveTime>,
+    availability_type: Option<AvailabilityType>,
+}
+
+// subject can be DISPO or RECUPERO_ORARIO
+impl TryFrom<&str> for AvailabilityType {
+    type Error = Report;
+
+    fn try_from(value: &str) -> Result<Self> {
+        match value {
+            "DISPO" => Ok(Self::Availability),
+            "RECUPERO_ORARIO" => Ok(Self::RecoveryHours),
+            _ => Err(color_eyre::eyre::eyre!(
+                "Invalid availability type: {}",
+                value
+            )),
+        }
+    }
+}
+
+impl TryFrom<RawLesson> for Lesson {
+    type Error = Report;
+
+    fn try_from(raw: RawLesson) -> Result<Self> {
+        let availability_type = raw.subject.map(|s| s.as_str().try_into()).transpose()?;
+
+        Ok(Self {
+            teacher: raw.teacher,
+            day: raw.day,
+            time: raw.time,
+            availability_type,
+        })
+    }
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize, Display, sqlx::Type)]
@@ -57,6 +91,14 @@ struct LessonsRoot {
     lessons: Vec<RawLesson>,
 }
 
+#[derive(Debug, Clone, Deserialize, Serialize, Display, sqlx::Type)]
+#[sqlx(type_name = "availability_type")]
+#[serde(rename_all = "UPPERCASE")]
+enum AvailabilityType {
+    Availability,
+    RecoveryHours,
+}
+
 const PATH: &str = "./src/fixtures/lessons/orario/Orario Provvisorio 5 ore v5.xml";
 
 pub async fn seed(db: &PgPool, write: bool) -> color_eyre::Result<()> {
@@ -67,7 +109,7 @@ pub async fn seed(db: &PgPool, write: bool) -> color_eyre::Result<()> {
         quick_xml::de::from_str::<LessonsRoot>(&file_content)?.lessons;
 
     // Filter for lessons that have any room that starts with DISPOSIZIONE#
-    let lessons: Vec<Lesson> = raw_lessons
+    let lessons = raw_lessons
         .into_iter()
         .filter(|lesson| {
             if let Some(rooms) = &lesson.room {
@@ -76,8 +118,8 @@ pub async fn seed(db: &PgPool, write: bool) -> color_eyre::Result<()> {
                 false
             }
         })
-        .map(|lesson| lesson.into())
-        .collect();
+        .map(|lesson| lesson.try_into())
+        .collect::<Result<Vec<Lesson>>>()?;
 
     // assert that every lesson has exactly one teacher
     for lesson in &lessons {
@@ -113,14 +155,16 @@ pub async fn seed(db: &PgPool, write: bool) -> color_eyre::Result<()> {
     for lesson in &lessons {
         let day = lesson.day.as_ref().unwrap();
         let teacher = lesson.teacher.as_ref().and_then(|t| t.first()).unwrap();
+        let availability_type = lesson.availability_type.as_ref().unwrap();
 
         sqlx::query!(
             r#"
-            INSERT INTO "availability" (day, time, teacher_id)
-            SELECT $1, $2, id FROM teacher WHERE full_name = $3
+            INSERT INTO "availability" (day, time, availability_type, teacher_id)
+            SELECT $1, $2, $3, id FROM teacher WHERE full_name = $4
             "#,
             day as &Day,
             lesson.time,
+            availability_type as &AvailabilityType,
             teacher
         )
         .execute(&mut *txn)
