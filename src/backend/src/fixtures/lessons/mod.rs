@@ -1,6 +1,9 @@
 use ahash::HashSet;
 use chrono::NaiveTime;
-use color_eyre::{Report, Result};
+use color_eyre::{
+    Report, Result,
+    eyre::{bail, eyre},
+};
 use serde::{Deserialize, Serialize};
 use sqlx::{PgPool, Postgres, QueryBuilder};
 use strum::Display;
@@ -101,7 +104,7 @@ enum AvailabilityType {
 
 const PATH: &str = "./src/fixtures/lessons/orario/Orario Provvisorio 5 ore v5.xml";
 
-pub async fn seed(db: &PgPool, write: bool) -> color_eyre::Result<()> {
+pub async fn seed(db: &PgPool, write: bool) -> Result<()> {
     info!("Seeding the lessons table...");
 
     let file_content = tokio::fs::read_to_string(PATH).await?;
@@ -153,9 +156,19 @@ pub async fn seed(db: &PgPool, write: bool) -> color_eyre::Result<()> {
     query_builder.build().execute(&mut *txn).await?;
 
     for lesson in &lessons {
-        let day = lesson.day.as_ref().unwrap();
-        let teacher = lesson.teacher.as_ref().and_then(|t| t.first()).unwrap();
-        let availability_type = lesson.availability_type.as_ref().unwrap();
+        let day = lesson
+            .day
+            .as_ref()
+            .ok_or_else(|| eyre!("Lesson doesn't have a day: {:?}", lesson))?;
+        let teacher = lesson
+            .teacher
+            .as_ref()
+            .and_then(|t| t.first())
+            .ok_or_else(|| eyre!("Lesson doesn't have a teacher: {:?}", lesson))?;
+        let availability_type = lesson
+            .availability_type
+            .as_ref()
+            .ok_or_else(|| eyre!("Lesson doesn't have an availability type: {:?}", lesson))?;
 
         sqlx::query!(
             r#"
