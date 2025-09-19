@@ -12,12 +12,12 @@
     let value = $state("");
 
     const triggerContent = $derived(
-        fruits.find((f) => f.value === value)?.label ?? "Select a fruit"
+        fruits.find((f) => f.value === value)?.label ?? "Seleziona un professore"
     );
 </script>
 
 <Select.Root type="single" name="favoriteFruit" bind:value>
-    <Select.Trigger class="w-[180px]">
+    <Select.Trigger class="w-[280px]">
         {triggerContent}
     </Select.Trigger>
     <Select.Content>

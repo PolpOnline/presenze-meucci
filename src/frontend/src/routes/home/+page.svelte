@@ -3,19 +3,31 @@
     import type {DateValue} from '@internationalized/date';
     import {Button} from '$lib/components/ui/button';
     import SelectProf from "$lib/components/SelectProf.svelte";
+    import * as Card from "$lib/components/ui/card/index.js";
 
     let date: DateValue | null = null;
 </script>
 
 <main>
-    <h1 class="mt-5 text-center text-3xl font-bold">Supplenze</h1>
+
     <div
             class="mx-auto mt-5 flex w-[95%] max-w-[800px] flex-col content-center space-y-4 pb-1 align-middle"
     >
-        <DatePicker bind:value={date}/>
+        <Card.Root>
+            <Card.Header>
+                <Card.Title>
+                    <h1 class="mt-5 text-center text-3xl font-bold">Supplenze</h1>
+                </Card.Title>
+            </Card.Header>
+            <Card.Content>
+                <div class="flex flex-col items-center gap-2">
+                    <DatePicker bind:value={date}/>
 
-        <SelectProf/>
+                    <SelectProf/>
 
-        <Button variant="secondary" href="">Cerca sostituzioni</Button>
+                    <Button variant="secondary" href="">Cerca sostituzioni</Button>
+                </div>
+            </Card.Content>
+        </Card.Root>
     </div>
 </main>
