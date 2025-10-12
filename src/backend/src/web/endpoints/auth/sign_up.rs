@@ -16,6 +16,7 @@ use tracing::debug;
     path = "/sign_up",
     summary = "Sign Up",
     description = "Sign up and login automatically",
+    request_body = Credentials,
     responses(
         (status = OK, description = "User signed up and logged in"),
         (status = INTERNAL_SERVER_ERROR, description = "Internal server error", body = str, content_type = "text/plain"),

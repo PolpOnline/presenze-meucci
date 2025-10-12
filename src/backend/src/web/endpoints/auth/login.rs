@@ -36,6 +36,7 @@ pub enum AuthError {
     path = "/login",
     summary = "Login",
     description = "Login",
+    request_body = Credentials,
     responses(
         (status = OK, description = "User was logged in"),
         (status = NOT_FOUND, description = "User not found"),
