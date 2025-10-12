@@ -2,6 +2,7 @@
     import {Button} from "$lib/components/ui/button/index.js";
     import {Label} from "$lib/components/ui/label/index.js";
     import {Input} from "$lib/components/ui/input/index.js";
+    // noinspection ES6UnusedImports
     import * as Card from "$lib/components/ui/card/index.js";
 </script>
 <div

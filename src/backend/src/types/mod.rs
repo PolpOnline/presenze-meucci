@@ -16,11 +16,19 @@ pub enum Day {
 }
 
 #[derive(Debug, Serialize)]
-pub struct Lesson {
+pub struct Availability {
     pub teacher: Option<Vec<String>>,
     pub day: Option<Day>,
     pub time: Option<NaiveTime>,
     pub availability_type: Option<AvailabilityType>,
+}
+
+#[derive(Debug, Serialize)]
+pub struct Lesson {
+    pub teacher: Option<String>,
+    pub day: Option<Day>,
+    pub time: Option<NaiveTime>,
+    pub room: Option<String>,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize, Display, sqlx::Type)]
