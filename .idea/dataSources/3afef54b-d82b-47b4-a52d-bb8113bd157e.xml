@@ -3,17 +3,9 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.53">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <Grants>1||-9223372036854775808|c|G
-1||10|c|G
-1||10|C|G
-1||10|T|G
-4||-9223372036854775808|c|G
-4||10|c|G
-4||10|C|G
-4||10|T|G</Grants>
-      <IntrospectionStateNumber>911</IntrospectionStateNumber>
+      <IntrospectionStateNumber>987</IntrospectionStateNumber>
       <ServerVersion>17.5</ServerVersion>
-      <StartupTime>1758140923</StartupTime>
+      <StartupTime>1760281659</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -267,12 +259,12 @@ true America/Yellowknife
 false Antarctica/Casey
 false Antarctica/Davis
 false Antarctica/DumontDUrville
-false Antarctica/Macquarie
+true Antarctica/Macquarie
 false Antarctica/Mawson
-false Antarctica/McMurdo
+true Antarctica/McMurdo
 false Antarctica/Palmer
 false Antarctica/Rothera
-false Antarctica/South_Pole
+true Antarctica/South_Pole
 false Antarctica/Syowa
 true Antarctica/Troll
 false Antarctica/Vostok
@@ -388,29 +380,29 @@ false Atlantic/Reykjavik
 false Atlantic/South_Georgia
 false Atlantic/St_Helena
 false Atlantic/Stanley
-false Australia/ACT
-false Australia/Adelaide
+true Australia/ACT
+true Australia/Adelaide
 false Australia/Brisbane
-false Australia/Broken_Hill
-false Australia/Canberra
-false Australia/Currie
+true Australia/Broken_Hill
+true Australia/Canberra
+true Australia/Currie
 false Australia/Darwin
 false Australia/Eucla
-false Australia/Hobart
-false Australia/LHI
+true Australia/Hobart
+true Australia/LHI
 false Australia/Lindeman
-false Australia/Lord_Howe
-false Australia/Melbourne
-false Australia/NSW
+true Australia/Lord_Howe
+true Australia/Melbourne
+true Australia/NSW
 false Australia/North
 false Australia/Perth
 false Australia/Queensland
-false Australia/South
-false Australia/Sydney
-false Australia/Tasmania
-false Australia/Victoria
+true Australia/South
+true Australia/Sydney
+true Australia/Tasmania
+true Australia/Victoria
 false Australia/West
-false Australia/Yancowinna
+true Australia/Yancowinna
 true BDST
 false BDT
 false BNT
@@ -625,7 +617,7 @@ false KRAST
 false KRAT
 false KST
 false Kwajalein
-false LHDT
+true LHDT
 false LHST
 false LIGT
 false LINT
@@ -662,8 +654,8 @@ false NOVT
 false NPT
 false NST
 false NUT
-false NZ
-false NZ-CHAT
+true NZ
+true NZ-CHAT
 true NZDT
 false NZST
 false NZT
@@ -688,9 +680,9 @@ false PWT
 true PYST
 false PYT
 false Pacific/Apia
-false Pacific/Auckland
+true Pacific/Auckland
 false Pacific/Bougainville
-false Pacific/Chatham
+true Pacific/Chatham
 false Pacific/Chuuk
 true Pacific/Easter
 false Pacific/Efate
@@ -713,7 +705,7 @@ false Pacific/Marquesas
 false Pacific/Midway
 false Pacific/Nauru
 false Pacific/Niue
-false Pacific/Norfolk
+true Pacific/Norfolk
 false Pacific/Noumea
 false Pacific/Pago_Pago
 false Pacific/Palau
@@ -1023,12 +1015,12 @@ true posix/America/Yellowknife
 false posix/Antarctica/Casey
 false posix/Antarctica/Davis
 false posix/Antarctica/DumontDUrville
-false posix/Antarctica/Macquarie
+true posix/Antarctica/Macquarie
 false posix/Antarctica/Mawson
-false posix/Antarctica/McMurdo
+true posix/Antarctica/McMurdo
 false posix/Antarctica/Palmer
 false posix/Antarctica/Rothera
-false posix/Antarctica/South_Pole
+true posix/Antarctica/South_Pole
 false posix/Antarctica/Syowa
 true posix/Antarctica/Troll
 false posix/Antarctica/Vostok
@@ -1144,29 +1136,29 @@ false posix/Atlantic/Reykjavik
 false posix/Atlantic/South_Georgia
 false posix/Atlantic/St_Helena
 false posix/Atlantic/Stanley
-false posix/Australia/ACT
-false posix/Australia/Adelaide
+true posix/Australia/ACT
+true posix/Australia/Adelaide
 false posix/Australia/Brisbane
-false posix/Australia/Broken_Hill
-false posix/Australia/Canberra
-false posix/Australia/Currie
+true posix/Australia/Broken_Hill
+true posix/Australia/Canberra
+true posix/Australia/Currie
 false posix/Australia/Darwin
 false posix/Australia/Eucla
-false posix/Australia/Hobart
-false posix/Australia/LHI
+true posix/Australia/Hobart
+true posix/Australia/LHI
 false posix/Australia/Lindeman
-false posix/Australia/Lord_Howe
-false posix/Australia/Melbourne
-false posix/Australia/NSW
+true posix/Australia/Lord_Howe
+true posix/Australia/Melbourne
+true posix/Australia/NSW
 false posix/Australia/North
 false posix/Australia/Perth
 false posix/Australia/Queensland
-false posix/Australia/South
-false posix/Australia/Sydney
-false posix/Australia/Tasmania
-false posix/Australia/Victoria
+true posix/Australia/South
+true posix/Australia/Sydney
+true posix/Australia/Tasmania
+true posix/Australia/Victoria
 false posix/Australia/West
-false posix/Australia/Yancowinna
+true posix/Australia/Yancowinna
 false posix/Brazil/Acre
 false posix/Brazil/DeNoronha
 false posix/Brazil/East
@@ -1322,15 +1314,15 @@ true posix/MST7MDT
 true posix/Mexico/BajaNorte
 false posix/Mexico/BajaSur
 false posix/Mexico/General
-false posix/NZ
-false posix/NZ-CHAT
+true posix/NZ
+true posix/NZ-CHAT
 true posix/Navajo
 false posix/PRC
 true posix/PST8PDT
 false posix/Pacific/Apia
-false posix/Pacific/Auckland
+true posix/Pacific/Auckland
 false posix/Pacific/Bougainville
-false posix/Pacific/Chatham
+true posix/Pacific/Chatham
 false posix/Pacific/Chuuk
 true posix/Pacific/Easter
 false posix/Pacific/Efate
@@ -1353,7 +1345,7 @@ false posix/Pacific/Marquesas
 false posix/Pacific/Midway
 false posix/Pacific/Nauru
 false posix/Pacific/Niue
-false posix/Pacific/Norfolk
+true posix/Pacific/Norfolk
 false posix/Pacific/Noumea
 false posix/Pacific/Pago_Pago
 false posix/Pacific/Palau
@@ -1410,7 +1402,7 @@ true posixrules
 13219||10|C|G
 13219||-9223372036854775808|U|G
 13219||10|U|G</Grants>
-      <IntrospectionStateNumber>911</IntrospectionStateNumber>
+      <IntrospectionStateNumber>987</IntrospectionStateNumber>
       <ObjectId>5</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4833,152 +4825,308 @@ true posixrules
       <AutoIntrospectionLevel>3</AutoIntrospectionLevel>
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <LastIntrospectionL1Xid>911</LastIntrospectionL1Xid>
-      <LastIntrospectionL2Xid>911</LastIntrospectionL2Xid>
-      <LastIntrospectionL3Xid>911</LastIntrospectionL3Xid>
+      <LastIntrospectionL1Xid>987</LastIntrospectionL1Xid>
+      <LastIntrospectionL2Xid>987</LastIntrospectionL2Xid>
+      <LastIntrospectionL3Xid>987</LastIntrospectionL3Xid>
       <LastIntrospectionLevel>3</LastIntrospectionLevel>
-      <LastIntrospectionLocalTimestamp>2025-09-17.20:28:52</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-10-12.15:15:51</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>532</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
-    <sequence id="265" parent="264" name="user_id_seq">
+    <object-type id="265" parent="264" name="availability_type">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>16598</ObjectId>
+      <Labels>Availability
+RecoveryHours</Labels>
+      <ObjectId>16771</ObjectId>
+      <StateNumber>985</StateNumber>
+      <SubCategory>enum</SubCategory>
+      <SubKind>enum</SubKind>
+      <OwnerName>postgres</OwnerName>
+    </object-type>
+    <object-type id="266" parent="264" name="day">
+      <DetailsLevel>2</DetailsLevel>
+      <Labels>Mon
+Tue
+Wed
+Thu
+Fri
+Sat
+Sun</Labels>
+      <ObjectId>16747</ObjectId>
+      <StateNumber>985</StateNumber>
+      <SubCategory>enum</SubCategory>
+      <SubKind>enum</SubKind>
+      <OwnerName>postgres</OwnerName>
+    </object-type>
+    <sequence id="267" parent="264" name="availability_id_seq">
+      <DetailsLevel>2</DetailsLevel>
+      <ObjectId>16775</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>908</StateNumber>
+      <StateNumber>985</StateNumber>
       <StoredType>integer|0s</StoredType>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <table id="266" parent="264" name="_sqlx_migrations">
+    <sequence id="268" parent="264" name="teacher_id_seq">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>16590</ObjectId>
-      <StateNumber>907</StateNumber>
+      <ObjectId>16761</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>985</StateNumber>
+      <StoredType>integer|0s</StoredType>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <sequence id="269" parent="264" name="user_id_seq">
+      <DetailsLevel>2</DetailsLevel>
+      <ObjectId>16735</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>985</StateNumber>
+      <StoredType>integer|0s</StoredType>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <table id="270" parent="264" name="_sqlx_migrations">
+      <DetailsLevel>2</DetailsLevel>
+      <ObjectId>16727</ObjectId>
+      <StateNumber>984</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="267" parent="264" name="user">
+    <table id="271" parent="264" name="availability">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>16599</ObjectId>
-      <StateNumber>908</StateNumber>
+      <ObjectId>16776</ObjectId>
+      <StateNumber>985</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <column id="268" parent="266" name="version">
+    <table id="272" parent="264" name="teacher">
+      <DetailsLevel>2</DetailsLevel>
+      <ObjectId>16762</ObjectId>
+      <StateNumber>985</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="273" parent="264" name="user">
+      <DetailsLevel>2</DetailsLevel>
+      <ObjectId>16736</ObjectId>
+      <StateNumber>985</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <column id="274" parent="270" name="version">
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>907</StateNumber>
+      <StateNumber>984</StateNumber>
       <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
-    <column id="269" parent="266" name="description">
+    <column id="275" parent="270" name="description">
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>907</StateNumber>
+      <StateNumber>984</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="270" parent="266" name="installed_on">
+    <column id="276" parent="270" name="installed_on">
       <DefaultExpression>now()</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>907</StateNumber>
+      <StateNumber>984</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
-    <column id="271" parent="266" name="success">
+    <column id="277" parent="270" name="success">
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>907</StateNumber>
+      <StateNumber>984</StateNumber>
       <StoredType>boolean|0s</StoredType>
       <TypeId>16</TypeId>
     </column>
-    <column id="272" parent="266" name="checksum">
+    <column id="278" parent="270" name="checksum">
       <NotNull>1</NotNull>
       <Position>5</Position>
-      <StateNumber>907</StateNumber>
+      <StateNumber>984</StateNumber>
       <StoredType>bytea|0s</StoredType>
       <TypeId>17</TypeId>
     </column>
-    <column id="273" parent="266" name="execution_time">
+    <column id="279" parent="270" name="execution_time">
       <NotNull>1</NotNull>
       <Position>6</Position>
-      <StateNumber>907</StateNumber>
+      <StateNumber>984</StateNumber>
       <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
-    <index id="274" parent="266" name="_sqlx_migrations_pkey">
+    <index id="280" parent="270" name="_sqlx_migrations_pkey">
       <ColNames>version</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16596</ObjectId>
+      <ObjectId>16733</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>907</StateNumber>
+      <StateNumber>984</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="275" parent="266" name="_sqlx_migrations_pkey">
+    <key id="281" parent="270" name="_sqlx_migrations_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16597</ObjectId>
+      <ObjectId>16734</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>907</StateNumber>
-      <UnderlyingIndexId>16596</UnderlyingIndexId>
+      <StateNumber>984</StateNumber>
+      <UnderlyingIndexId>16733</UnderlyingIndexId>
     </key>
-    <column id="276" parent="267" name="id">
+    <check id="282" parent="271" name="availability_time_check">
+      <ColNames>time</ColNames>
+      <ObjectId>16780</ObjectId>
+      <Predicate>EXTRACT(second FROM &quot;time&quot;) = (0)::numeric</Predicate>
+      <StateNumber>985</StateNumber>
+    </check>
+    <column id="283" parent="271" name="id">
+      <DefaultExpression>nextval(&apos;availability_id_seq&apos;::regclass)</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>985</StateNumber>
+      <StoredType>integer|0s</StoredType>
+      <SequenceId>16775</SequenceId>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="284" parent="271" name="teacher_id">
+      <Position>2</Position>
+      <StateNumber>985</StateNumber>
+      <StoredType>integer|0s</StoredType>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="285" parent="271" name="day">
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>985</StateNumber>
+      <StoredType>day|0s</StoredType>
+      <TypeId>16747</TypeId>
+    </column>
+    <column id="286" parent="271" name="time">
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>985</StateNumber>
+      <StoredType>time(0)|0s</StoredType>
+      <TypeId>1083</TypeId>
+    </column>
+    <column id="287" parent="271" name="availability_type">
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StateNumber>985</StateNumber>
+      <StoredType>availability_type|0s</StoredType>
+      <TypeId>16771</TypeId>
+    </column>
+    <foreign-key id="288" parent="271" name="availability_teacher_id_fkey">
+      <ColNames>teacher_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16783</ObjectId>
+      <OnDelete>cascade</OnDelete>
+      <StateNumber>985</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>16762</RefTableId>
+    </foreign-key>
+    <index id="289" parent="271" name="availability_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16781</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>985</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="290" parent="271" name="availability_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16782</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>985</StateNumber>
+      <UnderlyingIndexId>16781</UnderlyingIndexId>
+    </key>
+    <column id="291" parent="272" name="id">
+      <DefaultExpression>nextval(&apos;teacher_id_seq&apos;::regclass)</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>985</StateNumber>
+      <StoredType>integer|0s</StoredType>
+      <SequenceId>16761</SequenceId>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="292" parent="272" name="full_name">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>985</StateNumber>
+      <StoredType>text|0s</StoredType>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="293" parent="272" name="teacher_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16768</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>985</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="294" parent="272" name="teacher_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16769</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>985</StateNumber>
+      <UnderlyingIndexId>16768</UnderlyingIndexId>
+    </key>
+    <column id="295" parent="273" name="id">
       <DefaultExpression>nextval(&apos;user_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>908</StateNumber>
+      <StateNumber>985</StateNumber>
       <StoredType>integer|0s</StoredType>
-      <SequenceId>16598</SequenceId>
+      <SequenceId>16735</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="277" parent="267" name="username">
+    <column id="296" parent="273" name="username">
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>908</StateNumber>
+      <StateNumber>985</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="278" parent="267" name="password">
+    <column id="297" parent="273" name="password">
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>908</StateNumber>
+      <StateNumber>985</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <index id="279" parent="267" name="user_pkey">
+    <index id="298" parent="273" name="user_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16605</ObjectId>
+      <ObjectId>16742</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>908</StateNumber>
+      <StateNumber>985</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="280" parent="267" name="user_username_key">
+    <index id="299" parent="273" name="user_username_key">
       <ColNames>username</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16607</ObjectId>
-      <StateNumber>908</StateNumber>
+      <ObjectId>16744</ObjectId>
+      <StateNumber>985</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="281" parent="267" name="user_pkey">
+    <key id="300" parent="273" name="user_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16606</ObjectId>
+      <ObjectId>16743</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>908</StateNumber>
-      <UnderlyingIndexId>16605</UnderlyingIndexId>
+      <StateNumber>985</StateNumber>
+      <UnderlyingIndexId>16742</UnderlyingIndexId>
     </key>
-    <key id="282" parent="267" name="user_username_key">
+    <key id="301" parent="273" name="user_username_key">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16608</ObjectId>
-      <StateNumber>908</StateNumber>
-      <UnderlyingIndexId>16607</UnderlyingIndexId>
+      <ObjectId>16745</ObjectId>
+      <StateNumber>985</StateNumber>
+      <UnderlyingIndexId>16744</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>

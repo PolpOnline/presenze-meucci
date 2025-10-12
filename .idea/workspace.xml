@@ -11,22 +11,19 @@
     </cargoProject>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="613d2823-08be-46d5-b3fa-2b152461ec60" name="Changes" comment="Fix some running issues + add xml lesson parsing">
+    <list default="true" id="a2318cf7-bfac-4077-8c26-135610a93c99" name="Changes" comment="Add auth endpoints">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3afef54b-d82b-47b4-a52d-bb8113bd157e.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3afef54b-d82b-47b4-a52d-bb8113bd157e.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3afef54b-d82b-47b4-a52d-bb8113bd157e/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3afef54b-d82b-47b4-a52d-bb8113bd157e/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backend/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backend/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backend/src/fixtures/lessons/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/src/fixtures/lessons/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/src/app/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/src/app/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/src/web/endpoints/auth/login.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/src/web/endpoints/auth/login.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/src/web/endpoints/auth/sign_up.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/src/web/endpoints/auth/sign_up.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="ChangesViewManager">
-    <option name="groupingKeys">
-      <option value="directory" />
-      <option value="repository" />
-    </option>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -35,203 +32,58 @@
       </list>
     </option>
   </component>
-  <component name="FormatOnSaveOptions">
-    <option name="myRunOnSave" value="true" />
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;PolpOnline&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/PolpOnline/presenze-meucci.git&quot;,
-    &quot;accountId&quot;: &quot;c172a685-cb79-460e-a7c1-9b0d2b91e20c&quot;
-  }
-}</component>
   <component name="MacroExpansionManager">
-    <option name="directoryName" value="yY4KiIeU" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 6
-}</component>
-  <component name="ProjectId" id="32muG4MofcATS7Lrn3nt5DC35Zf" />
-  <component name="ProjectViewState">
-    <option name="abbreviatePackageNames" value="true" />
-    <option name="autoscrollToSource" value="true" />
-    <option name="flattenModules" value="true" />
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="false" />
-    <option name="showLibraryContents" value="true" />
-    <option name="showMembers" value="true" />
-    <option name="showVisibilityIcons" value="true" />
+    <option name="directoryName" value="JGpBkoPA" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
     "app.teamhub.selectedTeam": "https://github.com/PolpOnline/presenze-meucci",
     "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/tommy/Documents/Git_projects/presenze-meucci/src/backend",
-    "node.js.detected.package.eslint": "true",
+    "last_opened_file_path": "/home/tommy/Documents/Git_projects/presenze-meucci/src/backend/src/web/endpoints",
     "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "pnpm",
     "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
     "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
     "prettierjs.PrettierConfiguration.Package": "/home/tommy/Documents/Git_projects/presenze-meucci/src/frontend/node_modules/prettier",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "ts.external.directory.path": "/home/tommy/.local/share/JetBrains/IntelliJIdea2025.2/javascript-plugin/jsLanguageServicesImpl/external",
-    "vue.rearranger.settings.migration": "true"
-  },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
-    ],
-    "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect": [
-      "PostgreSQL"
-    ]
+    "ts.external.directory.path": "/home/tommy/Documents/Git_projects/presenze-meucci/src/frontend/node_modules/typescript/lib"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/backend" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/backend/src/fixtures/lessons" />
-      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/backend/src/web/endpoints" />
       <recent name="$PROJECT_DIR$/src/backend/src/web" />
-      <recent name="$PROJECT_DIR$/src/backend" />
-      <recent name="$PROJECT_DIR$/src/backend/src/app" />
     </key>
   </component>
   <component name="RustProjectSettings">
     <option name="toolchainHomeDirectory" value="/usr/bin" />
   </component>
-  <component name="RustfmtProjectSettings">
-    <option name="channel" value="nightly" />
-    <option name="useRustfmt" value="true" />
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
-        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-IU-252.25557.131" />
-      </set>
-    </attachedChunks>
-  </component>
-  <component name="SshConsoleOptionsProvider">
-    <option name="myEncoding" value="UTF-8" />
-    <option name="myConnectionType" value="NONE" />
-    <option name="myConnectionId" value="" />
-  </component>
-  <component name="SvnConfiguration">
-    <configuration>$USER_HOME$/.subversion</configuration>
-  </component>
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="613d2823-08be-46d5-b3fa-2b152461ec60" name="Changes" comment="" />
-      <created>1708012348385</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1708012348385</updated>
-      <workItem from="1708012349530" duration="115000" />
-      <workItem from="1758037971683" duration="9634000" />
-      <workItem from="1758140231397" duration="4696000" />
-    </task>
-    <task id="LOCAL-00001" summary="Initial commit">
+    <task id="LOCAL-00001" summary="Translate type day in english">
       <option name="closed" value="true" />
-      <created>1758046184450</created>
+      <created>1760282614752</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1758046184450</updated>
+      <updated>1760282614752</updated>
     </task>
-    <task id="LOCAL-00002" summary="Initial commit">
+    <task id="LOCAL-00002" summary="Add auth endpoints">
       <option name="closed" value="true" />
-      <created>1758046231305</created>
+      <created>1760284832443</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1758046231305</updated>
+      <updated>1760284832443</updated>
     </task>
-    <task id="LOCAL-00003" summary="Initial commit">
-      <option name="closed" value="true" />
-      <created>1758046403368</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1758046403368</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Add gitignore">
-      <option name="closed" value="true" />
-      <created>1758140447494</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1758140447494</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Fix some running issues">
-      <option name="closed" value="true" />
-      <created>1758143282928</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1758143282928</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Fix some running issues + add xml lesson parsing">
-      <option name="closed" value="true" />
-      <created>1758143294454</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1758143294454</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
-    <ignored-roots>
-      <path value="$PROJECT_DIR$/src/backend" />
-      <path value="$PROJECT_DIR$/src/frontend" />
-      <path value="$PROJECT_DIR$/src" />
-    </ignored-roots>
-    <MESSAGE value="Initial commit" />
-    <MESSAGE value="Add gitignore" />
-    <MESSAGE value="Fix some running issues" />
-    <MESSAGE value="Fix some running issues + add xml lesson parsing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix some running issues + add xml lesson parsing" />
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
+    <MESSAGE value="Translate type day in english" />
+    <MESSAGE value="Add auth endpoints" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add auth endpoints" />
   </component>
 </project>
