@@ -34,6 +34,7 @@ quick-xml = { version = "0.38.3", features = ["serde", "tokio", "serialize"] }
 clap = { version = "4.5.47", features = ["derive"] }
 strum = { version = "0.27.2", features = ["derive"] }
 chrono = { version = "0.4.42", features = ["serde"] }
+axum_thiserror = "0.1.0"
 
 [profile.release]
 lto = true

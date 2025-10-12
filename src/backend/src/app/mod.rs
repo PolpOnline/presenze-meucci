@@ -30,6 +30,7 @@ use crate::{
     users::LoginBackend,
     web::endpoints::{protected, public},
 };
+use crate::web::endpoints::auth;
 
 pub struct App {
     pub db: PgPool,
@@ -79,12 +80,12 @@ impl App {
                 LoginBackend,
                 (StatusCode::UNAUTHORIZED, "You are not logged in.")
             ))
+            .merge(auth::router())
             .merge(public::router())
             .layer(
                 ServiceBuilder::new()
                     .layer(auth_layer)
                     .layer(middleware::from_fn(set_cache_control))
-                    .layer(TraceLayer::new_for_http()),
             )
             .split_for_parts();
 
@@ -101,6 +102,7 @@ impl App {
 
         let router = router.layer(
             ServiceBuilder::new()
+                .layer(TraceLayer::new_for_http())
                 .layer(DecompressionLayer::new())
                 .layer(RequestDecompressionLayer::new())
                 .layer(CompressionLayer::new()),
