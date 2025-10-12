@@ -1,12 +1,9 @@
+use crate::types::{AvailabilityType, Day, Lesson};
 use ahash::HashSet;
 use chrono::NaiveTime;
-use color_eyre::{
-    Report, Result,
-    eyre::{bail, eyre},
-};
-use serde::{Deserialize, Serialize};
+use color_eyre::{eyre::eyre, Report, Result};
+use serde::Deserialize;
 use sqlx::{PgPool, Postgres, QueryBuilder};
-use strum::Display;
 use tracing::info;
 
 /// A lesson in the schedule.
@@ -33,16 +30,9 @@ struct RawLesson {
     _group: Option<Vec<String>>,
     room: Option<Vec<String>>,
     _week: Option<String>,
-    day: Option<Day>,
+    #[serde(rename = "DAY")]
+    ita_day: Option<ItaDay>,
     time: Option<NaiveTime>,
-}
-
-#[derive(Debug, Serialize)]
-struct Lesson {
-    teacher: Option<Vec<String>>,
-    day: Option<Day>,
-    time: Option<NaiveTime>,
-    availability_type: Option<AvailabilityType>,
 }
 
 // subject can be DISPO or RECUPERO_ORARIO
@@ -69,37 +59,45 @@ impl TryFrom<RawLesson> for Lesson {
 
         Ok(Self {
             teacher: raw.teacher,
-            day: raw.day,
+            day: raw.ita_day.map(|d| d.try_into()).transpose()?,
             time: raw.time,
             availability_type,
         })
     }
 }
 
-#[derive(Debug, Clone, Deserialize, Serialize, Display, sqlx::Type)]
-#[sqlx(type_name = "day")]
+#[derive(Debug, Clone, Deserialize)]
 #[serde(rename_all = "UPPERCASE")]
-enum Day {
+enum ItaDay {
     Lun,
     Mar,
     Mer,
     Gio,
     Ven,
     Sab,
+    Dom,
+}
+
+impl TryFrom<ItaDay> for Day {
+    type Error = Report;
+
+    fn try_from(value: ItaDay) -> Result<Self> {
+        match value {
+            ItaDay::Lun => Ok(Day::Mon),
+            ItaDay::Mar => Ok(Day::Tue),
+            ItaDay::Mer => Ok(Day::Wed),
+            ItaDay::Gio => Ok(Day::Thu),
+            ItaDay::Ven => Ok(Day::Fri),
+            ItaDay::Sab => Ok(Day::Sat),
+            ItaDay::Dom => Ok(Day::Sun),
+        }
+    }
 }
 
 #[derive(Debug, Deserialize)]
 struct LessonsRoot {
     #[serde(rename = "LESSON")]
     lessons: Vec<RawLesson>,
-}
-
-#[derive(Debug, Clone, Deserialize, Serialize, Display, sqlx::Type)]
-#[sqlx(type_name = "availability_type")]
-#[serde(rename_all = "UPPERCASE")]
-enum AvailabilityType {
-    Availability,
-    RecoveryHours,
 }
 
 const PATH: &str = "./src/fixtures/lessons/orario/Orario Provvisorio 5 ore v5.xml";

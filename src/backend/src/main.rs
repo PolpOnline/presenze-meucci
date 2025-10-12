@@ -3,6 +3,7 @@ mod fixtures;
 mod middleware;
 mod users;
 mod web;
+pub mod types;
 
 use color_eyre::Result;
 use dotenvy::dotenv;

@@ -6,7 +6,7 @@ CREATE TABLE "user"
     password TEXT NOT NULL
 );
 
-CREATE TYPE day AS ENUM ('Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom');
+CREATE TYPE day AS ENUM ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun');
 
 CREATE TABLE "teacher"
 (

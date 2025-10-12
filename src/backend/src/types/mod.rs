@@ -1,0 +1,32 @@
+use axum_serde::macros::{Deserialize, Serialize};
+use chrono::NaiveTime;
+use strum::Display;
+
+#[derive(Debug, Clone, Deserialize, Serialize, Display, sqlx::Type)]
+#[sqlx(type_name = "day")]
+#[serde(rename_all = "UPPERCASE")]
+pub enum Day {
+    Mon,
+    Tue,
+    Wed,
+    Thu,
+    Fri,
+    Sat,
+    Sun,
+}
+
+#[derive(Debug, Serialize)]
+pub struct Lesson {
+    pub teacher: Option<Vec<String>>,
+    pub day: Option<Day>,
+    pub time: Option<NaiveTime>,
+    pub availability_type: Option<AvailabilityType>,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize, Display, sqlx::Type)]
+#[sqlx(type_name = "availability_type")]
+#[serde(rename_all = "UPPERCASE")]
+pub enum AvailabilityType {
+    Availability,
+    RecoveryHours,
+}
