@@ -2,7 +2,7 @@ use crate::app::openapi::DASHBOARD_TAG;
 use crate::users::AuthSession;
 use axum::response::IntoResponse;
 use axum_serde::Sonic;
-use chrono::{NaiveDateTime};
+use chrono::NaiveDateTime;
 use http::StatusCode;
 use serde::Deserialize;
 use tracing::error;

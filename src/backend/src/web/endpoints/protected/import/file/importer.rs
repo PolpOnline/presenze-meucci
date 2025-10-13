@@ -6,7 +6,7 @@ use sqlx::{PgPool, Postgres, QueryBuilder, Transaction};
 use utoipa::ToSchema;
 
 use crate::{
-    types::{Availability, AvailabilityType, Day, Lesson},
+    types::{Availability, AvailabilityType, IsoDow, Lesson},
     web::endpoints::protected::import::file::{ImportFileMeta, ImportMode},
 };
 
@@ -48,27 +48,27 @@ pub struct RawLesson {
 #[derive(Debug, Clone, Deserialize, ToSchema)]
 #[serde(rename_all = "UPPERCASE")]
 enum ItaDay {
-    Lun,
-    Mar,
-    Mer,
-    Gio,
-    Ven,
-    Sab,
-    Dom,
+    Lun = 1,
+    Mar = 2,
+    Mer = 3,
+    Gio = 4,
+    Ven = 5,
+    Sab = 6,
+    Dom = 7
 }
 
-impl TryFrom<ItaDay> for Day {
+impl TryFrom<ItaDay> for IsoDow {
     type Error = Report;
 
     fn try_from(value: ItaDay) -> Result<Self> {
         match value {
-            ItaDay::Lun => Ok(Day::Mon),
-            ItaDay::Mar => Ok(Day::Tue),
-            ItaDay::Mer => Ok(Day::Wed),
-            ItaDay::Gio => Ok(Day::Thu),
-            ItaDay::Ven => Ok(Day::Fri),
-            ItaDay::Sab => Ok(Day::Sat),
-            ItaDay::Dom => Ok(Day::Sun),
+            ItaDay::Lun => Ok(IsoDow::Mon),
+            ItaDay::Mar => Ok(IsoDow::Tue),
+            ItaDay::Mer => Ok(IsoDow::Wed),
+            ItaDay::Gio => Ok(IsoDow::Thu),
+            ItaDay::Ven => Ok(IsoDow::Fri),
+            ItaDay::Sab => Ok(IsoDow::Sat),
+            ItaDay::Dom => Ok(IsoDow::Sun),
         }
     }
 }
@@ -217,12 +217,12 @@ async fn import_classes(
             r#"
             INSERT INTO "lesson" (day, time, room_id, teacher_id)
             SELECT
-              $1,
+              $1::smallint::isodow,
               $2,
               (SELECT id FROM room WHERE name = $3 AND import_id = $5),
               (SELECT id FROM teacher WHERE full_name = $4 AND import_id = $5)
             "#,
-            day as &Day,
+            day.iso_dow(),
             lesson.time as Option<NaiveTime>,
             lesson.room.as_deref(),
             lesson.teacher.as_deref(),
@@ -281,12 +281,12 @@ async fn import_availabilities(
         sqlx::query!(
             r#"
             INSERT INTO "availability" (day, time, availability_type, teacher_id)
-            SELECT $1,
+            SELECT $1::smallint::isodow,
                    $2,
                    $3,
                    (SELECT id FROM teacher WHERE full_name = $4 AND import_id = $5)
             "#,
-            day as &Day,
+            day.iso_dow(),
             lesson.time as Option<NaiveTime>,
             availability_type as &AvailabilityType,
             teacher,

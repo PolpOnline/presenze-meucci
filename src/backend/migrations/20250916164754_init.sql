@@ -15,7 +15,8 @@ CREATE TABLE import
     end_ts    TIMESTAMP                                        NOT NULL CHECK (end_ts >= begin_ts)
 );
 
-CREATE TYPE day AS ENUM ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun');
+-- ISO day-of-week domain: 1=Mon .. 7=Sun
+CREATE DOMAIN isodow AS SMALLINT CHECK (VALUE BETWEEN 1 AND 7);
 
 CREATE TABLE "teacher"
 (
@@ -35,7 +36,7 @@ CREATE TABLE "availability"
 (
     id                SERIAL PRIMARY KEY,
     teacher_id        INTEGER REFERENCES teacher (id) ON DELETE CASCADE NOT NULL,
-    day               day                                               NOT NULL,
+    day               isodow                                            NOT NULL,
     time              time_no_seconds                                   NOT NULL,
     availability_type availability_type                                 NOT NULL
 );
@@ -51,7 +52,7 @@ CREATE TABLE lesson
 (
     id         SERIAL PRIMARY KEY,
     teacher_id INTEGER REFERENCES teacher (id) ON DELETE CASCADE NOT NULL,
-    day        day                                               NOT NULL,
+    day        isodow                                            NOT NULL,
     time       time_no_seconds                                   NOT NULL,
     room_id    INTEGER REFERENCES room (id) ON DELETE CASCADE
 );

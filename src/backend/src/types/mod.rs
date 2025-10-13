@@ -3,23 +3,28 @@ use chrono::NaiveTime;
 use strum::Display;
 use utoipa::ToSchema;
 
-#[derive(Debug, Clone, Deserialize, Serialize, Display, sqlx::Type)]
-#[sqlx(type_name = "day")]
+#[derive(Debug, Clone, Deserialize, Serialize, Display)]
 #[serde(rename_all = "UPPERCASE")]
-pub enum Day {
-    Mon,
-    Tue,
-    Wed,
-    Thu,
-    Fri,
-    Sat,
-    Sun,
+pub enum IsoDow {
+    Mon = 1,
+    Tue = 2,
+    Wed = 3,
+    Thu = 4,
+    Fri = 5,
+    Sat = 6,
+    Sun = 7,
+}
+
+impl IsoDow {
+    pub fn iso_dow(&self) -> i16 {
+        self.clone() as i16
+    }
 }
 
 #[derive(Debug, Serialize)]
 pub struct Availability {
     pub teacher: Option<Vec<String>>,
-    pub day: Option<Day>,
+    pub day: Option<IsoDow>,
     pub time: Option<NaiveTime>,
     pub availability_type: Option<AvailabilityType>,
 }
@@ -27,7 +32,7 @@ pub struct Availability {
 #[derive(Debug, Serialize)]
 pub struct Lesson {
     pub teacher: Option<String>,
-    pub day: Option<Day>,
+    pub day: Option<IsoDow>,
     pub time: Option<NaiveTime>,
     pub room: Option<String>,
 }
