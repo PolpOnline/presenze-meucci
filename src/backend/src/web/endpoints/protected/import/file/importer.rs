@@ -3,7 +3,6 @@ use chrono::NaiveTime;
 use color_eyre::{Report, Result, eyre::eyre};
 use serde::Deserialize;
 use sqlx::{PgPool, Postgres, QueryBuilder, Transaction};
-use tracing::info;
 use utoipa::ToSchema;
 
 use crate::{
@@ -143,14 +142,6 @@ pub async fn import_file(
         ImportMode::Write => txn.commit().await,
         ImportMode::DryRun => txn.rollback().await,
     }?;
-
-    info!(
-        "Availability and teacher tables seeded ({})",
-        match meta.mode {
-            ImportMode::Write => "Committed",
-            ImportMode::DryRun => "Rolled Back",
-        }
-    );
 
     Ok(())
 }
