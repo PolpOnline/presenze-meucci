@@ -355,6 +355,7 @@ dependencies = [
  "bytes",
  "http",
  "mime",
+ "quick-xml",
  "serde",
  "sonic-rs",
  "thiserror 2.0.16",
@@ -1897,7 +1898,6 @@ dependencies = [
  "futures",
  "http",
  "password-auth",
- "quick-xml",
  "rustls",
  "serde",
  "sonic-rs",
@@ -1957,13 +1957,12 @@ dependencies = [
 
 [[package]]
 name = "quick-xml"
-version = "0.38.3"
+version = "0.37.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "42a232e7487fc2ef313d96dde7948e7a3c05101870d8985e4fd8d26aedd27b89"
+checksum = "331e97a1af0bf59823e6eadffe373d7b27f485be8748f71471c662c1f269b7fb"
 dependencies = [
  "memchr",
  "serde",
- "tokio",
 ]
 
 [[package]]

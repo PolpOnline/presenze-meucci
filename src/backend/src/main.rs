@@ -1,9 +1,9 @@
 mod app;
 mod fixtures;
 mod middleware;
+pub mod types;
 mod users;
 mod web;
-pub mod types;
 
 use color_eyre::Result;
 use dotenvy::dotenv;
@@ -37,14 +37,15 @@ async fn main() -> Result<()> {
 
     #[cfg(debug_assertions)]
     {
-        use app::cli::{Args, Command};
+        use app::cli::Args;
         use clap::Parser;
 
         let args = Args::parse();
 
         match args.command {
             None => app.serve().await,
-            Some(Command::SeedLessons(args)) => fixtures::lessons::seed(&app.db, args.write).await,
+            // For future use with fixtures to import static data
+            _ => Ok(()),
         }
     }
 

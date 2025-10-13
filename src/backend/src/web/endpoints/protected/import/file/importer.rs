@@ -1,13 +1,18 @@
-use crate::types::{Availability, AvailabilityType, Day, Lesson};
 use ahash::HashSet;
 use chrono::NaiveTime;
-use color_eyre::{eyre::eyre, Report, Result};
+use color_eyre::{Report, Result, eyre::eyre};
 use serde::Deserialize;
 use sqlx::{PgPool, Postgres, QueryBuilder, Transaction};
 use tracing::info;
+use utoipa::ToSchema;
 
-#[derive(Debug, Deserialize)]
-struct LessonsRoot {
+use crate::{
+    types::{Availability, AvailabilityType, Day, Lesson},
+    web::endpoints::protected::import::file::{ImportFileMeta, ImportMode},
+};
+
+#[derive(Debug, Deserialize, ToSchema)]
+pub struct ScheduleFile {
     #[serde(rename = "LESSON")]
     lessons: Vec<RawLesson>,
 }
@@ -25,9 +30,9 @@ struct LessonsRoot {
 //   <DAY>LUN</DAY>
 //   <TIME>8:00</TIME>
 // </LESSON>
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, ToSchema)]
 #[serde(rename_all = "UPPERCASE")]
-struct RawLesson {
+pub struct RawLesson {
     _duration: Option<String>,
     subject: Option<String>,
     _site: Option<String>,
@@ -41,7 +46,7 @@ struct RawLesson {
     time: Option<NaiveTime>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, ToSchema)]
 #[serde(rename_all = "UPPERCASE")]
 enum ItaDay {
     Lun,
@@ -105,7 +110,8 @@ impl TryFrom<RawLesson> for Lesson {
 
     fn try_from(raw: RawLesson) -> Result<Self> {
         Ok(Self {
-            teacher: raw.teacher.and_then(|t| t.into_iter().next()), // take the first teacher if any
+            teacher: raw.teacher.and_then(|t| t.into_iter().next()), /* take the first teacher if
+                                                                      * any */
             day: raw.ita_day.map(|d| d.try_into()).transpose()?,
             time: raw.time,
             room: raw.room.and_then(|r| r.into_iter().next()), // take the first room if any
@@ -113,41 +119,67 @@ impl TryFrom<RawLesson> for Lesson {
     }
 }
 
-const PATH: &str = "./src/fixtures/lessons/orario/Orario Provvisorio 5 ore v5.xml";
-
-pub async fn seed(db: &PgPool, write: bool) -> Result<()> {
-    info!("Seeding the lessons table...");
-
-    let file_content = tokio::fs::read_to_string(PATH).await?;
-    let raw_lessons: Vec<RawLesson> =
-        quick_xml::de::from_str::<LessonsRoot>(&file_content)?.lessons;
+pub async fn import_file(
+    db: &PgPool,
+    meta: ImportFileMeta,
+    schedule_file: ScheduleFile,
+    user_id: i32,
+) -> Result<()> {
+    let raw_lessons: Vec<RawLesson> = schedule_file.lessons;
 
     let mut txn = db.begin().await?;
 
-    seed_all_rooms(&raw_lessons, &mut txn).await?;
+    let import_id = create_import_record(&meta, user_id, &mut txn).await?;
 
-    seed_all_teachers(&raw_lessons, &mut txn).await?;
+    import_rooms(&raw_lessons, import_id, &mut txn).await?;
 
-    seed_availability(raw_lessons.clone(), &mut txn).await?;
+    import_teachers(&raw_lessons, import_id, &mut txn).await?;
 
-    seed_class(raw_lessons, &mut txn).await?;
+    import_availabilities(raw_lessons.clone(), import_id, &mut txn).await?;
 
-    if write {
-        txn.commit().await?;
-    } else {
-        txn.rollback().await?;
-    }
+    import_classes(raw_lessons, import_id, &mut txn).await?;
+
+    match meta.mode {
+        ImportMode::Write => txn.commit().await,
+        ImportMode::DryRun => txn.rollback().await,
+    }?;
 
     info!(
         "Availability and teacher tables seeded ({})",
-        if write { "Committed" } else { "Rolled Back" }
+        match meta.mode {
+            ImportMode::Write => "Committed",
+            ImportMode::DryRun => "Rolled Back",
+        }
     );
 
     Ok(())
 }
 
-async fn seed_all_rooms(
+async fn create_import_record(
+    import_file_meta: &ImportFileMeta,
+    user_id: i32,
+    txn: &mut Transaction<'_, Postgres>,
+) -> Result<i32> {
+    let import_id = sqlx::query!(
+        r#"
+        INSERT INTO "import" (user_id, file_name, begin_ts, end_ts)
+        VALUES ($1, $2, $3, $4)
+        RETURNING id
+        "#,
+        user_id,
+        import_file_meta.file_name,
+        import_file_meta.begin_ts,
+        import_file_meta.end_ts
+    )
+    .fetch_one(&mut **txn)
+    .await?;
+
+    Ok(import_id.id)
+}
+
+async fn import_rooms(
     raw_lessons: &[RawLesson],
+    import_id: i32,
     txn: &mut Transaction<'_, Postgres>,
 ) -> Result<()> {
     let all_rooms: Vec<&String> = raw_lessons
@@ -160,12 +192,13 @@ async fn seed_all_rooms(
 
     let mut query_builder: QueryBuilder<Postgres> = QueryBuilder::new(
         r#"
-        INSERT INTO "room" (name)
+        INSERT INTO "room" (name, import_id)
         "#,
     );
 
     query_builder.push_values(all_rooms, |mut b, room| {
         b.push_bind(room);
+        b.push_bind(import_id);
     });
 
     query_builder.build().execute(&mut **txn).await?;
@@ -173,8 +206,9 @@ async fn seed_all_rooms(
     Ok(())
 }
 
-async fn seed_class(
+async fn import_classes(
     raw_lessons: Vec<RawLesson>,
+    import_id: i32,
     txn: &mut Transaction<'_, Postgres>,
 ) -> Result<()> {
     let lessons = raw_lessons
@@ -190,13 +224,15 @@ async fn seed_class(
 
         sqlx::query!(
             r#"
-            INSERT INTO "lesson" (day, time, room_id, teacher_id)
+            INSERT INTO "lesson" (import_id, day, time, room_id, teacher_id)
             SELECT
               $1,
               $2,
-              (SELECT id FROM room WHERE name = $3),
-              (SELECT id FROM teacher WHERE full_name = $4)
+              $3,
+              (SELECT id FROM room WHERE name = $4),
+              (SELECT id FROM teacher WHERE full_name = $5)
             "#,
+            import_id,
             day as &Day,
             lesson.time as Option<NaiveTime>,
             lesson.room.as_deref(),
@@ -209,8 +245,9 @@ async fn seed_class(
     Ok(())
 }
 
-async fn seed_availability(
+async fn import_availabilities(
     raw_lessons: Vec<RawLesson>,
+    import_id: i32,
     txn: &mut Transaction<'_, Postgres>,
 ) -> Result<()> {
     // Filter for lessons that have any room that starts with DISPOSIZIONE#
@@ -253,13 +290,18 @@ async fn seed_availability(
 
         sqlx::query!(
             r#"
-            INSERT INTO "availability" (day, time, availability_type, teacher_id)
-            SELECT $1, $2, $3, id FROM teacher WHERE full_name = $4
+            INSERT INTO "availability" (import_id, day, time, availability_type, teacher_id)
+            SELECT $1,
+                   $2,
+                   $3,
+                   $4,
+                   (SELECT id FROM teacher WHERE full_name = $5)
             "#,
+            import_id,
             day as &Day,
             lesson.time as Option<NaiveTime>,
             availability_type as &AvailabilityType,
-            teacher
+            teacher,
         )
         .execute(&mut **txn)
         .await?;
@@ -268,8 +310,9 @@ async fn seed_availability(
     Ok(())
 }
 
-async fn seed_all_teachers(
+async fn import_teachers(
     raw_lessons: &[RawLesson],
+    import_id: i32,
     txn: &mut Transaction<'_, Postgres>,
 ) -> Result<()> {
     let all_teachers: Vec<&String> = raw_lessons
@@ -282,12 +325,13 @@ async fn seed_all_teachers(
 
     let mut query_builder: QueryBuilder<Postgres> = QueryBuilder::new(
         r#"
-        INSERT INTO "teacher" (full_name)
+        INSERT INTO "teacher" (full_name, import_id)
         "#,
     );
 
     query_builder.push_values(all_teachers, |mut b, teacher| {
         b.push_bind(teacher);
+        b.push_bind(import_id);
     });
 
     query_builder.build().execute(&mut **txn).await?;

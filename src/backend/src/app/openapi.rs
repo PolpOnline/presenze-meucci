@@ -5,13 +5,15 @@ use utoipa::{
 
 pub const DEFAULT_TAG: &str = "Default";
 pub const AUTH_TAG: &str = "Authentication";
+pub const IMPORT_TAG: &str = "Import";
 
 #[derive(OpenApi)]
 #[openapi(
     modifiers(&ApiDocSecurityAddon),
     tags(
         (name = DEFAULT_TAG, description = "Default tag"),
-        (name = AUTH_TAG, description = "Authentication related endpoints")
+        (name = AUTH_TAG, description = "Authentication related endpoints"),
+        (name = IMPORT_TAG, description = "Import related endpoints")
     )
 )]
 pub(super) struct ApiDoc;

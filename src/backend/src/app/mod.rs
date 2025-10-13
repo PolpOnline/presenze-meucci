@@ -28,9 +28,8 @@ use crate::{
     custom_login_required,
     middleware::set_cache_control::set_cache_control,
     users::LoginBackend,
-    web::endpoints::{protected, public},
+    web::endpoints::{auth, protected, public},
 };
-use crate::web::endpoints::auth;
 
 pub struct App {
     pub db: PgPool,
@@ -85,7 +84,7 @@ impl App {
             .layer(
                 ServiceBuilder::new()
                     .layer(auth_layer)
-                    .layer(middleware::from_fn(set_cache_control))
+                    .layer(middleware::from_fn(set_cache_control)),
             )
             .split_for_parts();
 

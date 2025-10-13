@@ -1,15 +1,15 @@
-use crate::users::User;
-use crate::web::endpoints::auth::login::AuthError;
-use crate::{
-    app::openapi::AUTH_TAG,
-    users::{AuthSession, Credentials},
-};
 use axum::response::IntoResponse;
 use axum_serde::Sonic;
 use http::StatusCode;
 use password_auth::generate_hash;
 use tokio::task;
 use tracing::debug;
+
+use crate::{
+    app::openapi::AUTH_TAG,
+    users::{AuthSession, Credentials, User},
+    web::endpoints::auth::login::AuthError,
+};
 
 #[utoipa::path(
     post,
@@ -53,10 +53,10 @@ pub async fn sign_up(
     };
 
     match auth_session.authenticate(req.clone()).await {
-        Ok(Some(_)) => {},
+        Ok(Some(_)) => {}
         Ok(None) => {
             debug!("User does not exist after signup");
-            return AuthError::UserNotExistingAfterSignUp.into_response()
+            return AuthError::UserNotExistingAfterSignUp.into_response();
         }
         Err(_) => return AuthError::FailedToReAuthenticateAfterSignUp.into_response(),
     }

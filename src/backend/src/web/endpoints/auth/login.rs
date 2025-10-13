@@ -3,7 +3,7 @@ use axum_serde::Sonic;
 use axum_thiserror::ErrorStatus;
 use http::StatusCode;
 use thiserror::Error;
-use tracing::{info};
+use tracing::info;
 use utoipa::ToSchema;
 
 use crate::{
@@ -62,4 +62,3 @@ pub async fn login(
     info!("Successfully logged in as {}", user.username);
     StatusCode::OK.into_response()
 }
-
