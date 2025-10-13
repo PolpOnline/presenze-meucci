@@ -60,9 +60,9 @@ CREATE TYPE absence_status AS ENUM ('Uncovered', 'ClassDelayed', 'ClassCancelled
 
 CREATE TABLE "absence"
 (
-    id                          SERIAL PRIMARY KEY,
-    absent_teacher_availability INTEGER REFERENCES availability (id) ON DELETE CASCADE NOT NULL,
-    absence_ts                  TIMESTAMP                                              NOT NULL,
-    status                      absence_status                                         NOT NULL DEFAULT 'Uncovered',
-    substitute_teacher_lesson   INTEGER REFERENCES lesson (id) ON DELETE CASCADE
+    id                              SERIAL PRIMARY KEY,
+    absent_teacher_lesson           INTEGER REFERENCES lesson (id) ON DELETE CASCADE NOT NULL,
+    absence_date                    DATE                                             NOT NULL DEFAULT CURRENT_DATE,
+    status                          absence_status                                   NOT NULL DEFAULT 'Uncovered',
+    substitute_teacher_availability INTEGER REFERENCES availability (id) ON DELETE CASCADE
 )

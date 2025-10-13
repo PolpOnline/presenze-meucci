@@ -1,6 +1,7 @@
 use axum_serde::macros::{Deserialize, Serialize};
 use chrono::NaiveTime;
 use strum::Display;
+use utoipa::ToSchema;
 
 #[derive(Debug, Clone, Deserialize, Serialize, Display, sqlx::Type)]
 #[sqlx(type_name = "day")]
@@ -39,7 +40,7 @@ pub enum AvailabilityType {
     RecoveryHours,
 }
 
-#[derive(Debug, Clone, Deserialize, Serialize, Display, sqlx::Type)]
+#[derive(Debug, Clone, Deserialize, Serialize, Display, sqlx::Type, ToSchema)]
 #[sqlx(type_name = "absence_status")]
 pub enum AbsenceStatus {
     Uncovered,

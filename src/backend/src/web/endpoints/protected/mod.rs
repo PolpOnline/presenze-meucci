@@ -1,10 +1,10 @@
 pub mod import;
-mod ok;
+mod absence;
 
-use utoipa_axum::{router::OpenApiRouter, routes};
+use utoipa_axum::router::OpenApiRouter;
 
 pub fn router() -> OpenApiRouter {
     OpenApiRouter::new()
-        .routes(routes!(ok::ok))
+        .nest("/absence", absence::router())
         .nest("/import", import::router())
 }

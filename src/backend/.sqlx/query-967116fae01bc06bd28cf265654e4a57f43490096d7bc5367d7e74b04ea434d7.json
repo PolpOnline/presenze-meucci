@@ -1,0 +1,65 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        WITH active_import AS (SELECT id\n                       FROM import\n                       WHERE user_id = $2\n                         AND begin_ts <= COALESCE($1, CURRENT_DATE)\n                         AND end_ts >= COALESCE($1, CURRENT_DATE)\n                       ORDER BY import_ts DESC\n                       LIMIT 1)\n        SELECT ab.id        AS id,\n               t.full_name  AS absent_professor,\n               l.time       AS time,\n               r.name       AS room,\n               ab.status    AS \"absent_status: AbsenceStatus\",\n               st.full_name AS substitute_professor\n        FROM absence ab\n                 JOIN lesson l ON ab.absent_teacher_lesson = l.id\n                 JOIN teacher t ON l.teacher_id = t.id\n                 JOIN active_import ON t.import_id = active_import.id\n                 LEFT JOIN room r ON l.room_id = r.id\n                 LEFT JOIN availability av ON ab.substitute_teacher_availability = av.id\n                 LEFT JOIN teacher st ON av.teacher_id = st.id\n        WHERE ab.absence_date = COALESCE($1, CURRENT_DATE);\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 1,
+        "name": "absent_professor",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "time",
+        "type_info": "Time"
+      },
+      {
+        "ordinal": 3,
+        "name": "room",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 4,
+        "name": "absent_status: AbsenceStatus",
+        "type_info": {
+          "Custom": {
+            "name": "absence_status",
+            "kind": {
+              "Enum": [
+                "Uncovered",
+                "ClassDelayed",
+                "ClassCancelled",
+                "SubstituteFound"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "ordinal": 5,
+        "name": "substitute_professor",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Date",
+        "Int4"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      true,
+      false,
+      true
+    ]
+  },
+  "hash": "967116fae01bc06bd28cf265654e4a57f43490096d7bc5367d7e74b04ea434d7"
+}

@@ -7,6 +7,7 @@ use utoipa::{
 pub const DEFAULT_TAG: &str = "Default";
 pub const AUTH_TAG: &str = "Authentication";
 pub const IMPORT_TAG: &str = "Import";
+pub const DASHBOARD_TAG: &str = "Dashboard";
 
 // ImportMode specification is a fix for https://github.com/juhaku/utoipa/issues/1165
 #[derive(OpenApi)]
@@ -15,7 +16,8 @@ pub const IMPORT_TAG: &str = "Import";
     tags(
         (name = DEFAULT_TAG, description = "Default tag"),
         (name = AUTH_TAG, description = "Authentication related endpoints"),
-        (name = IMPORT_TAG, description = "Import related endpoints")
+        (name = IMPORT_TAG, description = "Import related endpoints"),
+        (name = DASHBOARD_TAG, description = "Dashboard related endpoints"),
     ),
     components(
         schemas(

@@ -1,6 +1,6 @@
 use ahash::HashSet;
 use chrono::NaiveTime;
-use color_eyre::{Report, Result, eyre::eyre};
+use color_eyre::{eyre::eyre, Report, Result};
 use serde::Deserialize;
 use sqlx::{PgPool, Postgres, QueryBuilder, Transaction};
 use utoipa::ToSchema;

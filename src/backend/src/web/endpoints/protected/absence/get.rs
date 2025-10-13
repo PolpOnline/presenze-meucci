@@ -1,0 +1,109 @@
+use axum::extract::Query;
+use axum::response::IntoResponse;
+use axum_serde::Sonic;
+use chrono::{NaiveDate, NaiveTime};
+use http::StatusCode;
+use serde::{Deserialize, Serialize};
+use utoipa::{IntoParams, ToSchema};
+use crate::app::openapi::DASHBOARD_TAG;
+use crate::types::AbsenceStatus;
+use crate::users::AuthSession;
+
+#[derive(Debug, Deserialize, IntoParams)]
+#[serde(rename_all = "camelCase")]
+pub struct GetAbsenceRequest {
+    date: Option<NaiveDate>,
+}
+
+#[derive(Debug, Serialize, ToSchema)]
+struct GetAbsenceResponse {
+    absences: Vec<Absence>
+}
+
+#[derive(Debug, Serialize, ToSchema)]
+struct Absence {
+    id: i32,
+    absent_professor: String,
+    classes: Vec<AbsentClasses>
+}
+
+#[derive(Debug, Serialize, ToSchema)]
+struct AbsentClasses {
+    substitute_professor: Option<String>,
+    time: NaiveTime,
+    room: Option<String>,
+    absent_status: AbsenceStatus
+}
+
+#[utoipa::path(
+    get,
+    path = "/",
+    summary = "Added absences",
+    params(GetAbsenceRequest),
+    responses(
+        (status = OK, description = "Absences and their status", body = GetAbsenceResponse),
+        (status = UNAUTHORIZED, description = "Unauthorized", example = "Unauthorized"),
+    ),
+    security(
+        ("session" = [])
+    ),
+    tag = DASHBOARD_TAG,
+)]
+pub async fn get(
+    Query(req): Query<GetAbsenceRequest>,
+    auth_session: AuthSession,
+) -> impl IntoResponse {
+    let Some(user) = auth_session.user else {
+        return (StatusCode::UNAUTHORIZED, "Unauthorized").into_response();
+    };
+
+    let rows = match sqlx::query!(
+        r#"
+        WITH active_import AS (SELECT id
+                       FROM import
+                       WHERE user_id = $2
+                         AND begin_ts <= COALESCE($1, CURRENT_DATE)
+                         AND end_ts >= COALESCE($1, CURRENT_DATE)
+                       ORDER BY import_ts DESC
+                       LIMIT 1)
+        SELECT ab.id        AS id,
+               t.full_name  AS absent_professor,
+               l.time       AS time,
+               r.name       AS room,
+               ab.status    AS "absent_status: AbsenceStatus",
+               st.full_name AS substitute_professor
+        FROM absence ab
+                 JOIN lesson l ON ab.absent_teacher_lesson = l.id
+                 JOIN teacher t ON l.teacher_id = t.id
+                 JOIN active_import ON t.import_id = active_import.id
+                 LEFT JOIN room r ON l.room_id = r.id
+                 LEFT JOIN availability av ON ab.substitute_teacher_availability = av.id
+                 LEFT JOIN teacher st ON av.teacher_id = st.id
+        WHERE ab.absence_date = COALESCE($1, CURRENT_DATE);
+        "#,
+        req.date,
+        user.id
+    ).fetch_all(&auth_session.backend.db).await {
+        Ok(rows) => rows,
+        Err(e) => {
+            tracing::error!("Failed to fetch absences with classes: {}", e);
+            return (StatusCode::INTERNAL_SERVER_ERROR, "Internal Server Error").into_response();
+        }
+    };
+
+    let absences: Vec<Absence> = rows
+        .into_iter()
+        .map(|row| Absence {
+            id: row.id,
+            absent_professor: row.absent_professor,
+            classes: vec![AbsentClasses {
+                substitute_professor: row.substitute_professor,
+                time: row.time,
+                room: row.room,
+                absent_status: row.absent_status,
+            }],
+        })
+        .collect();
+
+    Sonic(GetAbsenceResponse { absences }).into_response()
+}

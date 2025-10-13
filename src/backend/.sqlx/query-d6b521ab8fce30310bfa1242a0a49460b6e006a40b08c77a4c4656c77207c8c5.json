@@ -1,0 +1,16 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        INSERT INTO absence (absent_teacher_lesson, absence_date)\n        SELECT $1, COALESCE($2::timestamp, CURRENT_DATE)::date\n        WHERE EXISTS (\n            SELECT 1\n            FROM lesson le\n            JOIN teacher t ON le.teacher_id = t.id\n            JOIN import i ON t.import_id = i.id\n            WHERE le.id = $1 AND i.user_id = $3\n        )\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Int4",
+        "Timestamp",
+        "Int4"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "d6b521ab8fce30310bfa1242a0a49460b6e006a40b08c77a4c4656c77207c8c5"
+}
