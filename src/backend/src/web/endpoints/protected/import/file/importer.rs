@@ -229,8 +229,8 @@ async fn import_classes(
               $1,
               $2,
               $3,
-              (SELECT id FROM room WHERE name = $4),
-              (SELECT id FROM teacher WHERE full_name = $5)
+              (SELECT id FROM room WHERE name = $4 AND import_id = $1),
+              (SELECT id FROM teacher WHERE full_name = $5 AND import_id = $1)
             "#,
             import_id,
             day as &Day,
@@ -295,7 +295,7 @@ async fn import_availabilities(
                    $2,
                    $3,
                    $4,
-                   (SELECT id FROM teacher WHERE full_name = $5)
+                   (SELECT id FROM teacher WHERE full_name = $5 AND import_id = $1)
             "#,
             import_id,
             day as &Day,
