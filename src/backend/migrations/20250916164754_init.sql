@@ -1,4 +1,3 @@
--- Add migration script here
 CREATE TABLE "user"
 (
     id       SERIAL PRIMARY KEY,
@@ -13,7 +12,7 @@ CREATE TABLE import
     import_ts TIMESTAMP                                        NOT NULL DEFAULT CURRENT_TIMESTAMP,
     file_name TEXT                                             NOT NULL,
     begin_ts  TIMESTAMP                                        NOT NULL,
-    end_ts    TIMESTAMP                                        NOT NULL
+    end_ts    TIMESTAMP                                        NOT NULL CHECK (end_ts >= begin_ts)
 );
 
 CREATE TYPE day AS ENUM ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun');
@@ -38,8 +37,7 @@ CREATE TABLE "availability"
     teacher_id        INTEGER REFERENCES teacher (id) ON DELETE CASCADE NOT NULL,
     day               day                                               NOT NULL,
     time              time_no_seconds                                   NOT NULL,
-    availability_type availability_type                                 NOT NULL,
-    import_id         INTEGER REFERENCES import (id) ON DELETE CASCADE  NOT NULL
+    availability_type availability_type                                 NOT NULL
 );
 
 CREATE TABLE room
@@ -55,7 +53,16 @@ CREATE TABLE lesson
     teacher_id INTEGER REFERENCES teacher (id) ON DELETE CASCADE NOT NULL,
     day        day                                               NOT NULL,
     time       time_no_seconds                                   NOT NULL,
-    room_id    INTEGER REFERENCES room (id) ON DELETE CASCADE,
-    import_id  INTEGER REFERENCES import (id) ON DELETE CASCADE  NOT NULL
+    room_id    INTEGER REFERENCES room (id) ON DELETE CASCADE
 );
 
+CREATE TYPE absence_status AS ENUM ('Uncovered', 'ClassDelayed', 'ClassCancelled', 'SubstituteFound');
+
+CREATE TABLE "absence"
+(
+    id                          SERIAL PRIMARY KEY,
+    absent_teacher_availability INTEGER REFERENCES availability (id) ON DELETE CASCADE NOT NULL,
+    absence_ts                  TIMESTAMP                                              NOT NULL,
+    status                      absence_status                                         NOT NULL DEFAULT 'Uncovered',
+    substitute_teacher_lesson   INTEGER REFERENCES lesson (id) ON DELETE CASCADE
+)

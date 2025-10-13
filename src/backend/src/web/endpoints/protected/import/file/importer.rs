@@ -224,19 +224,18 @@ async fn import_classes(
 
         sqlx::query!(
             r#"
-            INSERT INTO "lesson" (import_id, day, time, room_id, teacher_id)
+            INSERT INTO "lesson" (day, time, room_id, teacher_id)
             SELECT
               $1,
               $2,
-              $3,
-              (SELECT id FROM room WHERE name = $4 AND import_id = $1),
-              (SELECT id FROM teacher WHERE full_name = $5 AND import_id = $1)
+              (SELECT id FROM room WHERE name = $3 AND import_id = $5),
+              (SELECT id FROM teacher WHERE full_name = $4 AND import_id = $5)
             "#,
-            import_id,
             day as &Day,
             lesson.time as Option<NaiveTime>,
             lesson.room.as_deref(),
-            lesson.teacher.as_deref()
+            lesson.teacher.as_deref(),
+            import_id
         )
         .execute(&mut **txn)
         .await?;
@@ -290,18 +289,17 @@ async fn import_availabilities(
 
         sqlx::query!(
             r#"
-            INSERT INTO "availability" (import_id, day, time, availability_type, teacher_id)
+            INSERT INTO "availability" (day, time, availability_type, teacher_id)
             SELECT $1,
                    $2,
                    $3,
-                   $4,
-                   (SELECT id FROM teacher WHERE full_name = $5 AND import_id = $1)
+                   (SELECT id FROM teacher WHERE full_name = $4 AND import_id = $5)
             "#,
-            import_id,
             day as &Day,
             lesson.time as Option<NaiveTime>,
             availability_type as &AvailabilityType,
             teacher,
+            import_id
         )
         .execute(&mut **txn)
         .await?;

@@ -1,11 +1,10 @@
 {
   "db_name": "PostgreSQL",
-  "query": "\n            INSERT INTO \"lesson\" (import_id, day, time, room_id, teacher_id)\n            SELECT\n              $1,\n              $2,\n              $3,\n              (SELECT id FROM room WHERE name = $4 AND import_id = $1),\n              (SELECT id FROM teacher WHERE full_name = $5 AND import_id = $1)\n            ",
+  "query": "\n            INSERT INTO \"lesson\" (day, time, room_id, teacher_id)\n            SELECT\n              $1,\n              $2,\n              (SELECT id FROM room WHERE name = $3 AND import_id = $5),\n              (SELECT id FROM teacher WHERE full_name = $4 AND import_id = $5)\n            ",
   "describe": {
     "columns": [],
     "parameters": {
       "Left": [
-        "Int4",
         {
           "Custom": {
             "name": "day",
@@ -31,10 +30,11 @@
           }
         },
         "Text",
-        "Text"
+        "Text",
+        "Int4"
       ]
     },
     "nullable": []
   },
-  "hash": "46c99bd3eca8369ceb9c28f13189e4623418bc42d89b84774137a8349b7874f9"
+  "hash": "7a6a004b3edc12aad147ad15b29dfa9abe95e0b57a9c9349007fcb34596c9133"
 }
