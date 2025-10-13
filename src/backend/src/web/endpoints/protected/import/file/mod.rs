@@ -16,6 +16,7 @@ use crate::{
 #[derive(Debug, Deserialize, IntoParams)]
 pub struct ImportFileMeta {
     file_name: String,
+    #[param(default = "write")]
     mode: ImportMode,
     begin_ts: NaiveDateTime,
     end_ts: NaiveDateTime,
@@ -28,17 +29,6 @@ pub enum ImportMode {
     DryRun,
     Write,
 }
-
-//CREATE TABLE import
-// (
-//     id        SERIAL PRIMARY KEY,
-//     user_id   INTEGER REFERENCES "user" (id) ON DELETE CASCADE NOT NULL,
-//     import_ts TIMESTAMP                                        NOT NULL
-// DEFAULT CURRENT_TIMESTAMP,     file_name TEXT
-// NOT NULL,     file_hash TEXT                                             NOT
-// NULL,     begin_ts  TIMESTAMP                                        NOT
-// NULL,     end_ts    TIMESTAMP                                        NOT NULL
-// );
 
 #[utoipa::path(
     post,

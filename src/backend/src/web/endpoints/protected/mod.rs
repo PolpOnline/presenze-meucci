@@ -1,4 +1,4 @@
-mod import;
+pub mod import;
 mod ok;
 
 use utoipa_axum::{router::OpenApiRouter, routes};
