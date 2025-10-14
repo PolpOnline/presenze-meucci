@@ -1,0 +1,40 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT i.id, i.file_name, i.begin_ts, i.end_ts\n        FROM import i\n        WHERE i.user_id = $1\n        ORDER BY i.begin_ts DESC\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 1,
+        "name": "file_name",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "begin_ts",
+        "type_info": "Timestamp"
+      },
+      {
+        "ordinal": 3,
+        "name": "end_ts",
+        "type_info": "Timestamp"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int4"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "5dffb580339d2b249f3b65e441c227335c9254a6e6304ed1bbb975a75670bf32"
+}
