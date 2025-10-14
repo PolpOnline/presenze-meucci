@@ -7,7 +7,7 @@ use utoipa::ToSchema;
 
 use crate::{
     types::{Availability, AvailabilityType, IsoDow, Lesson},
-    web::endpoints::protected::import::file::{ImportFileMeta, ImportMode},
+    web::endpoints::protected::import::post::{ImportFileMeta, ImportMode},
 };
 
 #[derive(Debug, Deserialize, ToSchema)]

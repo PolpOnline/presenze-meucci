@@ -3,7 +3,7 @@ use utoipa::{
     openapi::security::{ApiKey, ApiKeyValue, SecurityScheme},
 };
 
-use crate::web::endpoints::protected::import::file::ImportMode;
+use crate::web::endpoints::protected::import::post::ImportMode;
 
 pub const DEFAULT_TAG: &str = "Default";
 pub const AUTH_TAG: &str = "Authentication";

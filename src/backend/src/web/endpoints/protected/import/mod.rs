@@ -1,7 +1,7 @@
 use utoipa_axum::{router::OpenApiRouter, routes};
 
-pub mod file;
+pub mod post;
 
 pub fn router() -> OpenApiRouter {
-    OpenApiRouter::new().routes(routes!(file::file))
+    OpenApiRouter::new().routes(routes!(post::post))
 }

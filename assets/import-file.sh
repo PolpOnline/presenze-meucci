@@ -18,7 +18,7 @@ MODE='write' # or 'dry-run'
 # URL-encode the file name for the query string
 ENCODED_FILE_NAME=$(node -e "console.log(encodeURIComponent(process.argv[1]))" "$FILE_NAME")
 
-curl "http://localhost:3000/import/file?begin_ts=$BEGIN_TS&end_ts=$END_TS&mode=$MODE&file_name=$ENCODED_FILE_NAME" \
+curl "http://localhost:3000/import?begin_ts=$BEGIN_TS&end_ts=$END_TS&mode=$MODE&file_name=$ENCODED_FILE_NAME" \
   --request POST \
   --header 'Content-Type: application/xml' \
   --cookie "meucci_presenze_id=$TOKEN" \

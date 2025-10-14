@@ -10,7 +10,7 @@ use utoipa::{IntoParams, ToSchema};
 
 use crate::{
     app::openapi::IMPORT_TAG, users::AuthSession,
-    web::endpoints::protected::import::file::importer::ScheduleFile,
+    web::endpoints::protected::import::post::importer::ScheduleFile,
 };
 
 #[derive(Debug, Deserialize, IntoParams)]
@@ -32,7 +32,7 @@ pub enum ImportMode {
 
 #[utoipa::path(
     post,
-    path = "/file",
+    path = "/",
     summary = "Import File",
     description = "Import a schedule file. The file must be in XML format exported by OrarioFacile.",
     request_body(content = ScheduleFile, content_type = "application/xml"),
@@ -47,7 +47,7 @@ pub enum ImportMode {
     ),
     tag = IMPORT_TAG,
 )]
-pub async fn file(
+pub async fn post(
     auth_session: AuthSession,
     Query(meta): Query<ImportFileMeta>,
     Xml(file): Xml<ScheduleFile>,
