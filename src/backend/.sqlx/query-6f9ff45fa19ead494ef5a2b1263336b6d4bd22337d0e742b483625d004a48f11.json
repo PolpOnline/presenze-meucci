@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        DELETE FROM absence ab\n        USING lesson l, teacher t, import i\n        WHERE ab.id = $1\n          AND ab.absent_teacher_lesson = l.id\n          AND l.teacher_id = t.id\n          AND t.import_id = i.id\n          AND i.user_id = $2\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Int4",
+        "Int4"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "6f9ff45fa19ead494ef5a2b1263336b6d4bd22337d0e742b483625d004a48f11"
+}
