@@ -14,7 +14,6 @@ use crate::{
 };
 
 #[derive(Debug, Deserialize, IntoParams)]
-#[serde(rename_all = "camelCase")]
 pub struct ImportFileMeta {
     file_name: String,
     #[param(default = ImportMode::default)]
