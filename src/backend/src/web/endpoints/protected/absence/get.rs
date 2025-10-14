@@ -1,3 +1,4 @@
+use ahash::{HashMap, HashMapExt};
 use axum::{extract::Query, response::IntoResponse};
 use axum_serde::Sonic;
 use chrono::{NaiveDate, NaiveTime};
@@ -20,13 +21,13 @@ struct GetAbsenceResponse {
 
 #[derive(Debug, Serialize, ToSchema)]
 struct Absence {
-    id: i32,
     absent_professor: String,
     classes: Vec<AbsentClasses>,
 }
 
 #[derive(Debug, Serialize, ToSchema)]
 struct AbsentClasses {
+    id: i32,
     substitute_professor: Option<String>,
     time: NaiveTime,
     room: Option<String>,
@@ -67,6 +68,7 @@ pub async fn get(
                        LIMIT 1)
         SELECT ab.id        AS id,
                t.full_name  AS absent_professor,
+               t.id         AS absent_professor_id,
                l.time       AS time,
                r.name       AS room,
                g.name       AS "group",
@@ -95,19 +97,29 @@ pub async fn get(
         }
     };
 
+    // Group by (absence ID, absent professor) to form the final structure
     let absences: Vec<Absence> = rows
         .into_iter()
-        .map(|row| Absence {
-            id: row.id,
-            absent_professor: row.absent_professor,
-            classes: vec![AbsentClasses {
+        .fold(HashMap::new(), |mut acc, row| {
+            let entry = acc
+                .entry(row.absent_professor_id)
+                .or_insert_with(|| Absence {
+                    absent_professor: row.absent_professor,
+                    classes: Vec::new(),
+                });
+
+            entry.classes.push(AbsentClasses {
+                id: row.id,
                 substitute_professor: row.substitute_professor,
                 time: row.time,
                 room: row.room,
                 group: row.group,
                 absent_status: row.absent_status,
-            }],
+            });
+
+            acc
         })
+        .into_values()
         .collect();
 
     Sonic(GetAbsenceResponse { absences }).into_response()
