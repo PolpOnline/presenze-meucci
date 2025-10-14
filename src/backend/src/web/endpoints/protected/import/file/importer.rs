@@ -1,6 +1,6 @@
 use ahash::HashSet;
 use chrono::NaiveTime;
-use color_eyre::{Report, Result, eyre::eyre};
+use color_eyre::{eyre::eyre, Report, Result};
 use serde::Deserialize;
 use sqlx::{PgPool, Postgres, QueryBuilder, Transaction};
 use utoipa::ToSchema;
@@ -37,7 +37,7 @@ pub struct RawLesson {
     _site: Option<String>,
     _module: Option<String>,
     teacher: Option<Vec<String>>,
-    _group: Option<Vec<String>>,
+    group: Option<Vec<String>>,
     room: Option<Vec<String>>,
     _week: Option<String>,
     #[serde(rename = "DAY")]
@@ -121,6 +121,8 @@ impl TryFrom<RawLesson> for Lesson {
             teacher: raw.teacher.and_then(|t| t.into_iter().next()),
             day: raw.ita_day.map(|d| d.try_into()).transpose()?,
             time: raw.time,
+            // take the first group if any
+            group: raw.group.and_then(|g| g.into_iter().next()),
             // take the first room if any
             room: raw.room.and_then(|r| r.into_iter().next()),
         })
@@ -140,6 +142,8 @@ pub async fn import_file(
     let import_id = create_import_record(&meta, user_id, &mut txn).await?;
 
     import_rooms(&raw_lessons, import_id, &mut txn).await?;
+
+    import_groups(&raw_lessons, import_id, &mut txn).await?;
 
     import_teachers(&raw_lessons, import_id, &mut txn).await?;
 
@@ -206,6 +210,36 @@ async fn import_rooms(
     Ok(())
 }
 
+
+async fn import_groups(
+    raw_lessons: &[RawLesson],
+    import_id: i32,
+    txn: &mut Transaction<'_, Postgres>,
+) -> Result<()> {
+    let all_groups: Vec<&String> = raw_lessons
+        .iter()
+        .filter_map(|lesson| lesson.group.as_ref())
+        .flatten()
+        .collect::<HashSet<&String>>()
+        .into_iter()
+        .collect();
+
+    let mut query_builder: QueryBuilder<Postgres> = QueryBuilder::new(
+        r#"
+        INSERT INTO "group" (name, import_id)
+        "#,
+    );
+
+    query_builder.push_values(all_groups, |mut b, group| {
+        b.push_bind(group);
+        b.push_bind(import_id);
+    });
+
+    query_builder.build().execute(&mut **txn).await?;
+
+    Ok(())
+}
+
 async fn import_lessons(
     raw_lessons: Vec<RawLesson>,
     import_id: i32,
@@ -224,18 +258,20 @@ async fn import_lessons(
 
         sqlx::query!(
             r#"
-            INSERT INTO "lesson" (day, time, duration, room_id, teacher_id)
+            INSERT INTO "lesson" (day, time, duration, room_id, group_id, teacher_id)
             SELECT
               $1::smallint::isodow,
               $2,
               $3,
-              (SELECT id FROM room WHERE name = $4 AND import_id = $6),
-              (SELECT id FROM teacher WHERE full_name = $5 AND import_id = $6)
+              (SELECT id FROM room WHERE name = $4 AND import_id = $7),
+              (SELECT id FROM "group" WHERE name = $5 AND import_id = $7),
+              (SELECT id FROM teacher WHERE full_name = $6 AND import_id = $7)
             "#,
             day.iso_dow(),
             lesson.time as Option<NaiveTime>,
             lesson.duration,
             lesson.room.as_deref(),
+            lesson.group.as_deref(),
             lesson.teacher.as_deref(),
             import_id
         )

@@ -30,6 +30,7 @@ struct AbsentClasses {
     substitute_professor: Option<String>,
     time: NaiveTime,
     room: Option<String>,
+    group: Option<String>,
     absent_status: AbsenceStatus,
 }
 
@@ -68,6 +69,7 @@ pub async fn get(
                t.full_name  AS absent_professor,
                l.time       AS time,
                r.name       AS room,
+               g.name       AS "group",
                ab.status    AS "absent_status: AbsenceStatus",
                st.full_name AS substitute_professor
         FROM absence ab
@@ -75,6 +77,7 @@ pub async fn get(
                  JOIN teacher t ON l.teacher_id = t.id
                  JOIN active_import ON t.import_id = active_import.id
                  LEFT JOIN room r ON l.room_id = r.id
+                 LEFT JOIN "group" g ON l.group_id = g.id
                  LEFT JOIN availability av ON ab.substitute_teacher_availability = av.id
                  LEFT JOIN teacher st ON av.teacher_id = st.id
         WHERE ab.absence_date = COALESCE($1, CURRENT_DATE);
@@ -101,6 +104,7 @@ pub async fn get(
                 substitute_professor: row.substitute_professor,
                 time: row.time,
                 room: row.room,
+                group: row.group,
                 absent_status: row.absent_status,
             }],
         })

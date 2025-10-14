@@ -1,0 +1,18 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        WITH lessons AS (\n          SELECT le.id\n          FROM lesson le\n          JOIN teacher t ON le.teacher_id = t.id\n          JOIN import i ON t.import_id = i.id\n          WHERE le.teacher_id = $1\n            AND le.day = EXTRACT(DOW FROM COALESCE($2, CURRENT_DATE)::date)::int\n            AND le.time::time BETWEEN ($3::time) AND ($4::time)\n            AND i.user_id = $5\n        )\n        INSERT INTO absence (absent_teacher_lesson, absence_date)\n        SELECT l.id, COALESCE($2, CURRENT_DATE)::date\n        FROM lessons l;\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Int4",
+        "Date",
+        "Time",
+        "Time",
+        "Int4"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "282b7148dcc871f4e801f1447a1d131a5f21554f78ba2fe2edced69d353231d4"
+}

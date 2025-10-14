@@ -48,6 +48,13 @@ CREATE TABLE room
     import_id INTEGER REFERENCES import (id) ON DELETE CASCADE NOT NULL
 );
 
+CREATE TABLE "group"
+(
+    id        SERIAL PRIMARY KEY,
+    name      TEXT                                             NOT NULL,
+    import_id INTEGER REFERENCES import (id) ON DELETE CASCADE NOT NULL
+);
+
 CREATE TABLE lesson
 (
     id         SERIAL PRIMARY KEY,
@@ -55,6 +62,7 @@ CREATE TABLE lesson
     day        isodow                                            NOT NULL,
     time       time_no_seconds                                   NOT NULL,
     room_id    INTEGER REFERENCES room (id) ON DELETE CASCADE,
+    group_id   INTEGER REFERENCES "group" (id) ON DELETE CASCADE,
     duration   SMALLINT CHECK (duration > 0)                     NOT NULL DEFAULT 1
 );
 
