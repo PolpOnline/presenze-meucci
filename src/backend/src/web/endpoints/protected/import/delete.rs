@@ -1,21 +1,21 @@
-use axum::{extract::Path, response::IntoResponse};
-use axum_serde::macros::Deserialize;
+use axum::response::IntoResponse;
+use axum_serde::{macros::Deserialize, Sonic};
 use http::StatusCode;
 use tracing::error;
-use utoipa::IntoParams;
+use utoipa::ToSchema;
 
 use crate::{app::openapi::IMPORT_TAG, users::AuthSession};
 
-#[derive(Debug, Deserialize, IntoParams)]
+#[derive(Debug, Deserialize, ToSchema)]
 pub struct ImportDeletionRequest {
-    import_id: i32,
+    id: i32,
 }
 
 #[utoipa::path(
     delete,
-    path = "/{import_id}",
+    path = "/",
     summary = "Delete an import",
-    params(ImportDeletionRequest),
+    request_body = ImportDeletionRequest,
     responses(
         (status = OK, description = "The import was deleted"),
         (status = UNAUTHORIZED, description = "Unauthorized", example = "Unauthorized"),
@@ -27,7 +27,7 @@ pub struct ImportDeletionRequest {
 )]
 pub async fn delete(
     auth_session: AuthSession,
-    Path(req): Path<ImportDeletionRequest>,
+    Sonic(req): Sonic<ImportDeletionRequest>,
 ) -> impl IntoResponse {
     let Some(user) = auth_session.user else {
         return (StatusCode::UNAUTHORIZED, "Unauthorized").into_response();
@@ -38,7 +38,7 @@ pub async fn delete(
         DELETE FROM import
         WHERE id = $1 AND user_id = $2
         "#,
-        req.import_id,
+        req.id,
         user.id,
     )
     .execute(&auth_session.backend.db)
@@ -46,7 +46,7 @@ pub async fn delete(
     {
         Ok(_) => {}
         Err(e) => {
-            error!("Database error when getting the import: {}", e);
+            error!("Database error when deleting the import: {}", e);
             return (StatusCode::INTERNAL_SERVER_ERROR, "Internal Server Error").into_response();
         }
     };
