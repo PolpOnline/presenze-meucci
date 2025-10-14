@@ -17,14 +17,14 @@ pub struct GetAbsenceRequest {
 
 #[derive(Debug, Serialize, ToSchema)]
 struct Absence {
-    absent_professor: String,
+    absent_teacher: String,
     classes: Vec<AbsentClasses>,
 }
 
 #[derive(Debug, Serialize, ToSchema)]
 struct AbsentClasses {
     id: i32,
-    substitute_professor: Option<String>,
+    substitute_teacher: Option<String>,
     time: NaiveTime,
     room: Option<String>,
     group: Option<String>,
@@ -63,13 +63,13 @@ pub async fn get(
                        ORDER BY import_ts DESC
                        LIMIT 1)
         SELECT ab.id        AS id,
-               t.full_name  AS absent_professor,
-               t.id         AS absent_professor_id,
+               t.full_name  AS absent_teacher,
+               t.id         AS absent_teacher_id,
                l.time       AS time,
                r.name       AS room,
                g.name       AS "group",
                ab.status    AS "absent_status: AbsenceStatus",
-               st.full_name AS substitute_professor
+               st.full_name AS substitute_teacher
         FROM absence ab
                  JOIN lesson l ON ab.absent_teacher_lesson = l.id
                  JOIN teacher t ON l.teacher_id = t.id
@@ -93,20 +93,18 @@ pub async fn get(
         }
     };
 
-    // Group by (absence ID, absent professor) to form the final structure
-    let absences: Vec<Absence> = rows
+    // Group by (absence ID, absent teacher) to form the final structure
+    let mut absences: Vec<Absence> = rows
         .into_iter()
         .fold(AHashMap::new(), |mut acc, row| {
-            let entry = acc
-                .entry(row.absent_professor_id)
-                .or_insert_with(|| Absence {
-                    absent_professor: row.absent_professor,
-                    classes: Vec::new(),
-                });
+            let entry = acc.entry(row.absent_teacher_id).or_insert_with(|| Absence {
+                absent_teacher: row.absent_teacher,
+                classes: Vec::new(),
+            });
 
             entry.classes.push(AbsentClasses {
                 id: row.id,
-                substitute_professor: row.substitute_professor,
+                substitute_teacher: row.substitute_teacher,
                 time: row.time,
                 room: row.room,
                 group: row.group,
@@ -117,6 +115,8 @@ pub async fn get(
         })
         .into_values()
         .collect();
+
+    absences.sort_by(|a, b| a.absent_teacher.cmp(&b.absent_teacher));
 
     Sonic(absences).into_response()
 }

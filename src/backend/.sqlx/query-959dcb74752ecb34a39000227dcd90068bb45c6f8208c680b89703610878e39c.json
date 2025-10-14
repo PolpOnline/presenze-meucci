@@ -1,0 +1,29 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT t.id, t.full_name\n        FROM teacher t\n                 JOIN import i ON t.import_id = i.id\n                 JOIN lesson l ON t.id = l.teacher_id\n        WHERE l.day = EXTRACT(DOW FROM COALESCE($1, CURRENT_DATE)::date)\n          AND i.user_id = $2\n        ORDER BY t.full_name\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 1,
+        "name": "full_name",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Date",
+        "Int4"
+      ]
+    },
+    "nullable": [
+      false,
+      false
+    ]
+  },
+  "hash": "959dcb74752ecb34a39000227dcd90068bb45c6f8208c680b89703610878e39c"
+}
