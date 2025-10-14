@@ -15,11 +15,6 @@ pub struct GetAbsenceRequest {
 }
 
 #[derive(Debug, Serialize, ToSchema)]
-struct GetAbsenceResponse {
-    absences: Vec<Absence>,
-}
-
-#[derive(Debug, Serialize, ToSchema)]
 struct Absence {
     absent_professor: String,
     classes: Vec<AbsentClasses>,
@@ -41,7 +36,7 @@ struct AbsentClasses {
     summary = "Added absences",
     params(GetAbsenceRequest),
     responses(
-        (status = OK, description = "Absences and their status", body = GetAbsenceResponse),
+        (status = OK, description = "Absences and their status", body = Vec<Absence>),
         (status = UNAUTHORIZED, description = "Unauthorized", example = "Unauthorized"),
     ),
     security(
@@ -122,5 +117,5 @@ pub async fn get(
         .into_values()
         .collect();
 
-    Sonic(GetAbsenceResponse { absences }).into_response()
+    Sonic(absences).into_response()
 }
