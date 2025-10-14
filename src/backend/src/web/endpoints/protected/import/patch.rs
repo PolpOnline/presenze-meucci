@@ -1,23 +1,28 @@
-use axum::response::IntoResponse;
-use axum_serde::{macros::Deserialize, Sonic};
+use axum::{extract::Path, response::IntoResponse};
+use axum_serde::{Sonic, macros::Deserialize};
 use chrono::NaiveDateTime;
 use http::StatusCode;
 use tracing::error;
-use utoipa::ToSchema;
+use utoipa::{IntoParams, ToSchema};
 
 use crate::{app::openapi::IMPORT_TAG, users::AuthSession};
 
+#[derive(Debug, Deserialize, IntoParams)]
+pub struct ImportPatchPathParams {
+    import_id: i32,
+}
+
 #[derive(Debug, Deserialize, ToSchema)]
 pub struct ImportPatchRequest {
-    id: i32,
     begin_ts: Option<NaiveDateTime>,
     end_ts: Option<NaiveDateTime>,
 }
 
 #[utoipa::path(
     patch,
-    path = "/",
+    path = "/{import_id}",
     summary = "Modify an import's metadata",
+    params(ImportPatchPathParams),
     request_body = ImportPatchRequest,
     responses(
         (status = OK, description = "The import was patched"),
@@ -30,6 +35,7 @@ pub struct ImportPatchRequest {
 )]
 pub async fn patch(
     auth_session: AuthSession,
+    Path(path): Path<ImportPatchPathParams>,
     Sonic(req): Sonic<ImportPatchRequest>,
 ) -> impl IntoResponse {
     let Some(user) = auth_session.user else {
@@ -43,7 +49,7 @@ pub async fn patch(
             end_ts = COALESCE($3, end_ts)
         WHERE id = $1 AND user_id = $4
         "#,
-        req.id,
+        path.import_id,
         req.begin_ts,
         req.end_ts,
         user.id,

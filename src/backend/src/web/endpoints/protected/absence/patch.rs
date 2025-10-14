@@ -1,15 +1,19 @@
-use axum::response::IntoResponse;
+use axum::{extract::Path, response::IntoResponse};
 use axum_serde::Sonic;
 use http::StatusCode;
 use serde::Deserialize;
 use tracing::error;
-use utoipa::ToSchema;
+use utoipa::{IntoParams, ToSchema};
 
 use crate::{app::openapi::DASHBOARD_TAG, types::AbsenceStatus, users::AuthSession};
 
+#[derive(Debug, Deserialize, IntoParams)]
+pub struct PatchAbsencePathParams {
+    absence_id: i32,
+}
+
 #[derive(Debug, Deserialize, ToSchema, Default)]
 pub struct PatchAbsenceRequest {
-    id: i32,
     #[schema(default = AbsenceStatus::default)]
     status: AbsenceStatus,
     substitute_teacher_availability_id: Option<i32>,
@@ -17,8 +21,9 @@ pub struct PatchAbsenceRequest {
 
 #[utoipa::path(
     patch,
-    path = "/",
+    path = "/{absence_id}",
     summary = "Modify absence",
+    params(PatchAbsencePathParams),
     request_body = PatchAbsenceRequest,
     responses(
         (status = OK, description = "Absence modified"),
@@ -30,6 +35,7 @@ pub struct PatchAbsenceRequest {
 )]
 pub async fn patch(
     auth_session: AuthSession,
+    Path(path): Path<PatchAbsencePathParams>,
     Sonic(req): Sonic<PatchAbsenceRequest>,
 ) -> impl IntoResponse {
     let Some(user) = auth_session.user else {
@@ -75,7 +81,7 @@ pub async fn patch(
           AND t.import_id = i.id
           AND i.user_id = $5
         "#,
-        req.id,
+        path.absence_id,
         req.status as AbsenceStatus,
         req.substitute_teacher_availability_id,
         user.id,

@@ -1,23 +1,21 @@
-use axum::response::IntoResponse;
-use axum_serde::Sonic;
+use axum::{extract::Path, response::IntoResponse};
 use http::StatusCode;
 use serde::Deserialize;
 use tracing::error;
-use utoipa::ToSchema;
+use utoipa::IntoParams;
 
 use crate::{app::openapi::DASHBOARD_TAG, users::AuthSession};
 
-#[derive(Debug, Deserialize, ToSchema)]
-#[serde(rename_all = "camelCase")]
-pub struct DeleteAbsenceRequest {
-    id: i32,
+#[derive(Debug, Deserialize, IntoParams)]
+pub struct DeleteAbsencePathParams {
+    absence_id: i32,
 }
 
 #[utoipa::path(
     delete,
-    path = "/",
+    path = "/{absence_id}",
     summary = "Delete absence",
-    request_body = DeleteAbsenceRequest,
+    params(DeleteAbsencePathParams),
     responses(
         (status = OK, description = "Deleted absence"),
         (status = UNAUTHORIZED, description = "Unauthorized", example = "Unauthorized"),
@@ -28,7 +26,7 @@ pub struct DeleteAbsenceRequest {
 )]
 pub async fn delete(
     auth_session: AuthSession,
-    Sonic(req): Sonic<DeleteAbsenceRequest>,
+    Path(req): Path<DeleteAbsencePathParams>,
 ) -> impl IntoResponse {
     let Some(user) = auth_session.user else {
         return (StatusCode::UNAUTHORIZED, "Unauthorized").into_response();
@@ -44,7 +42,7 @@ pub async fn delete(
           AND t.import_id = i.id
           AND i.user_id = $2
         "#,
-        req.id,
+        req.absence_id,
         user.id
     )
     .execute(&auth_session.backend.db)

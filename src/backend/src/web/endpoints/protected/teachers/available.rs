@@ -1,4 +1,4 @@
-use axum::{extract::Query, response::IntoResponse};
+use axum::{extract::Path, response::IntoResponse};
 use axum_serde::Sonic;
 use http::StatusCode;
 use serde::{Deserialize, Serialize};
@@ -34,7 +34,7 @@ pub struct AvailableTeacher {
     tag = DASHBOARD_TAG,
 )]
 pub async fn available(
-    Query(req): Query<GetCanBeAbsentRequest>,
+    Path(req): Path<GetCanBeAbsentRequest>,
     auth_session: AuthSession,
 ) -> impl IntoResponse {
     let Some(user) = auth_session.user else {
