@@ -1,13 +1,11 @@
-use axum::extract::Query;
-use axum::response::IntoResponse;
+use axum::{extract::Query, response::IntoResponse};
 use axum_serde::Sonic;
 use chrono::{NaiveDate, NaiveTime};
 use http::StatusCode;
 use serde::{Deserialize, Serialize};
 use utoipa::{IntoParams, ToSchema};
-use crate::app::openapi::DASHBOARD_TAG;
-use crate::types::AbsenceStatus;
-use crate::users::AuthSession;
+
+use crate::{app::openapi::DASHBOARD_TAG, types::AbsenceStatus, users::AuthSession};
 
 #[derive(Debug, Deserialize, IntoParams)]
 #[serde(rename_all = "camelCase")]
@@ -17,14 +15,14 @@ pub struct GetAbsenceRequest {
 
 #[derive(Debug, Serialize, ToSchema)]
 struct GetAbsenceResponse {
-    absences: Vec<Absence>
+    absences: Vec<Absence>,
 }
 
 #[derive(Debug, Serialize, ToSchema)]
 struct Absence {
     id: i32,
     absent_professor: String,
-    classes: Vec<AbsentClasses>
+    classes: Vec<AbsentClasses>,
 }
 
 #[derive(Debug, Serialize, ToSchema)]
@@ -32,7 +30,7 @@ struct AbsentClasses {
     substitute_professor: Option<String>,
     time: NaiveTime,
     room: Option<String>,
-    absent_status: AbsenceStatus
+    absent_status: AbsenceStatus,
 }
 
 #[utoipa::path(
@@ -83,7 +81,10 @@ pub async fn get(
         "#,
         req.date,
         user.id
-    ).fetch_all(&auth_session.backend.db).await {
+    )
+    .fetch_all(&auth_session.backend.db)
+    .await
+    {
         Ok(rows) => rows,
         Err(e) => {
             tracing::error!("Failed to fetch absences with classes: {}", e);

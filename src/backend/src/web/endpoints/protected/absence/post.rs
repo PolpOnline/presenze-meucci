@@ -1,5 +1,3 @@
-use crate::app::openapi::DASHBOARD_TAG;
-use crate::users::AuthSession;
 use axum::response::IntoResponse;
 use axum_serde::Sonic;
 use chrono::{NaiveDate, NaiveTime};
@@ -7,6 +5,8 @@ use http::StatusCode;
 use serde::Deserialize;
 use tracing::error;
 use utoipa::ToSchema;
+
+use crate::{app::openapi::DASHBOARD_TAG, users::AuthSession};
 
 #[derive(Debug, Deserialize, ToSchema)]
 pub struct AddAbsenceRequest {

@@ -1,0 +1,35 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            INSERT INTO \"availability\" (day, time, availability_type, teacher_id)\n            SELECT $1::smallint::isodow,\n                   $2,\n                   $3,\n                   (SELECT id FROM teacher WHERE full_name = $4 AND import_id = $5)\n            ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Int2",
+        {
+          "Custom": {
+            "name": "time_no_seconds",
+            "kind": {
+              "Domain": "Time"
+            }
+          }
+        },
+        {
+          "Custom": {
+            "name": "availability_type",
+            "kind": {
+              "Enum": [
+                "Availability",
+                "RecoveryHours"
+              ]
+            }
+          }
+        },
+        "Text",
+        "Int4"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "e042f6efda38edd15d76b12ed06b60ab9e9b60b583f64a3c88205ce521f2d163"
+}

@@ -1,8 +1,9 @@
-use crate::web::endpoints::protected::import::file::ImportMode;
 use utoipa::{
-    openapi::security::{ApiKey, ApiKeyValue, SecurityScheme}, Modify,
-    OpenApi,
+    Modify, OpenApi,
+    openapi::security::{ApiKey, ApiKeyValue, SecurityScheme},
 };
+
+use crate::web::endpoints::protected::import::file::ImportMode;
 
 pub const DEFAULT_TAG: &str = "Default";
 pub const AUTH_TAG: &str = "Authentication";

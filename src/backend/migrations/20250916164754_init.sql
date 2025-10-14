@@ -54,7 +54,8 @@ CREATE TABLE lesson
     teacher_id INTEGER REFERENCES teacher (id) ON DELETE CASCADE NOT NULL,
     day        isodow                                            NOT NULL,
     time       time_no_seconds                                   NOT NULL,
-    room_id    INTEGER REFERENCES room (id) ON DELETE CASCADE
+    room_id    INTEGER REFERENCES room (id) ON DELETE CASCADE,
+    duration   SMALLINT CHECK (duration > 0)                     NOT NULL DEFAULT 1
 );
 
 CREATE TYPE absence_status AS ENUM ('Uncovered', 'ClassDelayed', 'ClassCancelled', 'SubstituteFound');

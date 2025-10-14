@@ -1,6 +1,6 @@
 use ahash::HashSet;
 use chrono::NaiveTime;
-use color_eyre::{eyre::eyre, Report, Result};
+use color_eyre::{Report, Result, eyre::eyre};
 use serde::Deserialize;
 use sqlx::{PgPool, Postgres, QueryBuilder, Transaction};
 use utoipa::ToSchema;
@@ -32,7 +32,7 @@ pub struct ScheduleFile {
 #[derive(Debug, Clone, Deserialize, ToSchema)]
 #[serde(rename_all = "UPPERCASE")]
 pub struct RawLesson {
-    _duration: Option<String>,
+    duration: Option<String>,
     subject: Option<String>,
     _site: Option<String>,
     _module: Option<String>,
@@ -54,7 +54,7 @@ enum ItaDay {
     Gio = 4,
     Ven = 5,
     Sab = 6,
-    Dom = 7
+    Dom = 7,
 }
 
 impl TryFrom<ItaDay> for IsoDow {
@@ -108,12 +108,21 @@ impl TryFrom<RawLesson> for Lesson {
     type Error = Report;
 
     fn try_from(raw: RawLesson) -> Result<Self> {
+        let duration: Option<i16> = raw
+            .duration
+            .as_ref()
+            .and_then(|d| d.split(':').next())
+            .map(|d| d.parse())
+            .transpose()?;
+
         Ok(Self {
-            teacher: raw.teacher.and_then(|t| t.into_iter().next()), /* take the first teacher if
-                                                                      * any */
+            duration,
+            // take the first teacher if any
+            teacher: raw.teacher.and_then(|t| t.into_iter().next()),
             day: raw.ita_day.map(|d| d.try_into()).transpose()?,
             time: raw.time,
-            room: raw.room.and_then(|r| r.into_iter().next()), // take the first room if any
+            // take the first room if any
+            room: raw.room.and_then(|r| r.into_iter().next()),
         })
     }
 }
@@ -136,7 +145,7 @@ pub async fn import_file(
 
     import_availabilities(raw_lessons.clone(), import_id, &mut txn).await?;
 
-    import_classes(raw_lessons, import_id, &mut txn).await?;
+    import_lessons(raw_lessons, import_id, &mut txn).await?;
 
     match meta.mode {
         ImportMode::Write => txn.commit().await,
@@ -197,7 +206,7 @@ async fn import_rooms(
     Ok(())
 }
 
-async fn import_classes(
+async fn import_lessons(
     raw_lessons: Vec<RawLesson>,
     import_id: i32,
     txn: &mut Transaction<'_, Postgres>,
@@ -215,15 +224,17 @@ async fn import_classes(
 
         sqlx::query!(
             r#"
-            INSERT INTO "lesson" (day, time, room_id, teacher_id)
+            INSERT INTO "lesson" (day, time, duration, room_id, teacher_id)
             SELECT
               $1::smallint::isodow,
               $2,
-              (SELECT id FROM room WHERE name = $3 AND import_id = $5),
-              (SELECT id FROM teacher WHERE full_name = $4 AND import_id = $5)
+              $3,
+              (SELECT id FROM room WHERE name = $4 AND import_id = $6),
+              (SELECT id FROM teacher WHERE full_name = $5 AND import_id = $6)
             "#,
             day.iso_dow(),
             lesson.time as Option<NaiveTime>,
+            lesson.duration,
             lesson.room.as_deref(),
             lesson.teacher.as_deref(),
             import_id

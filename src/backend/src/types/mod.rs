@@ -35,6 +35,7 @@ pub struct Lesson {
     pub day: Option<IsoDow>,
     pub time: Option<NaiveTime>,
     pub room: Option<String>,
+    pub duration: Option<i16>,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize, Display, sqlx::Type)]
