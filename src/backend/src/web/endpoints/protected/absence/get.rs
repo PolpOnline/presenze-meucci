@@ -1,4 +1,4 @@
-use ahash::{HashMap, HashMapExt};
+use ahash::AHashMap;
 use axum::{extract::Query, response::IntoResponse};
 use axum_serde::Sonic;
 use chrono::{NaiveDate, NaiveTime};
@@ -100,7 +100,7 @@ pub async fn get(
     // Group by (absence ID, absent professor) to form the final structure
     let absences: Vec<Absence> = rows
         .into_iter()
-        .fold(HashMap::new(), |mut acc, row| {
+        .fold(AHashMap::new(), |mut acc, row| {
             let entry = acc
                 .entry(row.absent_professor_id)
                 .or_insert_with(|| Absence {

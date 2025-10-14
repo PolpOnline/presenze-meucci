@@ -1,6 +1,6 @@
 use ahash::HashSet;
 use chrono::NaiveTime;
-use color_eyre::{eyre::eyre, Report, Result};
+use color_eyre::{Report, Result, eyre::eyre};
 use serde::Deserialize;
 use sqlx::{PgPool, Postgres, QueryBuilder, Transaction};
 use utoipa::ToSchema;
@@ -209,7 +209,6 @@ async fn import_rooms(
 
     Ok(())
 }
-
 
 async fn import_groups(
     raw_lessons: &[RawLesson],
