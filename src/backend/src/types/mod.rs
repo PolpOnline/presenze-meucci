@@ -47,11 +47,15 @@ pub enum AvailabilityType {
     RecoveryHours,
 }
 
-#[derive(Debug, Clone, Deserialize, Serialize, Display, sqlx::Type, ToSchema)]
+#[derive(
+    Debug, Clone, PartialEq, Default, Deserialize, Serialize, Display, sqlx::Type, ToSchema,
+)]
 #[sqlx(type_name = "absence_status")]
+#[serde(rename_all = "camelCase")]
 pub enum AbsenceStatus {
+    #[default]
     Uncovered,
     ClassDelayed,
-    ClassCancelled,
+    ClassCanceled,
     SubstituteFound,
 }

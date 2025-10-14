@@ -1,0 +1,30 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        UPDATE absence ab\n        SET status = COALESCE($2, ab.status),\n            substitute_teacher_availability = (\n                SELECT av.id\n                FROM availability av\n                JOIN teacher t2 ON av.teacher_id = t2.id\n                JOIN import i2 ON t2.import_id = i2.id\n                WHERE av.id = $3\n                    AND i2.user_id = $4\n            )\n        FROM lesson l, teacher t, import i\n        WHERE ab.id = $1\n          AND ab.absent_teacher_lesson = l.id\n          AND l.teacher_id = t.id\n          AND t.import_id = i.id\n          AND i.user_id = $5\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Int4",
+        {
+          "Custom": {
+            "name": "absence_status",
+            "kind": {
+              "Enum": [
+                "Uncovered",
+                "ClassDelayed",
+                "ClassCanceled",
+                "SubstituteFound"
+              ]
+            }
+          }
+        },
+        "Int4",
+        "Int4",
+        "Int4"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "e5d36268f6ec3bd960c060d870a468078d962e746b104909146350892762e934"
+}

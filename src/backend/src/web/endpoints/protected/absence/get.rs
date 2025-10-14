@@ -11,6 +11,7 @@ use crate::{app::openapi::DASHBOARD_TAG, types::AbsenceStatus, users::AuthSessio
 #[derive(Debug, Deserialize, IntoParams)]
 #[serde(rename_all = "camelCase")]
 pub struct GetAbsenceRequest {
+    /// Date for which to get absences. If not provided, defaults to today.
     date: Option<NaiveDate>,
 }
 

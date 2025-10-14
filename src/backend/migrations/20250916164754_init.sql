@@ -66,7 +66,7 @@ CREATE TABLE lesson
     duration   SMALLINT CHECK (duration > 0)                     NOT NULL DEFAULT 1
 );
 
-CREATE TYPE absence_status AS ENUM ('Uncovered', 'ClassDelayed', 'ClassCancelled', 'SubstituteFound');
+CREATE TYPE absence_status AS ENUM ('Uncovered', 'ClassDelayed', 'ClassCanceled', 'SubstituteFound');
 
 CREATE TABLE "absence"
 (
@@ -75,4 +75,11 @@ CREATE TABLE "absence"
     absence_date                    DATE                                             NOT NULL DEFAULT CURRENT_DATE,
     status                          absence_status                                   NOT NULL DEFAULT 'Uncovered',
     substitute_teacher_availability INTEGER REFERENCES availability (id) ON DELETE CASCADE
-)
+        -- if substitute_teacher_availability is set, status must be 'SubstituteFound'
+        CONSTRAINT absence_substitute_status_check
+            CHECK (
+                (substitute_teacher_availability IS NOT NULL AND status = 'SubstituteFound')
+                    OR
+                (substitute_teacher_availability IS NULL AND status <> 'SubstituteFound')
+                )
+);

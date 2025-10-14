@@ -2,8 +2,9 @@ use utoipa_axum::{router::OpenApiRouter, routes};
 
 mod delete;
 pub mod get;
+mod patch;
 mod post;
 
 pub fn router() -> OpenApiRouter {
-    OpenApiRouter::new().routes(routes!(get::get, post::post, delete::delete))
+    OpenApiRouter::new().routes(routes!(get::get, post::post, delete::delete, patch::patch))
 }

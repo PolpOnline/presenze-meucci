@@ -5,7 +5,7 @@ use axum_serde::Xml;
 use chrono::NaiveDateTime;
 use http::StatusCode;
 use importer::import_file;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use utoipa::{IntoParams, ToSchema};
 
 use crate::{
@@ -14,19 +14,20 @@ use crate::{
 };
 
 #[derive(Debug, Deserialize, IntoParams)]
+#[serde(rename_all = "camelCase")]
 pub struct ImportFileMeta {
     file_name: String,
-    #[param(default = "write")]
+    #[param(default = ImportMode::default)]
     mode: ImportMode,
     begin_ts: NaiveDateTime,
     end_ts: NaiveDateTime,
 }
 
-#[derive(Default, Debug, Deserialize, ToSchema)]
-#[serde(rename_all = "snake_case")]
+#[derive(Default, Debug, Deserialize, Serialize, ToSchema)]
+#[serde(rename_all = "camelCase")]
 pub enum ImportMode {
-    #[default]
     DryRun,
+    #[default]
     Write,
 }
 
