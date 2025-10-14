@@ -21,7 +21,7 @@ struct ImportInfo {
     path = "/",
     summary = "List imports",
     responses(
-        (status = OK, description = "Absences and their status", body = Vec<ImportInfo>),
+        (status = OK, description = "List of imports", body = Vec<ImportInfo>),
         (status = UNAUTHORIZED, description = "Unauthorized", example = "Unauthorized"),
     ),
     security(
@@ -49,10 +49,7 @@ pub async fn get(auth_session: AuthSession) -> impl IntoResponse {
     {
         Ok(rows) => rows,
         Err(e) => {
-            error!(
-                "Database error when fetching teachers who can be absent: {}",
-                e
-            );
+            error!("Database error when getting the imports: {}", e);
             return (StatusCode::INTERNAL_SERVER_ERROR, "Internal Server Error").into_response();
         }
     };
