@@ -55,7 +55,7 @@ pub async fn post(
             AND i.user_id = $5
         )
         INSERT INTO absence (absent_teacher_lesson, absence_date)
-        SELECT l.id, ($2::date)
+        SELECT l.id, COALESCE($2, CURRENT_DATE)::date
         FROM lessons l;
         "#,
         req.absent_teacher_id,
@@ -68,8 +68,8 @@ pub async fn post(
     .await;
 
     match res {
-        Ok(done) if done.rows_affected() == 1 => StatusCode::OK.into_response(),
-        Ok(_) => (StatusCode::UNAUTHORIZED, "Unauthorized").into_response(),
+        Ok(done) if done.rows_affected() >= 1 => StatusCode::OK.into_response(),
+        Ok(_) => (StatusCode::INTERNAL_SERVER_ERROR, "No rows affected").into_response(),
         Err(e) => {
             error!("Failed to add absence: {}", e);
             (StatusCode::INTERNAL_SERVER_ERROR, "Failed to add absence").into_response()
