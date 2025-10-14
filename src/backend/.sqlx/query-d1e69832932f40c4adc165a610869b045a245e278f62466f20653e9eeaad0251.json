@@ -1,0 +1,45 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT DISTINCT teacher.id,\n                teacher.full_name,\n                availability.availability_type as \"availability_type: AvailabilityType\"\n        FROM absence\n                 JOIN lesson absent_lesson ON absence.absent_teacher_lesson = absent_lesson.id\n                 JOIN teacher absent_teacher ON absent_teacher.id = absent_lesson.teacher_id\n                 JOIN import active_import ON active_import.id = absent_teacher.import_id\n            AND absence.absence_date BETWEEN active_import.begin_ts AND active_import.end_ts\n                 JOIN teacher ON teacher.import_id = active_import.id\n                 JOIN availability ON availability.teacher_id = teacher.id\n        WHERE absence.id = $2\n          AND availability.day = absent_lesson.day\n          AND availability.time = absent_lesson.time\n          AND active_import.user_id = $1\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 1,
+        "name": "full_name",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "availability_type: AvailabilityType",
+        "type_info": {
+          "Custom": {
+            "name": "availability_type",
+            "kind": {
+              "Enum": [
+                "Availability",
+                "RecoveryHours"
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int4",
+        "Int4"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "d1e69832932f40c4adc165a610869b045a245e278f62466f20653e9eeaad0251"
+}

@@ -39,7 +39,7 @@ pub struct Lesson {
     pub duration: Option<i16>,
 }
 
-#[derive(Debug, Clone, Deserialize, Serialize, Display, sqlx::Type)]
+#[derive(Debug, Clone, Deserialize, Serialize, Display, sqlx::Type, ToSchema)]
 #[sqlx(type_name = "availability_type")]
 #[serde(rename_all = "UPPERCASE")]
 pub enum AvailabilityType {
