@@ -2,6 +2,7 @@ use axum::response::IntoResponse;
 use axum_serde::Sonic;
 use http::StatusCode;
 use serde::Deserialize;
+use tracing::error;
 use utoipa::ToSchema;
 
 use crate::{app::openapi::DASHBOARD_TAG, types::AbsenceStatus, users::AuthSession};
@@ -87,7 +88,7 @@ pub async fn patch(
         Ok(done) if done.rows_affected() >= 1 => StatusCode::OK.into_response(),
         Ok(_) => (StatusCode::BAD_REQUEST, "Bad Request").into_response(),
         Err(e) => {
-            tracing::error!("Failed to modify absence: {}", e);
+            error!("Failed to modify absence: {}", e);
             (StatusCode::INTERNAL_SERVER_ERROR, "Internal Server Error").into_response()
         }
     }

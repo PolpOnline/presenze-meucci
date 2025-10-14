@@ -6,6 +6,7 @@ use chrono::NaiveDateTime;
 use http::StatusCode;
 use importer::import_file;
 use serde::{Deserialize, Serialize};
+use tracing::error;
 use utoipa::{IntoParams, ToSchema};
 
 use crate::{
@@ -59,7 +60,7 @@ pub async fn post(
     match import_file(&auth_session.backend.db, meta, file, user.id).await {
         Ok(_) => (),
         Err(e) => {
-            tracing::error!("Error importing file: {:?}", e);
+            error!("Error importing file: {:?}", e);
             return (
                 StatusCode::INTERNAL_SERVER_ERROR,
                 format!("Error importing file: {:?}", e),

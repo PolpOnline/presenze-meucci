@@ -3,7 +3,7 @@ use axum_serde::Sonic;
 use http::StatusCode;
 use password_auth::generate_hash;
 use tokio::task;
-use tracing::debug;
+use tracing::error;
 
 use crate::{
     app::openapi::AUTH_TAG,
@@ -55,7 +55,7 @@ pub async fn sign_up(
     match auth_session.authenticate(req.clone()).await {
         Ok(Some(_)) => {}
         Ok(None) => {
-            debug!("User does not exist after signup");
+            error!("User does not exist after signup");
             return AuthError::UserNotExistingAfterSignUp.into_response();
         }
         Err(_) => return AuthError::FailedToReAuthenticateAfterSignUp.into_response(),

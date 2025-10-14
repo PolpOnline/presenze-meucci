@@ -2,6 +2,7 @@ use axum::{extract::Query, response::IntoResponse};
 use axum_serde::Sonic;
 use http::StatusCode;
 use serde::{Deserialize, Serialize};
+use tracing::error;
 use utoipa::{IntoParams, ToSchema};
 
 use crate::{app::openapi::DASHBOARD_TAG, types::AvailabilityType, users::AuthSession};
@@ -66,7 +67,7 @@ pub async fn available(
     {
         Ok(rows) => rows,
         Err(e) => {
-            tracing::error!("Database error when fetching available teachers: {}", e);
+            error!("Database error when fetching available teachers: {}", e);
             return (StatusCode::INTERNAL_SERVER_ERROR, "Internal Server Error").into_response();
         }
     };

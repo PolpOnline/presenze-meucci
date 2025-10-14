@@ -4,6 +4,7 @@ use axum_serde::Sonic;
 use chrono::{NaiveDate, NaiveTime};
 use http::StatusCode;
 use serde::{Deserialize, Serialize};
+use tracing::error;
 use utoipa::{IntoParams, ToSchema};
 
 use crate::{app::openapi::DASHBOARD_TAG, types::AbsenceStatus, users::AuthSession};
@@ -88,7 +89,7 @@ pub async fn get(
     {
         Ok(rows) => rows,
         Err(e) => {
-            tracing::error!("Failed to fetch absences with classes: {}", e);
+            error!("Failed to fetch absences with classes: {}", e);
             return (StatusCode::INTERNAL_SERVER_ERROR, "Internal Server Error").into_response();
         }
     };
