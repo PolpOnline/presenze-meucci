@@ -1,0 +1,17 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        UPDATE import\n        SET begin_ts = COALESCE($2, begin_ts),\n            end_ts = COALESCE($3, end_ts)\n        WHERE id = $1 AND user_id = $4\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Int4",
+        "Timestamp",
+        "Timestamp",
+        "Int4"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "a4afd58b66f2b21f0db805258a192130a31b698841f8748485f60d75d11d974e"
+}
