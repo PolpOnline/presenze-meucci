@@ -1,5 +1,5 @@
 use ahash::HashSet;
-use chrono::NaiveTime;
+use chrono::{Duration, NaiveTime, TimeDelta};
 use color_eyre::{Report, Result, eyre::eyre};
 use serde::Deserialize;
 use sqlx::{PgPool, Postgres, QueryBuilder, Transaction};
@@ -108,11 +108,22 @@ impl TryFrom<RawLesson> for Lesson {
     type Error = Report;
 
     fn try_from(raw: RawLesson) -> Result<Self> {
-        let duration: Option<i16> = raw
+        let duration: Option<TimeDelta> = raw
             .duration
             .as_ref()
-            .and_then(|d| d.split(':').next())
-            .map(|d| d.parse())
+            .map(|d| {
+                let parts: Vec<&str> = d.split(':').collect();
+                if parts.len() != 2 {
+                    return Err(eyre!("Invalid duration format: {}", d));
+                }
+                let hours: i64 = parts[0]
+                    .parse()
+                    .map_err(|_| eyre!("Invalid hours in duration: {}", d))?;
+                let minutes: i64 = parts[1]
+                    .parse()
+                    .map_err(|_| eyre!("Invalid minutes in duration: {}", d))?;
+                Ok(Duration::hours(hours) + Duration::minutes(minutes))
+            })
             .transpose()?;
 
         Ok(Self {
@@ -268,7 +279,7 @@ async fn import_lessons(
             "#,
             day.iso_dow(),
             lesson.time as Option<NaiveTime>,
-            lesson.duration,
+            lesson.duration as Option<TimeDelta>,
             lesson.room.as_deref(),
             lesson.group.as_deref(),
             lesson.teacher.as_deref(),

@@ -63,7 +63,8 @@ CREATE TABLE lesson
     time       time_no_seconds                                   NOT NULL,
     room_id    INTEGER REFERENCES room (id) ON DELETE CASCADE,
     group_id   INTEGER REFERENCES "group" (id) ON DELETE CASCADE,
-    duration   SMALLINT CHECK (duration > 0)                     NOT NULL DEFAULT 1
+    duration   INTERVAL HOUR TO MINUTE                           NOT NULL DEFAULT INTERVAL '1 hour'
+        CHECK (duration > INTERVAL '0 minutes')
 );
 
 CREATE TYPE absence_status AS ENUM ('Uncovered', 'ClassDelayed', 'ClassCanceled', 'SubstituteFound');

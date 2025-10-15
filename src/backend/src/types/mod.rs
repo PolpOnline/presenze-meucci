@@ -1,5 +1,5 @@
 use axum_serde::macros::{Deserialize, Serialize};
-use chrono::NaiveTime;
+use chrono::{NaiveTime, TimeDelta};
 use strum::Display;
 use utoipa::ToSchema;
 
@@ -36,7 +36,7 @@ pub struct Lesson {
     pub time: Option<NaiveTime>,
     pub room: Option<String>,
     pub group: Option<String>,
-    pub duration: Option<i16>,
+    pub duration: Option<TimeDelta>,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize, Display, sqlx::Type, ToSchema)]
