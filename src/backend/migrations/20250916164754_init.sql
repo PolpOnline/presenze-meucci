@@ -84,3 +84,29 @@ CREATE TABLE "absence"
                 (substitute_teacher_availability IS NULL AND status <> 'SubstituteFound')
                 )
 );
+
+-- Trigger function to enforce absence_date's ISO DOW matches lesson.day
+CREATE OR REPLACE FUNCTION check_absence_date_dow_matches_lesson()
+    RETURNS TRIGGER AS
+$$
+DECLARE
+    lesson_dow  SMALLINT;
+    absence_dow SMALLINT;
+BEGIN
+    SELECT day INTO lesson_dow FROM lesson WHERE id = NEW.absent_teacher_lesson;
+    IF lesson_dow IS NULL THEN
+        RAISE EXCEPTION 'Lesson with id % does not exist', NEW.absent_teacher_lesson;
+    END IF;
+    absence_dow := EXTRACT(ISODOW FROM NEW.absence_date);
+    IF lesson_dow <> absence_dow THEN
+        RAISE EXCEPTION 'absence.absence_date (%) DOW (%) does not match lesson.day (%) for lesson id %', NEW.absence_date, absence_dow, lesson_dow, NEW.absent_teacher_lesson;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_check_absence_date_dow
+    BEFORE INSERT OR UPDATE
+    ON absence
+    FOR EACH ROW
+EXECUTE FUNCTION check_absence_date_dow_matches_lesson();
