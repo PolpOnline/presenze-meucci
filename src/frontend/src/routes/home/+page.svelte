@@ -2,11 +2,15 @@
     import DatePicker from '$lib/components/DatePicker.svelte';
     import type {DateValue} from '@internationalized/date';
     import {Button} from '$lib/components/ui/button';
-    import SelectProf from "$lib/components/SelectProf.svelte";
     import * as Card from "$lib/components/ui/card/index.js";
+    import * as Select from "$lib/components/ui/select";
 
-    const prof = fetch('http://localhost')
+    let { data } = $props();
+    let value = $state("");
 
+    const triggerContent = $derived(
+        data.professors.find((p) => p.id.toString() === value)?.full_name ?? "Seleziona un professore"
+    )
     let date: DateValue | null = null;
 </script>
 
@@ -25,7 +29,24 @@
                 <div class="flex flex-col items-center gap-2">
                     <DatePicker bind:value={date}/>
 
-                    <SelectProf/>
+                    <Select.Root type="single" name="profselector">
+                        <Select.Trigger class="w-[280px]">
+                            {triggerContent}
+                        </Select.Trigger>
+                        <Select.Content>
+                            <Select.Group>
+                                <Select.Label>Professori</Select.Label>
+                                {#each data.professors as prof (prof.id)}
+                                    <Select.Item
+                                            value={prof.id.toString()}
+                                            label={prof.full_name}
+                                    >
+                                        {prof.full_name}
+                                    </Select.Item>
+                                {/each}
+                            </Select.Group>
+                        </Select.Content>
+                    </Select.Root>
 
                     <Button variant="secondary" href="">Cerca sostituzioni</Button>
                 </div>

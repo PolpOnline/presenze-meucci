@@ -61,7 +61,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const requestedPath = event.url.pathname;
 	// Auth check
 	event.locals.loginStatus = (
-		event.cookies.get('user_id') ? 'logged_in' : 'logged_out'
+		event.cookies.get('meucci_presenze_id') ? 'logged_in' : 'logged_out'
 	) as LoginStatus;
 
 	if (requestedPath.startsWith('/auth') || requestedPath.startsWith('/api/public')) {
@@ -71,8 +71,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (event.locals.loginStatus === 'logged_out') {
 		redirect(StatusCodes.MOVED_TEMPORARILY, 'auth/login');
 	}
-
-	event.locals.email = event.cookies.get('meucci_forum_user_email');
 
 	return resolve(event, resolveOptions);
 };
