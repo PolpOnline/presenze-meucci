@@ -11,7 +11,8 @@
     let value = $state("");
 
     const triggerContent = $derived(
-        data.professors.find((p) => p.id.toString() === value)?.full_name ?? "Seleziona un professore"
+       // data.professors.find((p) => p.id.toString() === value)?.full_name ?? "Seleziona un professore"
+        "test"
     )
     let date: DateValue | null = $state(null);
 </script>

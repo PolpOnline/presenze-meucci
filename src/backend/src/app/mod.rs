@@ -3,6 +3,7 @@ pub mod db;
 pub mod openapi;
 mod redis;
 
+use std::env;
 use std::str::FromStr;
 
 use axum::{middleware, routing::get};
@@ -16,6 +17,7 @@ use tower_http::{
     decompression::{DecompressionLayer, RequestDecompressionLayer},
     trace::TraceLayer,
 };
+use tower_http::cors::{AllowOrigin, Any, CorsLayer};
 use tower_sessions::{Expiry, SessionManagerLayer, cookie::Key};
 use tower_sessions_redis_store::RedisStore;
 use tracing::info;
@@ -73,6 +75,10 @@ impl App {
             AuthManagerLayerBuilder::new(backend, session_layer).build()
         };
 
+        let cors_layer = CorsLayer::new()
+            .allow_headers(Any)
+            .allow_origin(AllowOrigin::exact(env::var("CORS_ORIGIN")?.parse()?));
+
         let (router, api) = OpenApiRouter::with_openapi(ApiDoc::openapi())
             .merge(protected::router())
             .route_layer(custom_login_required!(
@@ -84,7 +90,8 @@ impl App {
             .layer(
                 ServiceBuilder::new()
                     .layer(auth_layer)
-                    .layer(middleware::from_fn(set_cache_control)),
+                    .layer(middleware::from_fn(set_cache_control))
+                    .layer(cors_layer),
             )
             .split_for_parts();
 

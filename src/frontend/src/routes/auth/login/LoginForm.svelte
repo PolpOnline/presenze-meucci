@@ -1,67 +1,61 @@
 <script lang="ts">
-	// noinspection ES6UnusedImports
-	import * as Form from '$lib/components/ui/form';
-	import { Input } from '$lib/components/ui/input';
-	import { formSchema, type FormSchema } from './schema';
-	import { type Infer, superForm, type SuperValidated } from 'sveltekit-superforms';
-	import { zod4Client } from 'sveltekit-superforms/adapters';
-	import LineMdLoadingLoop from '~icons/line-md/loading-loop';
-	import PasswordInput from '$components/password_input/PasswordInput.svelte';
-	import { toast } from 'svelte-sonner';
-	import { goto } from '$app/navigation';
+    import {Input} from '$lib/components/ui/input';
+    import LineMdLoadingLoop from '~icons/line-md/loading-loop';
+    import PasswordInput from '$components/password_input/PasswordInput.svelte';
+    import {Button} from "$components/ui/button";
+    import {client} from "$lib/api/api";
+    import {goto} from "$app/navigation";
 
+    let isSubmitting = $state(false);
+    let message = $state<string | null>(null);
 
-	const {
-		data
-	}: {
-		data: SuperValidated<Infer<FormSchema>>;
-	} = $props();
+    async function login(event: Event) {
+        event.preventDefault();
+        isSubmitting = true;
+        message = null;
 
-	const form = superForm(data, {
-		validators: zod4Client(formSchema),
-		onUpdated: ({ form: f }) => {
-			if (f.valid) {
-				toast.success("Login eseguito con successo!");
+        const formData = new FormData(event.target as HTMLFormElement);
 
-				goto('/');
-			}
-		}
-	});
+        try {
+            const res = await client.POST('/login', {
+                // @ts-expect-error We know the type is correct
+                body: Object.fromEntries(formData)
+            });
 
-	const { form: formData, enhance, message, delayed } = form;
+            if (res.error) {
+                message = res.data || 'Login failed. Please try again.';
+            } else {
+                window.location.href = '/';
+            }
+
+        } catch (error) {
+            message = 'An error occurred. Please try again. Details: ' + error;
+        } finally {
+            isSubmitting = false;
+        }
+    }
 </script>
 
-<form method="POST" use:enhance>
-	<Form.Field {form} name="username">
-		<Form.Control>
-			{#snippet children({ props })}
-				<Form.Label>
-					Username
-				</Form.Label>
-				<Input {...props} bind:value={$formData.username} autocomplete="username" />
-			{/snippet}
-		</Form.Control>
-		<Form.FieldErrors />
-	</Form.Field>
-	<Form.Field {form} name="password">
-		<Form.Control>
-			{#snippet children({ props })}
-				<Form.Label>
-					Password
-				</Form.Label>
-				<PasswordInput {...props} bind:value={$formData.password} autocomplete="current-password" />
-			{/snippet}
-		</Form.Control>
-		<Form.FieldErrors />
-	</Form.Field>
-	{#if $message}
-		<div class="text-destructive">{$message}</div>
-	{/if}
-	<Form.Button class="mt-8 w-full">
-		{#if !$delayed}
-			Login
-		{:else}
-			<LineMdLoadingLoop class="size-6" />
-		{/if}
-	</Form.Button>
+<form class="flex w-full flex-col" onsubmit={login}>
+    <label class="mt-4" for="username">
+        Username
+    </label>
+    <Input class="my-2" name="username" autocomplete="username" required/>
+
+    <label class="my-3 flex justify-between items-center" for="password">
+            Password
+        <a href="" class="underline">Password Dimenticata</a>
+    </label>
+    <PasswordInput name="password" autocomplete="current-password" required/>
+
+    {#if message}
+        <div class="text-destructive">{message}</div>
+    {/if}
+    <Button class="mt-8 w-full" disabled={isSubmitting} type="submit">
+        {#if !isSubmitting}
+            Login
+        {:else}
+            <LineMdLoadingLoop class="size-6"/>
+        {/if}
+    </Button>
 </form>

@@ -20,7 +20,7 @@ utoipa = { version = "5.2", features = ["uuid", "chrono", "axum_extras", "auto_i
 utoipa-axum = { version = "0.2" }
 utoipa-scalar = { version = "0.3", features = ["axum"] }
 tower = "0.5.2"
-tower-http = { version = "0.6.6", features = ["trace", "compression-full", "decompression-full"] }
+tower-http = { version = "0.6.6", features = ["trace", "compression-full", "decompression-full", "cors"] }
 http = "1.3.1"
 sonic-rs = "0.5.4"
 tracing = "0.1.41"

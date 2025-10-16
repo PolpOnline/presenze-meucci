@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import { client } from '$lib/api/api.server';
+import { client } from '$lib/api/api';
 import { redirect } from '@sveltejs/kit';
 import { StatusCodes } from 'http-status-codes';
 

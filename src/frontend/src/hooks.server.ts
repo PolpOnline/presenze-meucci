@@ -1,4 +1,4 @@
-import { API_URL } from '$lib/api/api.server';
+import { API_URL } from '$lib/api/api';
 import { type Handle, type HandleFetch, redirect, type ResolveOptions } from '@sveltejs/kit';
 import type { LoginStatus } from './app';
 import { default as setCookieParser } from 'set-cookie-parser';
@@ -69,7 +69,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	if (event.locals.loginStatus === 'logged_out') {
-		redirect(StatusCodes.MOVED_TEMPORARILY, 'auth/login');
+		redirect(StatusCodes.MOVED_TEMPORARILY, '/auth/login');
 	}
 
 	return resolve(event, resolveOptions);
