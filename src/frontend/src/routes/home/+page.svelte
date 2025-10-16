@@ -2,7 +2,9 @@
     import DatePicker from '$lib/components/DatePicker.svelte';
     import type {DateValue} from '@internationalized/date';
     import {Button} from '$lib/components/ui/button';
+    // noinspection ES6UnusedImports
     import * as Card from "$lib/components/ui/card/index.js";
+    // noinspection ES6UnusedImports
     import * as Select from "$lib/components/ui/select";
 
     let { data } = $props();
@@ -11,7 +13,7 @@
     const triggerContent = $derived(
         data.professors.find((p) => p.id.toString() === value)?.full_name ?? "Seleziona un professore"
     )
-    let date: DateValue | null = null;
+    let date: DateValue | null = $state(null);
 </script>
 
 <main>
