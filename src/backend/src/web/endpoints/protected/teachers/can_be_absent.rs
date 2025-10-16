@@ -46,7 +46,7 @@ pub async fn can_be_absent(
     let can_be_absent_teachers = match sqlx::query_as!(
         CanBeAbsentTeacher,
         r#"
-        SELECT t.id, t.full_name
+        SELECT DISTINCT t.id, t.full_name
         FROM teacher t
                  JOIN import i ON t.import_id = i.id
                  JOIN lesson l ON t.id = l.teacher_id
