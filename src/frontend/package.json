@@ -51,6 +51,8 @@
     ]
   },
   "dependencies": {
-    "mode-watcher": "^1.1.0"
+    "http-status-codes": "^2.3.0",
+    "mode-watcher": "^1.1.0",
+    "set-cookie-parser": "^2.7.1"
   }
 }

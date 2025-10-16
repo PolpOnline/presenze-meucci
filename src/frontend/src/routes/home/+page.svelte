@@ -5,6 +5,8 @@
     import SelectProf from "$lib/components/SelectProf.svelte";
     import * as Card from "$lib/components/ui/card/index.js";
 
+    const prof = fetch('http://localhost')
+
     let date: DateValue | null = null;
 </script>
 
