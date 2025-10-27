@@ -1,9 +1,9 @@
-import type { PageServerLoad } from './$types';
+import type { PageLoad } from './$types';
 import { client } from '$lib/api/api';
 import { redirect } from '@sveltejs/kit';
 import { StatusCodes } from 'http-status-codes';
 
-export const load: PageServerLoad = async (event) => {
+export const load: PageLoad = async (event) => {
 	await client.GET('/logout', {
 		fetch: event.fetch
 	});

@@ -1,59 +1,56 @@
-<script lang="ts">
-    import DatePicker from '$lib/components/DatePicker.svelte';
-    import type {DateValue} from '@internationalized/date';
-    import {Button} from '$lib/components/ui/button';
-    // noinspection ES6UnusedImports
-    import * as Card from "$lib/components/ui/card/index.js";
-    // noinspection ES6UnusedImports
-    import * as Select from "$lib/components/ui/select";
+<script>
 
-    let { data } = $props();
-    let value = $state("");
-
-    const triggerContent = $derived(
-       // data.professors.find((p) => p.id.toString() === value)?.full_name ?? "Seleziona un professore"
-        "test"
-    )
-    let date: DateValue | null = $state(null);
+import {ButtonGroup} from "$components/ui/button-group/index.js";
+import {Button} from "$components/ui/button/index.js";
+import * as Drawer from "$lib/components/ui/drawer/index.js";
+import {Input} from "$components/ui/input/index.js";
 </script>
 
-<main>
+<main class="flex justify-center">
+    <div class="max-w-[600px] w-[100%]">
+        <ButtonGroup
+                class="flex items-center justify-between w-[100%] mx-auto px-4 py-2  rounded-xl shadow-sm"
+        >
+            <Button
 
-    <div
-            class="mx-auto mt-5 flex w-[95%] max-w-[800px] flex-col content-center space-y-4 pb-1 align-middle"
-    >
-        <Card.Root>
-            <Card.Header>
-                <Card.Title>
-                    <h1 class="mt-5 text-center text-3xl font-bold">Supplenze</h1>
-                </Card.Title>
-            </Card.Header>
-            <Card.Content>
-                <div class="flex flex-col items-center gap-2">
-                    <DatePicker bind:value={date}/>
+                    class="rounded-9px bg-background-alt hover:bg-muted inline-flex size-12 items-center justify-center active:scale-[0.98] active:transition-all"
+            >
+                <img src="left-arrow.svg" alt="arrow-left" class="w-full h-full" />
+            </Button>
 
-                    <Select.Root type="single" name="profselector">
-                        <Select.Trigger class="w-[280px]">
-                            {triggerContent}
-                        </Select.Trigger>
-                        <Select.Content>
-                            <Select.Group>
-                                <Select.Label>Professori</Select.Label>
-                                {#each data.professors as prof (prof.id)}
-                                    <Select.Item
-                                            value={prof.id.toString()}
-                                            label={prof.full_name}
-                                    >
-                                        {prof.full_name}
-                                    </Select.Item>
-                                {/each}
-                            </Select.Group>
-                        </Select.Content>
-                    </Select.Root>
+            <h1 class="text-base font-semibold text-center text-white select-none">
+                oggi
+            </h1>
 
-                    <Button variant="secondary" href="">Cerca sostituzioni</Button>
-                </div>
-            </Card.Content>
-        </Card.Root>
+            <Button
+                    class="rounded-9px bg-background-alt hover:bg-muted inline-flex size-12 items-center justify-center active:scale-[0.98] active:transition-all"
+            >
+                <img src="right-arrow.svg" alt="arrow-right" class="w-full h-full" />
+            </Button>
+        </ButtonGroup>
+
+
+        <Drawer.Root>
+            <Drawer.Trigger>
+                <Button
+                        variant="secondary"
+                        size="icon"
+                        class="fixed bottom-5 right-5 w-12 h-12 rounded-2"
+                >
+                    <img src="/plus.svg" alt="Open drawer" class="w-6 h-6" />
+                </Button>
+            </Drawer.Trigger>
+
+            <Drawer.Content class="p-6 rounded-t-2xl border-t shadow-xl bg-background">
+                <Drawer.Header class="">
+                    <Drawer.Title class="text-lg font-semibold">Aggiungi assenza professore</Drawer.Title>
+                </Drawer.Header>
+                <Input type="email" placeholder="email" class="max-w-xs" />
+
+                <Drawer.Footer class="flex justify-end gap-2">
+                    <Button>Add</Button>
+                </Drawer.Footer>
+            </Drawer.Content>
+        </Drawer.Root>
     </div>
 </main>
