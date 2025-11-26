@@ -8,10 +8,7 @@ export default defineConfig({
 	plugins: [
 		tailwindcss(),
 		sveltekit(),
-		Icons({
-			compiler: 'svelte',
-			autoInstall: true
-		}),
+		Icons({ compiler: 'svelte', autoInstall: true }),
 		devtoolsJson()
 	]
 });

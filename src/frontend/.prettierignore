@@ -7,3 +7,6 @@ bun.lockb
 
 # Miscellaneous
 /static/
+
+# Ignore files from shadcn
+src/lib/components/ui

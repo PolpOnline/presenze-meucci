@@ -37,5 +37,11 @@ export default defineConfig(
 				svelteConfig
 			}
 		}
+	},
+	{
+		ignores: ['build/', '.svelte-kit/', 'dist/', 'src/lib/components/ui'],
+		rules: {
+			'svelte/no-navigation-without-resolve': 'off'
+		}
 	}
 );

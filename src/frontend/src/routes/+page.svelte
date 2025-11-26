@@ -1,56 +1,31 @@
 <script>
-
-import {ButtonGroup} from "$components/ui/button-group/index.js";
-import {Button} from "$components/ui/button/index.js";
-import * as Drawer from "$lib/components/ui/drawer/index.js";
-import {Input} from "$components/ui/input/index.js";
+	import { Button } from '$components/ui/button/index.js';
+	// noinspection ES6UnusedImports
+	import * as Drawer from '$lib/components/ui/drawer/index.js';
+	import { Input } from '$components/ui/input/index.js';
+	import PageSelector from '$components/PageSelector.svelte';
+    import LucidePlus from '~icons/lucide/plus';
 </script>
 
 <main class="flex justify-center">
-    <div class="max-w-[600px] w-[100%]">
-        <ButtonGroup
-                class="flex items-center justify-between w-[100%] mx-auto px-4 py-2  rounded-xl shadow-sm"
-        >
-            <Button
+	<div class="w-full max-w-[600px]">
+		<PageSelector class="my-4" />
 
-                    class="rounded-9px bg-background-alt hover:bg-muted inline-flex size-12 items-center justify-center active:scale-[0.98] active:transition-all"
-            >
-                <img src="left-arrow.svg" alt="arrow-left" class="w-full h-full" />
-            </Button>
+		<Drawer.Trigger>
+			<Button variant="secondary" size="icon" class="rounded-2 fixed right-5 bottom-5 size-12">
+                <LucidePlus class="size-6" />
+			</Button>
+		</Drawer.Trigger>
 
-            <h1 class="text-base font-semibold text-center text-white select-none">
-                oggi
-            </h1>
+		<Drawer.Content class="rounded-t-2xl border-t bg-background p-6 shadow-xl">
+			<Drawer.Header class="">
+				<Drawer.Title class="text-lg font-semibold">Aggiungi assenza professore</Drawer.Title>
+			</Drawer.Header>
+			<Input type="email" placeholder="email" class="max-w-xs" />
 
-            <Button
-                    class="rounded-9px bg-background-alt hover:bg-muted inline-flex size-12 items-center justify-center active:scale-[0.98] active:transition-all"
-            >
-                <img src="right-arrow.svg" alt="arrow-right" class="w-full h-full" />
-            </Button>
-        </ButtonGroup>
-
-
-        <Drawer.Root>
-            <Drawer.Trigger>
-                <Button
-                        variant="secondary"
-                        size="icon"
-                        class="fixed bottom-5 right-5 w-12 h-12 rounded-2"
-                >
-                    <img src="/plus.svg" alt="Open drawer" class="w-6 h-6" />
-                </Button>
-            </Drawer.Trigger>
-
-            <Drawer.Content class="p-6 rounded-t-2xl border-t shadow-xl bg-background">
-                <Drawer.Header class="">
-                    <Drawer.Title class="text-lg font-semibold">Aggiungi assenza professore</Drawer.Title>
-                </Drawer.Header>
-                <Input type="email" placeholder="email" class="max-w-xs" />
-
-                <Drawer.Footer class="flex justify-end gap-2">
-                    <Button>Add</Button>
-                </Drawer.Footer>
-            </Drawer.Content>
-        </Drawer.Root>
-    </div>
+			<Drawer.Footer class="flex justify-end gap-2">
+				<Button>Add</Button>
+			</Drawer.Footer>
+		</Drawer.Content>
+	</div>
 </main>
