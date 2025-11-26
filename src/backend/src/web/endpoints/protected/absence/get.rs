@@ -25,10 +25,13 @@ struct Absence {
 #[derive(Debug, Serialize, ToSchema)]
 struct AbsentClasses {
     id: i32,
+    /// Name of the substitute teacher set for the class, if any
     substitute_teacher: Option<String>,
+    /// Time of the class, e.g., 08:00:00
     time: NaiveTime,
     room: Option<String>,
     group: Option<String>,
+    /// Current status of the absence
     absent_status: AbsenceStatus,
 }
 
@@ -94,7 +97,7 @@ pub async fn get(
         }
     };
 
-    // Group by (absence ID, absent teacher) to form the final structure
+    // Group by absent teacher to form the final structure
     let mut absences: Vec<Absence> = rows
         .into_iter()
         .fold(AHashMap::new(), |mut acc, row| {
@@ -117,7 +120,11 @@ pub async fn get(
         .into_values()
         .collect();
 
-    absences.sort_by(|a, b| a.absent_teacher.cmp(&b.absent_teacher));
+    absences.sort_unstable_by_key(|a| a.absent_teacher.clone());
+
+    for absence in &mut absences {
+        absence.classes.sort_unstable_by_key(|c| c.time);
+    }
 
     Sonic(absences).into_response()
 }

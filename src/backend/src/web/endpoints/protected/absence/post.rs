@@ -13,7 +13,9 @@ pub struct AddAbsenceRequest {
     /// The date of the absence. If not provided, defaults to today.
     date: Option<NaiveDate>,
     absent_teacher_id: i32,
+    /// Start of the absence. e.g., 08:00:00
     begin_time: NaiveTime,
+    /// End of the absence. e.g., 10:00:00
     end_time: NaiveTime,
 }
 

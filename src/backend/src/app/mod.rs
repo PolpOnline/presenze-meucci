@@ -8,6 +8,7 @@ use std::str::FromStr;
 
 use axum::{middleware, routing::get};
 use axum_login::AuthManagerLayerBuilder;
+use http::header::{ACCEPT, CONTENT_TYPE, COOKIE};
 use http::StatusCode;
 use sqlx::PgPool;
 use tokio::signal;
@@ -17,8 +18,9 @@ use tower_http::{
     decompression::{DecompressionLayer, RequestDecompressionLayer},
     trace::TraceLayer,
 };
-use tower_http::cors::{AllowOrigin, Any, CorsLayer};
+use tower_http::cors::{AllowOrigin, CorsLayer};
 use tower_sessions::{Expiry, SessionManagerLayer, cookie::Key};
+use tower_sessions::cookie::SameSite;
 use tower_sessions_redis_store::RedisStore;
 use tracing::info;
 use utoipa::OpenApi;
@@ -60,6 +62,7 @@ impl App {
             SessionManagerLayer::new(session_store)
                 .with_name("meucci_presenze_id")
                 .with_secure(true)
+                .with_same_site(SameSite::Lax)
                 .with_expiry(Expiry::OnInactivity(
                     tower_sessions::cookie::time::Duration::days(7),
                 ))
@@ -76,8 +79,9 @@ impl App {
         };
 
         let cors_layer = CorsLayer::new()
-            .allow_headers(Any)
-            .allow_origin(AllowOrigin::exact(env::var("CORS_ORIGIN")?.parse()?));
+            .allow_headers([ACCEPT, CONTENT_TYPE, COOKIE])
+            .allow_origin(AllowOrigin::exact(env::var("CORS_ORIGIN")?.parse()?))
+            .allow_credentials(true);
 
         let (router, api) = OpenApiRouter::with_openapi(ApiDoc::openapi())
             .merge(protected::router())

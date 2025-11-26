@@ -4,7 +4,11 @@
 	import * as Drawer from '$lib/components/ui/drawer/index.js';
 	import { Input } from '$components/ui/input/index.js';
 	import PageSelector from '$components/PageSelector.svelte';
-    import LucidePlus from '~icons/lucide/plus';
+	import LucidePlus from '~icons/lucide/plus';
+
+	const { data } = $props();
+
+	console.log(data.absences);
 </script>
 
 <main class="flex justify-center">
@@ -13,12 +17,12 @@
 
 		<Drawer.Trigger>
 			<Button variant="secondary" size="icon" class="rounded-2 fixed right-5 bottom-5 size-12">
-                <LucidePlus class="size-6" />
+				<LucidePlus class="size-6" />
 			</Button>
 		</Drawer.Trigger>
 
 		<Drawer.Content class="rounded-t-2xl border-t bg-background p-6 shadow-xl">
-			<Drawer.Header class="">
+			<Drawer.Header>
 				<Drawer.Title class="text-lg font-semibold">Aggiungi assenza professore</Drawer.Title>
 			</Drawer.Header>
 			<Input type="email" placeholder="email" class="max-w-xs" />

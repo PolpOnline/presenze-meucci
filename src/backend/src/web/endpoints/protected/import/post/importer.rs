@@ -257,6 +257,13 @@ async fn import_lessons(
 ) -> Result<()> {
     let lessons = raw_lessons
         .into_iter()
+        .filter(|lesson| {
+            if let Some(subject) = &lesson.subject {
+                subject != "DISPO" && subject != "RECUPERO_ORARIO"
+            } else {
+                true
+            }
+        })
         .map(|lesson| lesson.try_into())
         .collect::<Result<Vec<Lesson>>>()?;
 
