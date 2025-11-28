@@ -1,6 +1,6 @@
 <script>
-	import { Input } from '$components/ui/input/index.js';
-	import { Button } from '$lib/components/ui/button/index.js';
+	import { Input } from '$components/ui/input/index.ts';
+	import { Button } from '$components/ui/button/index.ts';
 
 	async function reset() {}
 </script>
@@ -15,3 +15,9 @@
 		</form>
 	</div>
 </main>
+
+<style lang="postcss">
+    .h-screen-not-navbar {
+        height: calc(100svh - 5rem);
+    }
+</style>

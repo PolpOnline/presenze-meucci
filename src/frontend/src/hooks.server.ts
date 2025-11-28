@@ -1,15 +1,15 @@
-/*import { API_URL } from '$lib/api/api';
 import { type Handle, type HandleFetch, redirect, type ResolveOptions } from '@sveltejs/kit';
 import type { LoginStatus } from './app';
 import { default as setCookieParser } from 'set-cookie-parser';
 import { StatusCodes } from 'http-status-codes';
+import { PUBLIC_API_URL } from '$lib/api/public-api';
 
 // Cookie max age in seconds (400 days)
 export const COOKIE_ABSOLUTE_MAX_AGE = 34560000;
 
 // Forwards all cookies to the API, see https://kit.svelte.dev/docs/hooks#server-hooks-handlefetch
 export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
-	const isApiRequest = request.url.startsWith(API_URL);
+	const isApiRequest = request.url.startsWith(PUBLIC_API_URL);
 
 	if (!isApiRequest) {
 		return fetch(request);
@@ -75,4 +75,3 @@ export const handle: Handle = async ({ event, resolve }) => {
 	return resolve(event, resolveOptions);
 };
 
- */
