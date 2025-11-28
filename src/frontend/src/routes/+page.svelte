@@ -5,6 +5,7 @@
 	import { Input } from '$components/ui/input/index.js';
 	import PageSelector from '$components/PageSelector.svelte';
 	import LucidePlus from '~icons/lucide/plus';
+    import ProfessorPicker from "$components/ProfessorPicker.svelte";
 
 	const { data } = $props();
 
@@ -14,6 +15,8 @@
 
 <main class="flex justify-center">
 	<div class="w-full max-w-[600px]">
+
+
 		<PageSelector class="my-4 mx-20 md:mx-0" />
         <Drawer.Trigger>
             <Button variant="secondary" size="icon" class="fixed rounded-2 right-5 bottom-5 size-12">
@@ -25,7 +28,10 @@
             <Drawer.Header class="mt-20">
                 <Drawer.Title class="text-[30px] font-semibold">Aggiungi assenza professore</Drawer.Title>
             </Drawer.Header>
-            <Input type="text" placeholder="Professore" class="max-w-xl" />
+
+            <!-- TODO: Add props to ProfessorPicker -->
+
+            <ProfessorPicker/>
             <Input type="number" placeholder="Dalle ore" class="max-w-xl" />
             <Input type="number" placeholder="Alle ore" class="max-w-xl" />
 
