@@ -25,7 +25,7 @@
             <Drawer.Header class="mt-20">
                 <Drawer.Title class="text-[30px] font-semibold">Aggiungi assenza professore</Drawer.Title>
             </Drawer.Header>
-            <Input type="email" placeholder="email" class="max-w-xl" />
+            <Input type="text" placeholder="Professore" class="max-w-xl" />
             <Input type="number" placeholder="Dalle ore" class="max-w-xl" />
             <Input type="number" placeholder="Alle ore" class="max-w-xl" />
 
