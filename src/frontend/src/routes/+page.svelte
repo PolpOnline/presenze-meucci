@@ -9,27 +9,29 @@
 	const { data } = $props();
 
 	console.log(data.absences);
+
 </script>
 
 <main class="flex justify-center">
 	<div class="w-full max-w-[600px]">
-		<PageSelector class="my-4" />
+		<PageSelector class="my-4 mx-20 md:mx-0" />
+        <Drawer.Trigger>
+            <Button variant="secondary" size="icon" class="fixed rounded-2 right-5 bottom-5 size-12">
+                <LucidePlus class="size-6" />
+            </Button>
+        </Drawer.Trigger>
 
-		<Drawer.Trigger>
-			<Button variant="secondary" size="icon" class="rounded-2 fixed right-5 bottom-5 size-12">
-				<LucidePlus class="size-6" />
-			</Button>
-		</Drawer.Trigger>
+        <Drawer.Content class="rounded-t-2xl border-t bg-background p-6 shadow-xl flex flex-col gap-4 items-center justify-center">
+            <Drawer.Header class="mt-20">
+                <Drawer.Title class="text-[30px] font-semibold">Aggiungi assenza professore</Drawer.Title>
+            </Drawer.Header>
+            <Input type="email" placeholder="email" class="max-w-xl" />
+            <Input type="number" placeholder="Dalle ore" class="max-w-xl" />
+            <Input type="number" placeholder="Alle ore" class="max-w-xl" />
 
-		<Drawer.Content class="rounded-t-2xl border-t bg-background p-6 shadow-xl">
-			<Drawer.Header>
-				<Drawer.Title class="text-lg font-semibold">Aggiungi assenza professore</Drawer.Title>
-			</Drawer.Header>
-			<Input type="email" placeholder="email" class="max-w-xs" />
-
-			<Drawer.Footer class="flex justify-end gap-2">
-				<Button>Add</Button>
-			</Drawer.Footer>
-		</Drawer.Content>
-	</div>
+            <Drawer.Footer class="flex flex-row justify-center mb-20 w-full]">
+                <Button class="max-w-xl w-full">Add</Button>
+            </Drawer.Footer>
+        </Drawer.Content>
+    </div>
 </main>

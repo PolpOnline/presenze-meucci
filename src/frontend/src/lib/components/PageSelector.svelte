@@ -41,26 +41,28 @@
 	<Button
 		variant="outline"
 		size="icon"
-		href={nextPageHref}
+		href={prevPageHref}
 		data-sveltekit-preload-data="hover"
 		data-sveltekit-preload-code="eager"
 		data-sveltekit-replacestate
 		aria-label="Go back in time"
+        disabled={currentPage === 0}
 	>
 		<LucideChevronLeft />
 	</Button>
 
 	<!-- TODO: Add the current date -->
 
+
+
 	<Button
 		variant="outline"
 		size="icon"
-		href={prevPageHref}
+		href={nextPageHref}
 		data-sveltekit-preload-data="hover"
 		data-sveltekit-preload-code="eager"
 		data-sveltekit-replacestate
 		aria-label="Go forward in time"
-		disabled={currentPage === 0}
 	>
 		<LucideChevronRight />
 	</Button>
