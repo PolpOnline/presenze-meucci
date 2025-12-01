@@ -29,8 +29,6 @@
                 <Drawer.Title class="text-[30px] font-semibold">Aggiungi assenza professore</Drawer.Title>
             </Drawer.Header>
 
-            <!-- TODO: Add props to ProfessorPicker -->
-
             <ProfessorPicker/>
             <Input type="number" placeholder="Dalle ore" class="max-w-xl" />
             <Input type="number" placeholder="Alle ore" class="max-w-xl" />

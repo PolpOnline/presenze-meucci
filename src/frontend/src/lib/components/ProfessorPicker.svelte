@@ -6,15 +6,17 @@
     import * as Popover from "$lib/components/ui/popover/index.js";
     import { Button } from "$lib/components/ui/button/index.js";
     import { cn } from "$lib/utils.js";
+    import {client} from "$lib/api/api";
 
-    const professors = $props<{full_name:string, id:number}[]>();
 
     let open = $state(false);
     let value = $state("");
     let triggerRef = $state<HTMLButtonElement>(null!);
 
+    let professors: Array<{full_name:string, id:number}> = [];
+
     const selectedValue = $derived(
-        professors.find((f: {full_name:string, id:number}) => f.id === Number(value))?.label
+        professors.find((f: {full_name:string, id:number}) => f.id === Number(value))?.id,
     );
 
     function closeAndFocusTrigger() {
@@ -23,6 +25,15 @@
             triggerRef.focus();
         });
     }
+
+    async function getProfessors() {
+        const res = await client.GET("/teachers/can_be_absent");
+
+        professors = res.data ?? [];
+
+        return professors;
+    }
+
 </script>
 
 <Popover.Root bind:open>
@@ -48,23 +59,31 @@
                 <Command.Group>
 
                     <!-- TODO: Fix this-->
-                    {#each professors as professor}
+
+                    {#await getProfessors()}
+
+                    {:then professors}
+                        {#each professors as professor (professor.id)}
                         <Command.Item
-                                value={professor.id}
-                                onSelect={() => {
-        value = professor.id;
-        closeAndFocusTrigger();
-       }}
+                            value={professor.id.toString()}
+                            onSelect={() => {
+                            value = professor.id.toString();
+                            closeAndFocusTrigger();
+                             }}
                         >
-                            <CheckIcon
-                                    class={cn(
-         "me-2 size-4",
-         value !== professor.id && "text-transparent"
-        )}
-                            />
+                        <CheckIcon
+                            class={cn("me-2 size-4",
+                            value !== professor.id.toString() && "text-transparent"
+                            )}
+                        />
                             {professor.full_name}
                         </Command.Item>
-                    {/each}
+                        {/each}
+                    {:catch error}
+                        <div class="text-destructive-foreground">
+                            <p>Errore: {error.message}</p>
+                        </div>
+                    {/await}
                 </Command.Group>
             </Command.List>
         </Command.Root>
