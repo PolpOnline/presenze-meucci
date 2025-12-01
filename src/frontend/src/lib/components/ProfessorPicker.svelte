@@ -13,11 +13,13 @@
     let value = $state("");
     let triggerRef = $state<HTMLButtonElement>(null!);
 
-    let professors: Array<{full_name:string, id:number}> = [];
+    let professors = $state<Array<{ full_name: string; id: number }>>([]);
 
     const selectedValue = $derived(
-        professors.find((f: {full_name:string, id:number}) => f.id === Number(value))?.id,
+        professors.find((f) => f.id === Number(value))?.full_name
     );
+
+
 
     function closeAndFocusTrigger() {
         open = false;
@@ -57,11 +59,8 @@
             <Command.List>
                 <Command.Empty>Nessun professore trovato!</Command.Empty>
                 <Command.Group>
-
-                    <!-- TODO: Fix this-->
-
                     {#await getProfessors()}
-
+                        <Command.Loading />
                     {:then professors}
                         {#each professors as professor (professor.id)}
                         <Command.Item
