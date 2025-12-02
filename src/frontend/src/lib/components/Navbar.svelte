@@ -24,7 +24,7 @@
 		</a>
 	</div>
 	<div class="col-span-8 flex items-center justify-center font-black">
-		<a href="/" class="text-3xl"> Presenze Meucci </a>
+		<a href="/" class="text-3xl text-center"> Presenze Meucci </a>
 	</div>
 	<div class="col-span-2 mr-3 flex items-center gap-1 justify-self-end">
 		<DropdownMenu.Root>
