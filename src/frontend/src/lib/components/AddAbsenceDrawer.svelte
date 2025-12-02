@@ -7,7 +7,7 @@
 	import { Button } from '$components/ui/button/index';
 	import { cn } from '$lib/utils';
 	import { client } from '$lib/api/api';
-    import {invalidateAll} from "$app/navigation";
+	import { invalidateAll } from '$app/navigation';
 
 	let open = $state(false);
 
@@ -27,19 +27,19 @@
 			return;
 		}
 
-        const body = {
-            absent_teacher_id: absent_teacher_id,
-            date,
-            begin_time,
-            end_time
-        };
+		const body = {
+			absent_teacher_id: absent_teacher_id,
+			date,
+			begin_time,
+			end_time
+		};
 
 		const res = await client.POST('/absence', {
 			body
 		});
 
 		if (res.response.ok) {
-            await invalidateAll();
+			await invalidateAll();
 
 			// Successfully added absence
 			open = false;
@@ -84,7 +84,7 @@
 		<form onsubmit={submitForm} class="flex w-full flex-col items-center gap-4">
 			<TeacherPicker bind:value={absent_teacher_id} />
 
-            <!-- TODO: Get date from the page -->
+			<!-- TODO: Get date from the page -->
 			<Input type="date" placeholder="Del giorno" class="max-w-lg" id="date" bind:value={date} />
 
 			<Input
@@ -93,7 +93,7 @@
 				class="max-w-lg"
 				id="begin_time"
 				bind:value={begin_time}
-                required
+				required
 			/>
 
 			<Input
@@ -102,7 +102,7 @@
 				class="max-w-lg"
 				id="end_time"
 				bind:value={end_time}
-                required
+				required
 			/>
 
 			<Drawer.Footer class="flex w-full flex-row justify-center">

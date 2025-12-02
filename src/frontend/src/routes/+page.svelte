@@ -4,15 +4,28 @@
 	import AbsenceCard from '$components/AbsenceCard.svelte';
 	import type { components } from '$lib/api/schema';
 	import AddAbsenceDrawer from '$components/AddAbsenceDrawer.svelte';
+	import { title } from '$lib/stores/title.store';
+	import { formatItalianDate } from '$lib/utils/dates';
 
-	const { data } = $props<components['schemas']['Absence'][]>();
+	const { data }: { data: { date: string | null; absences: components['schemas']['Absence'][] } } =
+		$props();
+
+	const formattedDate = $derived(data.date ? formatItalianDate(data.date as string) : 'oggi');
+
+	$effect(() => {
+		title.set('Assenze per ' + formattedDate);
+	});
 </script>
+
+<svelte:head>
+	<title>Presenze Meucci</title>
+</svelte:head>
 
 <main class="flex justify-center">
 	<div class="w-full max-w-3xl">
-		<PageSelector class="my-4 md:mx-0 mx-3" />
+		<PageSelector class="mx-3 my-4 md:mx-0" date={data.date} {formattedDate} />
 		<div class="flex w-full flex-col items-center justify-center gap-4">
-			{#each data.absences as absence (absence.id)}
+			{#each data.absences as absence (absence.absent_teacher)}
 				<AbsenceCard {absence} />
 			{/each}
 		</div>

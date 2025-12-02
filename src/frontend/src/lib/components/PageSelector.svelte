@@ -1,21 +1,32 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button/index.js';
-	import { page } from '$app/state';
 	import LucideChevronLeft from '~icons/lucide/chevron-left';
 	import LucideChevronRight from '~icons/lucide/chevron-right';
+	import LucideCalendarSync from '~icons/lucide/calendar-sync';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { cn } from '$lib/utils';
 	import { type ClassValue } from 'clsx';
 	import { toast } from 'svelte-sonner';
+	import { DateTime } from 'luxon';
+	import { capitalizeFirstLetter } from '$lib/utils/text';
 
-	const currentPage = $derived(Number(page.url.searchParams.get('page')) || 0);
+	const {
+		class: className,
+		date,
+		formattedDate
+	}: { class?: ClassValue; date: string | null; formattedDate: string } = $props();
 
-	const prevPage = $derived(currentPage - 1 === 0 ? null : currentPage - 1);
-	const prevPageHref = $derived(prevPage === null ? `?` : `?page=${prevPage}`);
+	const currentDate = $derived((date ? DateTime.fromISO(date) : DateTime.now()).startOf('day'));
 
-	const nextPage = $derived(currentPage + 1 === 0 ? null : currentPage + 1);
-	const nextPageHref = $derived(nextPage === null ? `?` : `?page=${nextPage}`);
+	const prevTarget = $derived(currentDate.minus({ days: 1 }));
+	const prevDateHref = $derived(
+		prevTarget.equals(DateTime.now().startOf('day')) ? '?' : `?date=${prevTarget.toISODate()}`
+	);
+	const nextTarget = $derived(currentDate.plus({ days: 1 }));
+	const nextDateHref = $derived(
+		nextTarget.equals(DateTime.now().startOf('day')) ? '?' : `?date=${nextTarget.toISODate()}`
+	);
 
 	onMount(() => {
 		document.addEventListener('keydown', keyHandler);
@@ -26,44 +37,49 @@
 
 	function keyHandler(event: KeyboardEvent) {
 		if (event.key === 'ArrowRight') {
-			goto(prevPageHref);
+			goto(prevDateHref);
 		}
 		if (event.key === 'ArrowLeft') {
-			goto(nextPageHref);
+			goto(nextDateHref);
 		}
 		if (event.key === 'Escape') {
 			toast.info('Reset to live view');
 			goto('?');
 		}
 	}
-
-	const { class: className }: { class?: ClassValue } = $props();
 </script>
 
 <div class={cn(className, 'mb-3 flex items-center justify-between')}>
 	<Button
 		variant="outline"
 		size="icon"
-		href={prevPageHref}
+		href={prevDateHref}
 		data-sveltekit-preload-data="hover"
 		data-sveltekit-preload-code="eager"
 		data-sveltekit-replacestate
-		aria-label="Go back in time"
+		aria-label="Go to the previous day"
 	>
 		<LucideChevronLeft />
 	</Button>
 
-	<!-- TODO: Add the current date -->
+	<div class="text-lg font-medium tracking-wide">
+		{capitalizeFirstLetter(formattedDate)}
+	</div>
 
-	<Button
-		variant="outline"
-		size="icon"
-		href={nextPageHref}
-		data-sveltekit-preload-data="hover"
-		data-sveltekit-preload-code="eager"
-		data-sveltekit-replacestate
-		aria-label="Go forward in time"
-	>
-		<LucideChevronRight />
-	</Button>
+	<div>
+		<Button variant="outline" size="icon" disabled={!date} aria-label="Reset to today">
+			<LucideCalendarSync />
+		</Button>
+		<Button
+			variant="outline"
+			size="icon"
+			href={nextDateHref}
+			data-sveltekit-preload-data="hover"
+			data-sveltekit-preload-code="eager"
+			data-sveltekit-replacestate
+			aria-label="Go to the next day"
+		>
+			<LucideChevronRight />
+		</Button>
+	</div>
 </div>

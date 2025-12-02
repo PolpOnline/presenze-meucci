@@ -5,6 +5,7 @@
 	import Navbar from '$lib/components/Navbar.svelte';
 	import type { LoginStatus } from '../app';
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar';
+	import { title } from '$lib/stores/title.store';
 
 	let { children } = $props();
 	let loggedInEmail: string = $state('');
@@ -13,6 +14,7 @@
 
 <svelte:head>
 	<link rel="icon" type="image/svg+xml" href={favicon} />
+	<title>{$title}</title>
 </svelte:head>
 
 <ModeWatcher defaultMode="dark" />
