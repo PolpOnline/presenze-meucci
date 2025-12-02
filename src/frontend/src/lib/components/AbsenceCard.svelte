@@ -3,8 +3,6 @@
     import MoreHorizontal from "@lucide/svelte/icons/more-horizontal";
     import {Badge} from "$components/ui/badge";
 
-    // Example structure – replace with your data
-    let absentTeacher = "Nome prof assente";
     let { data } = $props<{
         absent_teacher: string;
         classes: Array<{
@@ -22,11 +20,11 @@
 
 <Card.Root class="w-full max-w-sm p-2 space-y-4">
     <Card.Header class="pb-0">
-        <Card.Title class="text-lg font-semibold">{absentTeacher}</Card.Title>
+        <Card.Title class="text-lg font-semibold">{data.absent_teacher}</Card.Title>
     </Card.Header>
 
     <Card.Content class="space-y-4">
-        {#each data.Array as hour (hour.id)}
+        {#each data.classes as hour (hour.id)}
             <div class="border rounded-xl p-3 space-y-2 shadow-sm">
 
                 <div class="text-sm font-medium">{hour.time}</div>

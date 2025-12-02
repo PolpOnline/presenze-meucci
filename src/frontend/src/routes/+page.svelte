@@ -6,9 +6,19 @@
 	import PageSelector from '$components/PageSelector.svelte';
 	import LucidePlus from '~icons/lucide/plus';
     import ProfessorPicker from "$components/ProfessorPicker.svelte";
-//    import AbsenceCard from "$components/AbsenceCard.svelte";
+    import AbsenceCard from "$components/AbsenceCard.svelte";
 
-	const { data } = $props();
+	const { data } = $props<{
+        classes: {
+            id: number;
+            room?: string | null | undefined;
+            substitute_teacher?: string | null | undefined;
+            group?: string | null | undefined;
+            time: string;
+            absent_status: "uncovered" | "classDelayed" | "classCanceled" | "substituteFound";
+        }[];
+        absent_teacher: string;
+    }[]>();
 
 	console.log(data.absences);
 
@@ -19,11 +29,11 @@
 
 
 		<PageSelector class="my-4 mx-20 md:mx-0" />
-        <!--
+
                {#each data.absences as absence (absence.id)}
-                  <AbsenceCard data={absence} />
+                  <AbsenceCard absent_teacher=absence.absent_teacher classes={absence.classes}/>
                 {/each}
-        -->
+
         <Drawer.Trigger>
             <Button variant="secondary" size="icon" class="fixed rounded-2 right-5 bottom-5 size-12">
                 <LucidePlus class="size-6" />
