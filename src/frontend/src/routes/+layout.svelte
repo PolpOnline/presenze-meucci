@@ -2,8 +2,6 @@
 	import '../app.css';
 	import favicon from '$lib/images/favicon.svg';
 	import { ModeWatcher } from 'mode-watcher';
-	// noinspection ES6UnusedImports
-	import * as Drawer from '$lib/components/ui/drawer/index.js';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import type { LoginStatus } from '../app';
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar';
@@ -24,7 +22,5 @@
 
 	<Navbar {loggedInEmail} {loginStatus} />
 
-	<Drawer.Root>
-		{@render children?.()}
-	</Drawer.Root>
+    {@render children?.()}
 </div>

@@ -5,29 +5,38 @@
     import * as Drawer from "$components/ui/drawer/index";
     import ProfessorPicker from "$components/ProfessorPicker.svelte";
     import {Button} from "$components/ui/button/index";
+    import {cn} from "$lib/utils";
+
+    let hideTrigger = $state(false);
 </script>
 
-<Drawer.Trigger>
-    <Button variant="secondary" size="icon" class="fixed rounded-2 right-5 bottom-5 size-12">
-        <LucidePlus class="size-6"/>
-    </Button>
-</Drawer.Trigger>
-<Drawer.Content
-        class="rounded-t-2xl border-t bg-background p-6 shadow-xl flex flex-col gap-4 items-center justify-center"
+<Drawer.Root
+        onOpenChange={(o) => {if (o) hideTrigger = o}}
+        onOpenChangeComplete={(o) => {if (!o) hideTrigger = o}}
 >
-    <Drawer.Header>
-        <Drawer.Title class="text-3xl font-semibold text-center">Aggiungi assenza professore</Drawer.Title>
-    </Drawer.Header>
+    <Drawer.Trigger>
+        <Button variant="secondary" size="icon"
+                class={cn(hideTrigger ? "hidden" : "", "fixed rounded-2 right-5 bottom-5 size-12")}>
+            <LucidePlus class="size-6"/>
+        </Button>
+    </Drawer.Trigger>
+    <Drawer.Content
+            class="rounded-t-2xl border-t bg-background p-6 shadow-xl flex flex-col gap-4 items-center justify-center"
+    >
+        <Drawer.Header>
+            <Drawer.Title class="text-3xl font-semibold text-center">Aggiungi assenza professore</Drawer.Title>
+        </Drawer.Header>
 
-    <ProfessorPicker/>
+        <ProfessorPicker/>
 
-    <Input type="date" placeholder="Del giorno" class="max-w-lg" id="date"/>
+        <Input type="date" placeholder="Del giorno" class="max-w-lg" id="date"/>
 
-    <Input type="time" placeholder="Dalle ore" class="max-w-lg" id="begin_time"/>
+        <Input type="time" placeholder="Dalle ore" class="max-w-lg" id="begin_time"/>
 
-    <Input type="time" placeholder="Alle ore" class="max-w-lg" id="end_time"/>
+        <Input type="time" placeholder="Alle ore" class="max-w-lg" id="end_time"/>
 
-    <Drawer.Footer class="flex flex-row justify-center mb-20 w-full">
-        <Button class="w-full max-w-lg">Add</Button>
-    </Drawer.Footer>
-</Drawer.Content>
+        <Drawer.Footer class="flex flex-row justify-center mb-20 w-full">
+            <Button class="w-full max-w-lg">Add</Button>
+        </Drawer.Footer>
+    </Drawer.Content>
+</Drawer.Root>
