@@ -75,14 +75,15 @@ CREATE TABLE "absence"
     absent_teacher_lesson           INTEGER REFERENCES lesson (id) ON DELETE CASCADE NOT NULL,
     absence_date                    DATE                                             NOT NULL DEFAULT CURRENT_DATE,
     status                          absence_status                                   NOT NULL DEFAULT 'Uncovered',
-    substitute_teacher_availability INTEGER REFERENCES availability (id) ON DELETE CASCADE
-        -- if substitute_teacher_availability is set, status must be 'SubstituteFound'
-        CONSTRAINT absence_substitute_status_check
-            CHECK (
-                (substitute_teacher_availability IS NOT NULL AND status = 'SubstituteFound')
-                    OR
-                (substitute_teacher_availability IS NULL AND status <> 'SubstituteFound')
-                )
+    substitute_teacher_availability INTEGER REFERENCES availability (id) ON DELETE CASCADE,
+    UNIQUE (absent_teacher_lesson, absence_date),
+    -- if substitute_teacher_availability is set, status must be 'SubstituteFound'
+    CONSTRAINT absence_substitute_status_check
+        CHECK (
+            (substitute_teacher_availability IS NOT NULL AND status = 'SubstituteFound')
+                OR
+            (substitute_teacher_availability IS NULL AND status <> 'SubstituteFound')
+            )
 );
 
 -- Trigger function to enforce absence_date's ISO DOW matches lesson.day
