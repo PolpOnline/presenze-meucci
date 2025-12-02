@@ -31,9 +31,9 @@
 		class="flex flex-col items-center justify-center gap-4 rounded-t-2xl border-t bg-background p-6 shadow-xl"
 	>
 		<Drawer.Header>
-			<Drawer.Title class="text-center text-3xl font-semibold"
-				>Aggiungi assenza professore</Drawer.Title
-			>
+			<Drawer.Title class="text-center text-3xl font-semibold">
+                Aggiungi assenza professore
+            </Drawer.Title>
 		</Drawer.Header>
 
 		<ProfessorPicker />

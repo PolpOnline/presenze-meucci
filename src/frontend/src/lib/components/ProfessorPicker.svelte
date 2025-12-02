@@ -9,15 +9,12 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { cn } from '$lib/utils.js';
 	import { client } from '$lib/api/api';
-	import type { components } from '$lib/api/schema';
 
 	let open = $state(false);
 	let value = $state('');
 	let triggerRef = $state<HTMLButtonElement>(null!);
 
-	let professors = $state<components['schemas']['CanBeAbsentTeacher'][]>([]);
-
-	const selectedValue = $derived(professors.find((f) => f.id === Number(value))?.full_name);
+	let selectedValue = $state<string | null>(null);
 
 	function closeAndFocusTrigger() {
 		open = false;
@@ -53,9 +50,10 @@
 					{:then professors}
 						{#each professors as professor (professor.id)}
 							<Command.Item
-								value={professor.full_name}
+								value={professor.id.toString()}
 								onSelect={() => {
 									value = professor.id.toString();
+                                    selectedValue = professor.full_name;
 									closeAndFocusTrigger();
 								}}
 							>
