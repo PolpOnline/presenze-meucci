@@ -6,6 +6,8 @@
 	import type { LoginStatus } from '../app';
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar';
 	import { title } from '$lib/stores/title.store';
+	// noinspection ES6UnusedImports
+	import * as Tooltip from '$lib/components/ui/tooltip/index';
 
 	let { children } = $props();
 	let loggedInEmail: string = $state('');
@@ -22,7 +24,9 @@
 <div data-vaul-drawer-wrapper>
 	<ProgressBar class="text-white" zIndex={100} />
 
-	<Navbar {loggedInEmail} {loginStatus} />
+	<Tooltip.Provider>
+		<Navbar {loggedInEmail} {loginStatus} />
 
-	{@render children?.()}
+		{@render children?.()}
+	</Tooltip.Provider>
 </div>

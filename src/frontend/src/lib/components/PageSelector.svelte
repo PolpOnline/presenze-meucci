@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button/index.js';
 	import LucideChevronLeft from '~icons/lucide/chevron-left';
 	import LucideChevronRight from '~icons/lucide/chevron-right';
 	import LucideCalendarSync from '~icons/lucide/calendar-sync';
@@ -10,6 +9,7 @@
 	import { toast } from 'svelte-sonner';
 	import { DateTime } from 'luxon';
 	import { capitalizeFirstLetter } from '$lib/utils/text';
+	import ButtonTooltip from '$components/ButtonTooltip.svelte';
 
 	const {
 		class: className,
@@ -50,36 +50,45 @@
 </script>
 
 <div class={cn(className, 'mb-3 flex items-center justify-between')}>
-	<Button
+	<ButtonTooltip
 		variant="outline"
 		size="icon"
 		href={prevDateHref}
 		data-sveltekit-preload-data="hover"
 		data-sveltekit-preload-code="eager"
 		data-sveltekit-replacestate
-		aria-label="Go to the previous day"
+		label="Vai al giorno precedente"
 	>
 		<LucideChevronLeft />
-	</Button>
+	</ButtonTooltip>
 
 	<div class="text-lg font-medium tracking-wide">
 		{capitalizeFirstLetter(formattedDate)}
 	</div>
 
 	<div>
-		<Button variant="outline" size="icon" disabled={!date} aria-label="Reset to today">
+		<ButtonTooltip
+			variant="outline"
+            size="icon"
+			href="?"
+			data-sveltekit-preload-data="hover"
+			data-sveltekit-preload-code="eager"
+			data-sveltekit-replacestate
+			label="Torna a oggi"
+			disabled={!date}
+		>
 			<LucideCalendarSync />
-		</Button>
-		<Button
+		</ButtonTooltip>
+		<ButtonTooltip
 			variant="outline"
 			size="icon"
 			href={nextDateHref}
 			data-sveltekit-preload-data="hover"
 			data-sveltekit-preload-code="eager"
 			data-sveltekit-replacestate
-			aria-label="Go to the next day"
+			label="Vai al giorno successivo"
 		>
 			<LucideChevronRight />
-		</Button>
+		</ButtonTooltip>
 	</div>
 </div>
