@@ -11,8 +11,15 @@
 
 	const currentPage = $derived(Number(page.url.searchParams.get('page')) || 0);
 
-	const prevPageHref = $derived(currentPage > 1 ? `?page=${currentPage - 1}` : `?`);
-	const nextPageHref = $derived(`?page=${currentPage + 1}`);
+    const prevPage = $derived(currentPage - 1 === 0 ? null : currentPage - 1);
+    const prevPageHref = $derived(
+         prevPage === null ? `?` : `?page=${prevPage}`
+    );
+
+    const nextPage = $derived(currentPage + 1 === 0 ? null : currentPage + 1);
+    const nextPageHref = $derived(
+        nextPage === null ? `?` : `?page=${nextPage}`
+    );
 
 	onMount(() => {
 		document.addEventListener('keydown', keyHandler);
@@ -22,7 +29,7 @@
 	});
 
 	function keyHandler(event: KeyboardEvent) {
-		if (event.key === 'ArrowRight' && currentPage > 0) {
+		if (event.key === 'ArrowRight') {
 			goto(prevPageHref);
 		}
 		if (event.key === 'ArrowLeft') {
@@ -46,7 +53,6 @@
 		data-sveltekit-preload-code="eager"
 		data-sveltekit-replacestate
 		aria-label="Go back in time"
-		disabled={currentPage === 0}
 	>
 		<LucideChevronLeft />
 	</Button>
