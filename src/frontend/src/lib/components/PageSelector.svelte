@@ -46,14 +46,12 @@
 		data-sveltekit-preload-code="eager"
 		data-sveltekit-replacestate
 		aria-label="Go back in time"
-        disabled={currentPage === 0}
+		disabled={currentPage === 0}
 	>
 		<LucideChevronLeft />
 	</Button>
 
 	<!-- TODO: Add the current date -->
-
-
 
 	<Button
 		variant="outline"

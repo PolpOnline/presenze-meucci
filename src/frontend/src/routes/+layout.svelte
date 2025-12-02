@@ -22,5 +22,5 @@
 
 	<Navbar {loggedInEmail} {loginStatus} />
 
-    {@render children?.()}
+	{@render children?.()}
 </div>

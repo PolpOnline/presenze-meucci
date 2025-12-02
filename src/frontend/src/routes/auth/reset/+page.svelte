@@ -17,7 +17,7 @@
 </main>
 
 <style lang="postcss">
-    .h-screen-not-navbar {
-        height: calc(100svh - 5rem);
-    }
+	.h-screen-not-navbar {
+		height: calc(100svh - 5rem);
+	}
 </style>
