@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { Button } from '$components/ui/button/index.js';
 	// noinspection ES6UnusedImports
 	import * as Drawer from '$lib/components/ui/drawer/index.js';
@@ -6,6 +6,7 @@
 	import PageSelector from '$components/PageSelector.svelte';
 	import LucidePlus from '~icons/lucide/plus';
     import ProfessorPicker from "$components/ProfessorPicker.svelte";
+//    import AbsenceCard from "$components/AbsenceCard.svelte";
 
 	const { data } = $props();
 
@@ -18,12 +19,16 @@
 
 
 		<PageSelector class="my-4 mx-20 md:mx-0" />
+        <!--
+               {#each data.absences as absence (absence.id)}
+                  <AbsenceCard data={absence} />
+                {/each}
+        -->
         <Drawer.Trigger>
             <Button variant="secondary" size="icon" class="fixed rounded-2 right-5 bottom-5 size-12">
                 <LucidePlus class="size-6" />
             </Button>
         </Drawer.Trigger>
-
         <Drawer.Content class="rounded-t-2xl border-t bg-background p-6 shadow-xl flex flex-col gap-4 items-center justify-center">
             <Drawer.Header class="mt-20">
                 <Drawer.Title class="text-[30px] font-semibold">Aggiungi assenza professore</Drawer.Title>

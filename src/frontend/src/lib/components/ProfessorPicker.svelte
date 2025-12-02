@@ -60,28 +60,27 @@
                 <Command.Empty>Nessun professore trovato!</Command.Empty>
                 <Command.Group>
                     {#await getProfessors()}
-                        <Command.Loading />
+                        <p class="p-2">Loading…</p>
                     {:then professors}
                         {#each professors as professor (professor.id)}
-                        <Command.Item
-                            value={professor.id.toString()}
-                            onSelect={() => {
+                            <Command.Item
+                                    value={professor.full_name}
+                                    onSelect={() => {
                             value = professor.id.toString();
                             closeAndFocusTrigger();
-                             }}
-                        >
-                        <CheckIcon
-                            class={cn("me-2 size-4",
-                            value !== professor.id.toString() && "text-transparent"
-                            )}
-                        />
-                            {professor.full_name}
-                        </Command.Item>
+                        }}
+                            >
+                                <CheckIcon
+                                        class={cn("me-2 size-4",
+                            value !== professor.id.toString() && "text-transparent")}
+                                />
+                                {professor.full_name}
+                            </Command.Item>
                         {/each}
                     {:catch error}
-                        <div class="text-destructive-foreground">
-                            <p>Errore: {error.message}</p>
-                        </div>
+                        <p class="text-destructive-foreground p-2">
+                            Errore: {error.message}
+                        </p>
                     {/await}
                 </Command.Group>
             </Command.List>
