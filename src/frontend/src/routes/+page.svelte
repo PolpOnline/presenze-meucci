@@ -13,7 +13,7 @@
 		<PageSelector class="mx-20 my-4 md:mx-0" />
 		<div class="flex w-full flex-col items-center justify-center gap-4">
 			{#each data.absences as absence (absence.id)}
-				<AbsenceCard {absence} class="min-w-full" />
+				<AbsenceCard {absence} />
 			{/each}
 		</div>
 

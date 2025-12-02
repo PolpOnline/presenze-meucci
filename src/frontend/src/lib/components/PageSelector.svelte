@@ -11,15 +11,11 @@
 
 	const currentPage = $derived(Number(page.url.searchParams.get('page')) || 0);
 
-    const prevPage = $derived(currentPage - 1 === 0 ? null : currentPage - 1);
-    const prevPageHref = $derived(
-         prevPage === null ? `?` : `?page=${prevPage}`
-    );
+	const prevPage = $derived(currentPage - 1 === 0 ? null : currentPage - 1);
+	const prevPageHref = $derived(prevPage === null ? `?` : `?page=${prevPage}`);
 
-    const nextPage = $derived(currentPage + 1 === 0 ? null : currentPage + 1);
-    const nextPageHref = $derived(
-        nextPage === null ? `?` : `?page=${nextPage}`
-    );
+	const nextPage = $derived(currentPage + 1 === 0 ? null : currentPage + 1);
+	const nextPageHref = $derived(nextPage === null ? `?` : `?page=${nextPage}`);
 
 	onMount(() => {
 		document.addEventListener('keydown', keyHandler);

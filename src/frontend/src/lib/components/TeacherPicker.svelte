@@ -10,8 +10,13 @@
 	import { cn } from '$lib/utils.js';
 	import { client } from '$lib/api/api';
 
+	let {
+		value = $bindable()
+	}: {
+		value: number | null;
+	} = $props();
+
 	let open = $state(false);
-	let value = $state('');
 	let triggerRef = $state<HTMLButtonElement>(null!);
 
 	let selectedValue = $state<string | null>(null);
@@ -23,7 +28,7 @@
 		});
 	}
 
-	async function getProfessors() {
+	async function getTeachers() {
 		const res = await client.GET('/teachers/can_be_absent');
 
 		return res.data ?? [];
@@ -45,22 +50,20 @@
 			<Command.List>
 				<Command.Empty>Nessun professore trovato!</Command.Empty>
 				<Command.Group>
-					{#await getProfessors()}
+					{#await getTeachers()}
 						<p class="p-2">Loading…</p>
-					{:then professors}
-						{#each professors as professor (professor.id)}
+					{:then teachers}
+						{#each teachers as teacher (teacher.id)}
 							<Command.Item
-								value={professor.id.toString()}
+								value={teacher.id.toString()}
 								onSelect={() => {
-									value = professor.id.toString();
-                                    selectedValue = professor.full_name;
+									value = teacher.id;
+									selectedValue = teacher.full_name;
 									closeAndFocusTrigger();
 								}}
 							>
-								<CheckIcon
-									class={cn('me-2 size-4', value !== professor.id.toString() && 'text-transparent')}
-								/>
-								{professor.full_name}
+								<CheckIcon class={cn('me-2 size-4', value !== teacher.id && 'text-transparent')} />
+								{teacher.full_name}
 							</Command.Item>
 						{/each}
 					{:catch error}
