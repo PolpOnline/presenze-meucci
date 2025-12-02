@@ -67,7 +67,6 @@
 >
 	<Drawer.Trigger>
 		<Button
-			variant="secondary"
 			size="icon"
 			class={cn(hideTrigger ? 'hidden' : '', 'rounded-2 fixed right-5 bottom-5 size-12')}
 		>
