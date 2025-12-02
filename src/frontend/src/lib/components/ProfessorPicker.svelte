@@ -1,25 +1,25 @@
 <script lang="ts">
-    import CheckIcon from "@lucide/svelte/icons/check";
-    import ChevronsUpDownIcon from "@lucide/svelte/icons/chevrons-up-down";
+    import CheckIcon from "~icons/lucide/check";
+    import ChevronsUpDownIcon from "~icons/lucide/chevrons-up-down";
     import { tick } from "svelte";
+    // noinspection ES6UnusedImports
     import * as Command from "$lib/components/ui/command/index.js";
+    // noinspection ES6UnusedImports
     import * as Popover from "$lib/components/ui/popover/index.js";
     import { Button } from "$lib/components/ui/button/index.js";
     import { cn } from "$lib/utils.js";
     import {client} from "$lib/api/api";
-
+    import type {components} from "$lib/api/schema";
 
     let open = $state(false);
     let value = $state("");
     let triggerRef = $state<HTMLButtonElement>(null!);
 
-    let professors = $state<Array<{ full_name: string; id: number }>>([]);
+    let professors = $state<components["schemas"]["CanBeAbsentTeacher"][]>([]);
 
     const selectedValue = $derived(
         professors.find((f) => f.id === Number(value))?.full_name
     );
-
-
 
     function closeAndFocusTrigger() {
         open = false;
@@ -31,9 +31,7 @@
     async function getProfessors() {
         const res = await client.GET("/teachers/can_be_absent");
 
-        professors = res.data ?? [];
-
-        return professors;
+        return res.data ?? [];
     }
 
 </script>
@@ -43,7 +41,7 @@
         {#snippet child({ props })}
             <Button
                     variant="outline"
-                    class="w-[200px] justify-between"
+                    class="max-w-xl"
                     {...props}
                     role="combobox"
                     aria-expanded={open}
@@ -53,7 +51,7 @@
             </Button>
         {/snippet}
     </Popover.Trigger>
-    <Popover.Content class="w-[200px] p-0">
+    <Popover.Content class="w-(--bits-popover-anchor-width) p-0">
         <Command.Root>
             <Command.Input placeholder="Cerca professore..." />
             <Command.List>

@@ -1,55 +1,22 @@
 <script lang="ts">
-	import { Button } from '$components/ui/button/index.js';
-	// noinspection ES6UnusedImports
-	import * as Drawer from '$lib/components/ui/drawer/index.js';
-	import { Input } from '$components/ui/input/index.js';
-	import PageSelector from '$components/PageSelector.svelte';
-	import LucidePlus from '~icons/lucide/plus';
-    import ProfessorPicker from "$components/ProfessorPicker.svelte";
+    import PageSelector from '$components/PageSelector.svelte';
+
     import AbsenceCard from "$components/AbsenceCard.svelte";
-	const { data } = $props<{
-        classes: {
-            id: number;
-            room?: string | null | undefined;
-            substitute_teacher?: string | null | undefined;
-            group?: string | null | undefined;
-            time: string;
-            absent_status: "uncovered" | "classDelayed" | "classCanceled" | "substituteFound";
-        }[];
-        absent_teacher: string;
-    }[]>();
+    import type {components} from "$lib/api/schema";
+    import AddAbsenceDrawer from "$components/AddAbsenceDrawer.svelte";
 
-	console.log(data.absences);
-
+    const {data} = $props<components["schemas"]["Absence"][]>();
 </script>
 
 <main class="flex justify-center">
-	<div class="w-full max-w-[600px]">
-
-
-		<PageSelector class="my-4 mx-20 md:mx-0" />
+    <div class="w-full max-w-[600px]">
+        <PageSelector class="my-4 mx-20 md:mx-0"/>
         <div class="w-full flex flex-col gap-4 items-center justify-center">
             {#each data.absences as absence (absence.id)}
-                <AbsenceCard data={absence} class="min-w-full"/>
+                <AbsenceCard {absence} class="min-w-full"/>
             {/each}
         </div>
-        <Drawer.Trigger>
-            <Button variant="secondary" size="icon" class="fixed rounded-2 right-5 bottom-5 size-12">
-                <LucidePlus class="size-6" />
-            </Button>
-        </Drawer.Trigger>
-        <Drawer.Content class="rounded-t-2xl border-t bg-background p-6 shadow-xl flex flex-col gap-4 items-center justify-center">
-            <Drawer.Header class="mt-20">
-                <Drawer.Title class="text-[30px] font-semibold">Aggiungi assenza professore</Drawer.Title>
-            </Drawer.Header>
 
-            <ProfessorPicker/>
-            <Input type="number" placeholder="Dalle ore" class="max-w-xl" />
-            <Input type="number" placeholder="Alle ore" class="max-w-xl" />
-
-            <Drawer.Footer class="flex flex-row justify-center mb-20 w-full]">
-                <Button class="max-w-xl w-full">Add</Button>
-            </Drawer.Footer>
-        </Drawer.Content>
+        <AddAbsenceDrawer />
     </div>
 </main>

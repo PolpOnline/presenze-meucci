@@ -119,3 +119,38 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Hide arrows on number inputs */
+@layer base {
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+/* Put clock and calendar icons in input type = time/date at the container end */
+@layer base {
+    input[type='time'],
+    input[type='date'] {
+        @apply relative;
+    }
+
+    input[type='time']::-webkit-calendar-picker-indicator,
+    input[type='date']::-webkit-calendar-picker-indicator {
+        @apply absolute right-2;
+    }
+}
+
+/* Modernize scrollbar */
+::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-background;
+}

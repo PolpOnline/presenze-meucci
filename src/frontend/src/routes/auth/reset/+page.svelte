@@ -1,6 +1,6 @@
 <script>
-	import { Input } from '$components/ui/input/index.ts';
-	import { Button } from '$components/ui/button/index.ts';
+	import { Input } from '$components/ui/input/index';
+	import { Button } from '$components/ui/button/index';
 
 	async function reset() {}
 </script>
