@@ -13,7 +13,10 @@
 	</div>
 
 	{#each absence.classes as hour (hour.id)}
-		<div class="ml-2 text-lg font-medium text-muted-foreground">{hour.time}</div>
+		{@const formattedTime = hour.time.split(':', 2).slice(0, 2).join(':')}
+
+		<div class="ml-2 text-lg font-medium text-muted-foreground">{formattedTime}</div>
+
 		<div class="rounded-xl border p-3 shadow-sm">
 			<div class="flex flex-col">
 				{#if hour.absent_status === 'uncovered'}

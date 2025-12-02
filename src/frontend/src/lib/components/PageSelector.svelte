@@ -69,7 +69,7 @@
 	<div>
 		<ButtonTooltip
 			variant="outline"
-            size="icon"
+			size="icon"
 			href="?"
 			data-sveltekit-preload-data="hover"
 			data-sveltekit-preload-code="eager"
