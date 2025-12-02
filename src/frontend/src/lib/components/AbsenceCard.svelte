@@ -6,8 +6,37 @@
 	import LucidePencil from '~icons/lucide/pencil';
 	import LucideTrash2 from '~icons/lucide/trash-2';
 	import ButtonTooltip from '$components/ButtonTooltip.svelte';
+    import {client} from "$lib/api/api";
+    import {toast} from "svelte-sonner";
+    import {invalidateAll} from "$app/navigation";
 
 	let { absence }: { absence: components['schemas']['Absence'] } = $props();
+
+    async function deleteAbsence(classId: number) {
+        // TODO: Add a confirmation dialog before deletion
+
+        try {
+            const res = await client.DELETE(`/absence/{absence_id}`, {
+                params: {
+                    path: {
+                        absence_id: classId
+                    }
+                }
+            });
+
+            if (res.response.status !== 200) {
+                // noinspection ExceptionCaughtLocallyJS
+                throw new Error('Failed to delete absence');
+            }
+
+            toast.success('Absence deleted successfully');
+
+            await invalidateAll();
+        } catch (error) {
+            toast.error('Error deleting absence: ' + error);
+            console.error('Error deleting absence:', error);
+        }
+    }
 </script>
 
 <div class="w-full rounded-xl border p-4">
@@ -49,6 +78,7 @@
 							class="text-destructive"
 							label="Elimina assenza"
 							variant="outline"
+                            onclick={() => deleteAbsence(hour.id)}
 						>
 							<LucideTrash2 class="size-4 text-destructive" />
 						</ButtonTooltip>

@@ -6,8 +6,10 @@
 	import AddAbsenceDrawer from '$components/AddAbsenceDrawer.svelte';
 	import { title } from '$lib/stores/title.store';
 	import { formatItalianDate } from '$lib/utils/dates';
+    import { Toaster } from "$lib/components/ui/sonner/index.js";
 
-	const { data }: { data: { date: string | null; absences: components['schemas']['Absence'][] } } =
+
+    const { data }: { data: { date: string | null; absences: components['schemas']['Absence'][] } } =
 		$props();
 
 	const formattedDate = $derived(data.date ? formatItalianDate(data.date as string) : 'oggi');
@@ -21,6 +23,8 @@
 	<title>Presenze Meucci</title>
 </svelte:head>
 
+<Toaster richColors position="bottom-center" />
+
 <main class="flex justify-center">
 	<div class="w-full max-w-3xl">
 		<PageSelector class="mx-3 my-4 md:mx-0" date={data.date} {formattedDate} />
@@ -30,6 +34,6 @@
 			{/each}
 		</div>
 
-		<AddAbsenceDrawer />
+		<AddAbsenceDrawer date={data.date} {formattedDate} />
 	</div>
 </main>

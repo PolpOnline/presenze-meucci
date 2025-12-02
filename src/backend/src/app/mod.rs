@@ -3,24 +3,27 @@ pub mod db;
 pub mod openapi;
 mod redis;
 
-use std::env;
-use std::str::FromStr;
+use std::{env, str::FromStr};
 
 use axum::{middleware, routing::get};
 use axum_login::AuthManagerLayerBuilder;
-use http::header::{ACCEPT, CONTENT_TYPE, COOKIE};
-use http::StatusCode;
+use http::{
+    header::{ACCEPT, CONTENT_TYPE, COOKIE}, Method,
+    StatusCode,
+};
 use sqlx::PgPool;
 use tokio::signal;
 use tower::ServiceBuilder;
 use tower_http::{
     compression::CompressionLayer,
+    cors::{AllowOrigin, CorsLayer},
     decompression::{DecompressionLayer, RequestDecompressionLayer},
     trace::TraceLayer,
 };
-use tower_http::cors::{AllowOrigin, CorsLayer};
-use tower_sessions::{Expiry, SessionManagerLayer, cookie::Key};
-use tower_sessions::cookie::SameSite;
+use tower_sessions::{
+    cookie::{Key, SameSite}, Expiry,
+    SessionManagerLayer,
+};
 use tower_sessions_redis_store::RedisStore;
 use tracing::info;
 use utoipa::OpenApi;
@@ -81,7 +84,15 @@ impl App {
         let cors_layer = CorsLayer::new()
             .allow_headers([ACCEPT, CONTENT_TYPE, COOKIE])
             .allow_origin(AllowOrigin::exact(env::var("CORS_ORIGIN")?.parse()?))
-            .allow_credentials(true);
+            .allow_credentials(true)
+            .allow_methods([
+                Method::GET,
+                Method::POST,
+                Method::PUT,
+                Method::PATCH,
+                Method::DELETE,
+                Method::OPTIONS,
+            ]);
 
         let (router, api) = OpenApiRouter::with_openapi(ApiDoc::openapi())
             .merge(protected::router())

@@ -8,13 +8,15 @@
 	import { cn } from '$lib/utils';
 	import { client } from '$lib/api/api';
 	import { invalidateAll } from '$app/navigation';
+    import {DateTime} from "luxon";
+
+    let { date, formattedDate }: { date: string | null, formattedDate: string } = $props();
 
 	let open = $state(false);
 
 	let hideTrigger = $state(false);
 
 	let absent_teacher_id: number | null = $state(null);
-	let date: string = $state('');
 	let begin_time: string = $state('');
 	let end_time: string = $state('');
 
@@ -29,7 +31,7 @@
 
 		const body = {
 			absent_teacher_id: absent_teacher_id,
-			date,
+			date: date ?? DateTime.now().toISODate(),
 			begin_time,
 			end_time
 		};
@@ -78,13 +80,13 @@
 			<Drawer.Title class="text-center text-3xl font-semibold">
 				Aggiungi assenza professore
 			</Drawer.Title>
+            <Drawer.Description class="text-center">
+                Per {formattedDate}
+            </Drawer.Description>
 		</Drawer.Header>
 
 		<form onsubmit={submitForm} class="flex w-full flex-col items-center gap-4">
 			<TeacherPicker bind:value={absent_teacher_id} />
-
-			<!-- TODO: Get date from the page -->
-			<Input type="date" placeholder="Del giorno" class="max-w-lg" id="date" bind:value={date} />
 
 			<Input
 				type="time"
