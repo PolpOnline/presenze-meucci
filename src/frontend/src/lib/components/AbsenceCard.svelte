@@ -18,16 +18,16 @@
 
 </script>
 
-<Card.Root class="w-full max-w-sm p-2 space-y-4">
-    <Card.Header class="pb-0">
-        <Card.Title class="text-lg font-semibold">{data.absent_teacher}</Card.Title>
+<Card.Root class="w-full p-10 space-y-4">
+    <Card.Header>
+        <Card.Title class="text-xl font-semibold">{data.absent_teacher}</Card.Title>
     </Card.Header>
 
-    <Card.Content class="space-y-4">
+    <Card.Content>
         {#each data.classes as hour (hour.id)}
             <div class="border rounded-xl p-3 space-y-2 shadow-sm">
 
-                <div class="text-sm font-medium">{hour.time}</div>
+                <div class="text-lg font-medium">{hour.time}</div>
 
                 <div class="flex items-start justify-between">
                     <div class="flex flex-col">
@@ -44,7 +44,7 @@
                         </div>
                     </div>
 
-                    <MoreHorizontal class="w-5 h-5 opacity-70" />
+                    <MoreHorizontal class="w-5 h-5 opacity-70"/>
                 </div>
 
             </div>

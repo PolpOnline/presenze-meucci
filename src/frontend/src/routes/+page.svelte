@@ -7,7 +7,6 @@
 	import LucidePlus from '~icons/lucide/plus';
     import ProfessorPicker from "$components/ProfessorPicker.svelte";
     import AbsenceCard from "$components/AbsenceCard.svelte";
-
 	const { data } = $props<{
         classes: {
             id: number;
@@ -29,11 +28,11 @@
 
 
 		<PageSelector class="my-4 mx-20 md:mx-0" />
-
-               {#each data.absences as absence (absence.id)}
-                  <AbsenceCard absent_teacher=absence.absent_teacher classes={absence.classes}/>
-                {/each}
-
+        <div class="w-full flex flex-col gap-4 items-center justify-center">
+            {#each data.absences as absence (absence.id)}
+                <AbsenceCard data={absence} class="min-w-full"/>
+            {/each}
+        </div>
         <Drawer.Trigger>
             <Button variant="secondary" size="icon" class="fixed rounded-2 right-5 bottom-5 size-12">
                 <LucidePlus class="size-6" />
