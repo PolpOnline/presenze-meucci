@@ -45,12 +45,10 @@
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Content>
 				{#if loggedIn}
-					<DropdownMenu.Group>
-						<DropdownMenu.Item class="text-destructive" onclick={handleLogout}>
-							<LucideLogOut class="mr-2 size-4 text-destructive" />
-							Logout
-						</DropdownMenu.Item>
-					</DropdownMenu.Group>
+					<DropdownMenu.Item class="text-destructive" onclick={handleLogout}>
+						<LucideLogOut class="mr-2 size-4 text-destructive" />
+						Logout
+					</DropdownMenu.Item>
 					<DropdownMenu.Separator />
 				{/if}
 				<DropdownMenuLinkItem href="https://github.com/PolpOnline/presenze-meucci" target="_blank">
