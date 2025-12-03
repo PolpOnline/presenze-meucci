@@ -61,6 +61,7 @@
 	<ButtonTooltip
 		variant="outline"
 		size="icon"
+        class="mr-10"
 		href={prevDateHref}
 		data-sveltekit-preload-data="hover"
 		data-sveltekit-preload-code="eager"
