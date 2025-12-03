@@ -34,11 +34,14 @@ pub struct ScheduleFile {
 pub struct RawLesson {
     duration: Option<String>,
     subject: Option<String>,
+    #[serde(rename = "SITE")]
     _site: Option<String>,
+    #[serde(rename = "MODULE")]
     _module: Option<String>,
     teacher: Option<Vec<String>>,
     group: Option<Vec<String>>,
     room: Option<Vec<String>>,
+    #[serde(rename = "WEEK")]
     _week: Option<String>,
     #[serde(rename = "DAY")]
     ita_day: Option<ItaDay>,

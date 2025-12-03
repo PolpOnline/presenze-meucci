@@ -4,34 +4,20 @@
  */
 
 export interface paths {
-	'/teachers/available/{absence_id}': {
+	'/sign_up': {
 		parameters: {
 			query?: never;
 			header?: never;
 			path?: never;
 			cookie?: never;
 		};
-		/** Available teachers for an absence */
-		get: operations['available'];
+		get?: never;
 		put?: never;
-		post?: never;
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	'/teachers/can_be_absent': {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Teachers who can be absent */
-		get: operations['can_be_absent'];
-		put?: never;
-		post?: never;
+		/**
+		 * Sign Up
+		 * @description Sign up and login automatically
+		 */
+		post: operations['sign_up'];
 		delete?: never;
 		options?: never;
 		head?: never;
@@ -56,6 +42,24 @@ export interface paths {
 		options?: never;
 		head?: never;
 		patch?: never;
+		trace?: never;
+	};
+	'/import/{import_id}': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		post?: never;
+		/** Delete an import */
+		delete: operations['delete'];
+		options?: never;
+		head?: never;
+		/** Modify an import's metadata */
+		patch: operations['patch'];
 		trace?: never;
 	};
 	'/absence': {
@@ -94,24 +98,6 @@ export interface paths {
 		patch: operations['patch'];
 		trace?: never;
 	};
-	'/import/{import_id}': {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		get?: never;
-		put?: never;
-		post?: never;
-		/** Delete an import */
-		delete: operations['delete'];
-		options?: never;
-		head?: never;
-		/** Modify an import's metadata */
-		patch: operations['patch'];
-		trace?: never;
-	};
 	'/login': {
 		parameters: {
 			query?: never;
@@ -132,20 +118,34 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
-	'/sign_up': {
+	'/teachers/can_be_absent': {
 		parameters: {
 			query?: never;
 			header?: never;
 			path?: never;
 			cookie?: never;
 		};
-		get?: never;
+		/** Teachers who can be absent */
+		get: operations['can_be_absent'];
 		put?: never;
-		/**
-		 * Sign Up
-		 * @description Sign up and login automatically
-		 */
-		post: operations['sign_up'];
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/teachers/available/{absence_id}': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Available teachers for an absence */
+		get: operations['available'];
+		put?: never;
+		post?: never;
 		delete?: never;
 		options?: never;
 		head?: never;
@@ -177,6 +177,76 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
 	schemas: {
+		AbsentClasses: {
+			room?: string | null;
+			group?: string | null;
+			/** @description Name of the substitute teacher set for the class, if any */
+			substitute_teacher?: string | null;
+			/** @description Time of the class, e.g., 08:00:00 */
+			time: string;
+			/** @description Current status of the absence */
+			absent_status: components['schemas']['AbsenceStatus'];
+			/** Format: int32 */
+			id: number;
+		};
+		AddAbsenceRequest: {
+			/** Format: int32 */
+			absent_teacher_id: number;
+			/**
+			 * Format: date
+			 * @description The date of the absence. If not provided, defaults to today.
+			 */
+			date?: string | null;
+			/** @description Start of the absence. e.g., 08:00:00 */
+			begin_time: string;
+			/** @description End of the absence. e.g., 10:00:00 */
+			end_time: string;
+		};
+		Absence: {
+			classes: components['schemas']['AbsentClasses'][];
+			absent_teacher: string;
+		};
+		/** @enum {string} */
+		AvailabilityType: 'AVAILABILITY' | 'RECOVERYHOURS';
+		AvailableTeacher: {
+			/** Format: int32 */
+			id: number;
+			availability_type: components['schemas']['AvailabilityType'];
+			full_name: string;
+		};
+		Credentials: {
+			/** @description The password of the user */
+			password: string;
+			/** @description The email of the user */
+			username: string;
+		};
+		ImportInfo: {
+			/** Format: date-time */
+			end_ts: string;
+			file_name: string;
+			/** Format: date-time */
+			begin_ts: string;
+			/** Format: int32 */
+			id: number;
+		};
+		/** @enum {string} */
+		ImportMode: 'dryRun' | 'write';
+		/** @enum {string} */
+		ItaDay: 'LUN' | 'MAR' | 'MER' | 'GIO' | 'VEN' | 'SAB' | 'DOM';
+		ImportPatchRequest: {
+			/** Format: date-time */
+			begin_ts?: string | null;
+			/** Format: date-time */
+			end_ts?: string | null;
+		};
+		ScheduleFile: {
+			LESSON: components['schemas']['RawLesson'][];
+		};
+		CanBeAbsentTeacher: {
+			/** Format: int32 */
+			id: number;
+			full_name: string;
+		};
 		PatchAbsenceRequest: {
 			/** Format: int32 */
 			substitute_teacher_availability_id?: number | null;
@@ -184,84 +254,19 @@ export interface components {
 			status: components['schemas']['AbsenceStatus'];
 		};
 		/** @enum {string} */
-		AvailabilityType: 'AVAILABILITY' | 'RECOVERYHOURS';
+		AbsenceStatus: 'uncovered' | 'classDelayed' | 'classCanceled' | 'substituteFound';
 		/** @description A lesson in the schedule. */
 		RawLesson: {
-			TEACHER?: string[] | null;
-			_SITE?: string | null;
+			DURATION?: string | null;
+			MODULE?: string | null;
+			SITE?: string | null;
+			WEEK?: string | null;
 			SUBJECT?: string | null;
+			TEACHER?: string[] | null;
 			TIME?: string | null;
 			GROUP?: string[] | null;
-			ROOM?: string[] | null;
-			DURATION?: string | null;
 			DAY?: null | components['schemas']['ItaDay'];
-			_WEEK?: string | null;
-			_MODULE?: string | null;
-		};
-		/** @enum {string} */
-		AbsenceStatus: 'uncovered' | 'classDelayed' | 'classCanceled' | 'substituteFound';
-		Credentials: {
-			/** @description The email of the user */
-			username: string;
-			/** @description The password of the user */
-			password: string;
-		};
-		CanBeAbsentTeacher: {
-			/** Format: int32 */
-			id: number;
-			full_name: string;
-		};
-		ImportPatchRequest: {
-			/** Format: date-time */
-			end_ts?: string | null;
-			/** Format: date-time */
-			begin_ts?: string | null;
-		};
-		AbsentClasses: {
-			/** Format: int32 */
-			id: number;
-			room?: string | null;
-			substitute_teacher?: string | null;
-			group?: string | null;
-			time: string;
-			absent_status: components['schemas']['AbsenceStatus'];
-		};
-		ScheduleFile: {
-			LESSON: components['schemas']['RawLesson'][];
-		};
-		AvailableTeacher: {
-			/** Format: int32 */
-			id: number;
-			availability_type: components['schemas']['AvailabilityType'];
-			full_name: string;
-		};
-		AddAbsenceRequest: {
-			/**
-			 * Format: date
-			 * @description The date of the absence. If not provided, defaults to today.
-			 */
-			date?: string | null;
-			begin_time: string;
-			end_time: string;
-			/** Format: int32 */
-			absent_teacher_id: number;
-		};
-		/** @enum {string} */
-		ImportMode: 'dryRun' | 'write';
-		Absence: {
-			classes: components['schemas']['AbsentClasses'][];
-			absent_teacher: string;
-		};
-		/** @enum {string} */
-		ItaDay: 'LUN' | 'MAR' | 'MER' | 'GIO' | 'VEN' | 'SAB' | 'DOM';
-		ImportInfo: {
-			/** Format: date-time */
-			end_ts: string;
-			/** Format: int32 */
-			id: number;
-			/** Format: date-time */
-			begin_ts: string;
-			file_name: string;
+			ROOM?: string[] | null;
 		};
 	};
 	responses: never;
@@ -272,66 +277,34 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-	available: {
+	sign_up: {
 		parameters: {
 			query?: never;
-			header?: never;
-			path: {
-				absence_id: number;
-			};
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			/** @description Available Teachers and their availability type */
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					'application/json': components['schemas']['AvailableTeacher'][];
-				};
-			};
-			/** @description Unauthorized */
-			401: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	can_be_absent: {
-		parameters: {
-			query?: {
-				/**
-				 * @description Date for which to get teachers who can be absent.
-				 *     Results in the teachers who have lessons on that day.
-				 *     If not provided, defaults to today.
-				 */
-				date?: string | null;
-			};
 			header?: never;
 			path?: never;
 			cookie?: never;
 		};
-		requestBody?: never;
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['Credentials'];
+			};
+		};
 		responses: {
-			/** @description Absences and their status */
+			/** @description User signed up and logged in */
 			200: {
 				headers: {
 					[name: string]: unknown;
 				};
-				content: {
-					'application/json': components['schemas']['CanBeAbsentTeacher'][];
-				};
+				content?: never;
 			};
-			/** @description Unauthorized */
-			401: {
+			/** @description Internal server error */
+			500: {
 				headers: {
 					[name: string]: unknown;
 				};
-				content?: never;
+				content: {
+					'text/plain': string;
+				};
 			};
 		};
 	};
@@ -353,6 +326,64 @@ export interface operations {
 			};
 			/** @description Internal server error */
 			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	delete: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path: {
+				import_id: number;
+			};
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description The import was deleted */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	patch: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path: {
+				import_id: number;
+			};
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['ImportPatchRequest'];
+			};
+		};
+		responses: {
+			/** @description The import was patched */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Unauthorized */
+			401: {
 				headers: {
 					[name: string]: unknown;
 				};
@@ -498,64 +529,6 @@ export interface operations {
 			};
 		};
 	};
-	delete: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path: {
-				import_id: number;
-			};
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			/** @description The import was deleted */
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Unauthorized */
-			401: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	patch: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path: {
-				import_id: number;
-			};
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				'application/json': components['schemas']['ImportPatchRequest'];
-			};
-		};
-		responses: {
-			/** @description The import was patched */
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Unauthorized */
-			401: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
 	login: {
 		parameters: {
 			query?: never;
@@ -603,34 +576,66 @@ export interface operations {
 			};
 		};
 	};
-	sign_up: {
+	can_be_absent: {
 		parameters: {
-			query?: never;
+			query?: {
+				/**
+				 * @description Date for which to get teachers who can be absent.
+				 *     Results in the teachers who have lessons on that day.
+				 *     If not provided, defaults to today.
+				 */
+				date?: string | null;
+			};
 			header?: never;
 			path?: never;
 			cookie?: never;
 		};
-		requestBody: {
-			content: {
-				'application/json': components['schemas']['Credentials'];
-			};
-		};
+		requestBody?: never;
 		responses: {
-			/** @description User signed up and logged in */
+			/** @description Absences and their status */
 			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['CanBeAbsentTeacher'][];
+				};
+			};
+			/** @description Unauthorized */
+			401: {
 				headers: {
 					[name: string]: unknown;
 				};
 				content?: never;
 			};
-			/** @description Internal server error */
-			500: {
+		};
+	};
+	available: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path: {
+				absence_id: number;
+			};
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Available Teachers and their availability type */
+			200: {
 				headers: {
 					[name: string]: unknown;
 				};
 				content: {
-					'text/plain': string;
+					'application/json': components['schemas']['AvailableTeacher'][];
 				};
+			};
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
 			};
 		};
 	};
