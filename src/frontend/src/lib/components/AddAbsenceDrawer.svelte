@@ -8,9 +8,13 @@
 	import { cn } from '$lib/utils';
 	import { client } from '$lib/api/api';
 	import { invalidateAll } from '$app/navigation';
-    import {DateTime} from "luxon";
+	import { DateTime } from 'luxon';
 
-    let { open = $bindable(), date, formattedDate }: { open: boolean, date: string | null, formattedDate: string } = $props();
+	let {
+		open = $bindable(),
+		date,
+		formattedDate
+	}: { open: boolean; date: string | null; formattedDate: string } = $props();
 
 	let hideTrigger = $state(false);
 
@@ -78,9 +82,9 @@
 			<Drawer.Title class="text-center text-3xl font-semibold">
 				Aggiungi assenza professore
 			</Drawer.Title>
-            <Drawer.Description class="text-center">
-                Per {formattedDate}
-            </Drawer.Description>
+			<Drawer.Description class="text-center">
+				Per {formattedDate}
+			</Drawer.Description>
 		</Drawer.Header>
 
 		<form onsubmit={submitForm} class="flex w-full flex-col items-center gap-4">

@@ -13,10 +13,15 @@
 
 	const {
 		class: className,
-        disabled,
+		disabled,
 		date,
 		formattedDate
-	}: { class?: ClassValue; disabled: boolean | undefined; date: string | null; formattedDate: string } = $props();
+	}: {
+		class?: ClassValue;
+		disabled: boolean | undefined;
+		date: string | null;
+		formattedDate: string;
+	} = $props();
 
 	const currentDate = $derived((date ? DateTime.fromISO(date) : DateTime.now()).startOf('day'));
 
@@ -37,7 +42,7 @@
 	});
 
 	function keyHandler(event: KeyboardEvent) {
-        if (disabled) return;
+		if (disabled) return;
 
 		if (event.key === 'ArrowRight') {
 			goto(prevDateHref);
@@ -60,7 +65,7 @@
 		data-sveltekit-preload-data="hover"
 		data-sveltekit-preload-code="eager"
 		data-sveltekit-replacestate
-        {disabled}
+		{disabled}
 		label="Vai al giorno precedente"
 	>
 		<LucideChevronLeft />
@@ -90,7 +95,7 @@
 			data-sveltekit-preload-data="hover"
 			data-sveltekit-preload-code="eager"
 			data-sveltekit-replacestate
-            {disabled}
+			{disabled}
 			label="Vai al giorno successivo"
 		>
 			<LucideChevronRight />
