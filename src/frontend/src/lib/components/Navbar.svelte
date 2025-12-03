@@ -6,15 +6,27 @@
 	import LucideGithub from '~icons/lucide/github';
 	import { buttonVariants } from '$lib/components/ui/button/index.js';
 	import DropdownMenuLinkItem from '$lib/components/DropdownMenuLinkItem.svelte';
-	import type { LoginStatus } from '../../app';
 	import ITISMeucciLogo from '$lib/images/ITISMeucciLogo.svelte';
+	import { client } from '$lib/api/api';
+	import { goto, invalidate } from '$app/navigation';
 
-	const {
-		loginStatus,
-		loggedInEmail
-	}: { loginStatus: LoginStatus; loggedInEmail: string | undefined } = $props();
+	const { loggedIn }: { loggedIn: boolean } = $props();
 
-	const loggedIn = $derived(loginStatus === 'logged_in');
+	async function handleLogout() {
+		try {
+			const res = await client.GET('/logout');
+
+			await invalidate('app:loggedIn');
+
+			if (res.response.ok) {
+				await goto('/auth/login');
+			} else {
+				console.error('Logout failed');
+			}
+		} catch (error) {
+			console.error('An error occurred during logout:', error);
+		}
+	}
 </script>
 
 <nav class="grid h-20 grid-cols-12">
@@ -32,18 +44,12 @@
 				<LucideSettings />
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Content>
-				{#if loggedInEmail}
-					<DropdownMenu.Label>{loggedInEmail}</DropdownMenu.Label>
-					<DropdownMenu.Separator />
-				{/if}
 				{#if loggedIn}
 					<DropdownMenu.Group>
-						<div data-sveltekit-preload-data="off">
-							<DropdownMenuLinkItem class="text-red-600" href="/auth/logout">
-								<LucideLogOut class="mr-2 size-4" />
-								Logout
-							</DropdownMenuLinkItem>
-						</div>
+						<DropdownMenu.Item class="text-destructive" onclick={handleLogout}>
+							<LucideLogOut class="mr-2 size-4 text-destructive" />
+							Logout
+						</DropdownMenu.Item>
 					</DropdownMenu.Group>
 					<DropdownMenu.Separator />
 				{/if}

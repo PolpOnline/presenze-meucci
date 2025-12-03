@@ -16,5 +16,3 @@ declare global {
 }
 
 export {};
-
-export type LoginStatus = 'logged_in' | 'logged_out';
