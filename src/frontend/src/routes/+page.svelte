@@ -17,6 +17,8 @@
 	$effect(() => {
 		title.set('Assenze per ' + formattedDate);
 	});
+
+    let openAbsenceDrawer = $state(false);
 </script>
 
 <svelte:head>
@@ -27,13 +29,13 @@
 
 <main class="flex justify-center">
 	<div class="w-full max-w-3xl">
-		<PageSelector class="mx-3 my-4 md:mx-0" date={data.date} {formattedDate} />
+		<PageSelector class="mx-3 my-4 md:mx-0" disabled={openAbsenceDrawer} date={data.date} {formattedDate} />
 		<div class="flex w-full flex-col items-center justify-center gap-4">
 			{#each data.absences as absence (absence.absent_teacher)}
 				<AbsenceCard {absence} />
 			{/each}
 		</div>
 
-		<AddAbsenceDrawer date={data.date} {formattedDate} />
+		<AddAbsenceDrawer bind:open={openAbsenceDrawer} date={data.date} {formattedDate} />
 	</div>
 </main>

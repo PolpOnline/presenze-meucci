@@ -13,9 +13,10 @@
 
 	const {
 		class: className,
+        disabled,
 		date,
 		formattedDate
-	}: { class?: ClassValue; date: string | null; formattedDate: string } = $props();
+	}: { class?: ClassValue; disabled: boolean | undefined; date: string | null; formattedDate: string } = $props();
 
 	const currentDate = $derived((date ? DateTime.fromISO(date) : DateTime.now()).startOf('day'));
 
@@ -36,6 +37,8 @@
 	});
 
 	function keyHandler(event: KeyboardEvent) {
+        if (disabled) return;
+
 		if (event.key === 'ArrowRight') {
 			goto(prevDateHref);
 		}
@@ -57,6 +60,7 @@
 		data-sveltekit-preload-data="hover"
 		data-sveltekit-preload-code="eager"
 		data-sveltekit-replacestate
+        {disabled}
 		label="Vai al giorno precedente"
 	>
 		<LucideChevronLeft />
@@ -75,7 +79,7 @@
 			data-sveltekit-preload-code="eager"
 			data-sveltekit-replacestate
 			label="Torna a oggi"
-			disabled={!date}
+			disabled={!date || disabled}
 		>
 			<LucideCalendarSync />
 		</ButtonTooltip>
@@ -86,6 +90,7 @@
 			data-sveltekit-preload-data="hover"
 			data-sveltekit-preload-code="eager"
 			data-sveltekit-replacestate
+            {disabled}
 			label="Vai al giorno successivo"
 		>
 			<LucideChevronRight />

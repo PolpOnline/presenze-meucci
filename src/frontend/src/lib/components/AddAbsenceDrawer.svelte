@@ -10,9 +10,7 @@
 	import { invalidateAll } from '$app/navigation';
     import {DateTime} from "luxon";
 
-    let { date, formattedDate }: { date: string | null, formattedDate: string } = $props();
-
-	let open = $state(false);
+    let { open = $bindable(), date, formattedDate }: { open: boolean, date: string | null, formattedDate: string } = $props();
 
 	let hideTrigger = $state(false);
 
