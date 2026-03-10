@@ -3,12 +3,14 @@
 	import type { components } from '$lib/api/schema';
 	import LucideDoorClosed from '~icons/lucide/door-closed';
 	import LucideUsers from '~icons/lucide/users';
-	import LucidePencil from '~icons/lucide/pencil';
+	// import LucidePencil from '~icons/lucide/pencil';
 	import LucideTrash2 from '~icons/lucide/trash-2';
 	import ButtonTooltip from '$components/ButtonTooltip.svelte';
 	import { client } from '$lib/api/api';
 	import { toast } from 'svelte-sonner';
 	import { invalidateAll } from '$app/navigation';
+    import AbsenceEditDrawer from "$components/AbsenceEditDrawer.svelte";
+
 
 	let { absence }: { absence: components['schemas']['Absence'] } = $props();
 
@@ -37,6 +39,8 @@
 			console.error('Error deleting absence:', error);
 		}
 	}
+
+    let openEditDrawer = $state(false);
 </script>
 
 <div class="w-full rounded-xl border p-4">
@@ -70,9 +74,14 @@
 						</div>
 					</div>
 					<div class="col-span-2 flex items-center justify-end space-x-2">
+						<!--
 						<ButtonTooltip size="icon" label="Modifica assenza" variant="outline">
 							<LucidePencil class="size-4" />
 						</ButtonTooltip>
+						-->
+
+                        <AbsenceEditDrawer bind:open={openEditDrawer}/>
+
 						<ButtonTooltip
 							size="icon"
 							class="text-destructive"
