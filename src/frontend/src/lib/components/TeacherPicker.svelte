@@ -55,7 +55,7 @@
 					{:then teachers}
 						{#each teachers as teacher (teacher.id)}
 							<Command.Item
-								value={teacher.id.toString()}
+								value={teacher.full_name.toString()}
 								onSelect={() => {
 									value = teacher.id;
 									selectedValue = teacher.full_name;
